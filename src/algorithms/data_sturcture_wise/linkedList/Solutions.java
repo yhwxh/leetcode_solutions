@@ -43,6 +43,26 @@ public class Solutions {
         }
     }
 
+    // 不使用头节点
+    public ListNode removeElements3(ListNode head, int val) {
+        // 将所有满足条件的头节点删除
+        while (head !=null && head.val == val){
+            head = head.next;
+        }
+        if (head == null) {
+            return null;
+        }
+        ListNode prev = head;
+        while (prev.next != null) {
+            if (prev.next.val == val){
+                prev.next = prev.next.next;
+            } else {
+                prev = prev.next;
+            }
+        }
+        return head;
+    }
+
 
     public static void main(String[] args) {
         // test 203
