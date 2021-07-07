@@ -1,4 +1,4 @@
-package algorithms.stratagy_wise.recursion;
+package algorithms.strategy_wise.recursion;
 
 import utils.ListNode;
 
