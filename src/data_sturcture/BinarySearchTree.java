@@ -137,9 +137,10 @@ public class BinarySearchTree<E extends Comparable> {
         if (root == null){
             return;
         }
-        Queue<Node> elements = new LinkedList();
 
+        Queue<Node> elements = new LinkedList();
         elements.add(root);
+
         while (elements != null){
             Node cur = elements.poll();
             System.out.print(cur.val + " ");
