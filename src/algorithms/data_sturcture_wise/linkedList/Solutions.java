@@ -12,9 +12,10 @@ public class Solutions {
      * 解法：
      */
     public ListNode removeElements(ListNode head, int val) {
-        if (head == null) {
-            return null;
-        }
+        // 有 虚拟头节点的话就不用判断头节点了
+//        if (head == null) {
+//            return null;
+//        }
         ListNode dummyHead = new ListNode(-1);
         dummyHead.next = head;
         ListNode pre = dummyHead;
