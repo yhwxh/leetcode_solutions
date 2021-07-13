@@ -304,6 +304,7 @@ public class BinarySearchTree<E extends Comparable> {
 
             // 待删除节点左右子树均不为空时：找到比待删除节点大（小）的最小值（最大值），即待删除节点右（左）子树的最小值（最大值）
             // 然后用这个节点代替待删除节点，并删除最小值
+//            Node predecessor = maximum(node.left);
             Node successor = minimum(node.right);
             // 重新构建左右子树
             successor.right = removeMin(node.right);  // 将待删除节点右子树删除最小值后的新树返回给删除节点的右子树
@@ -313,6 +314,13 @@ public class BinarySearchTree<E extends Comparable> {
             node.left = node.right = null;
             return successor;
         }
+    }
+
+    public E floor(E e){
+        return null;
+    }
+    public E ceil(E e){
+        return null;
     }
 
     private class Node {
