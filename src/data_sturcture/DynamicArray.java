@@ -1,16 +1,16 @@
 package data_sturcture;
 
-public class ArrayListImplement<E> {
+public class DynamicArray<E> {
 
     private E[] data;
     public int size;
 
-    public ArrayListImplement(int capacity) {
+    public DynamicArray(int capacity) {
         data = (E[]) new Object[capacity];
         size = 0;
     }
 
-    public ArrayListImplement() {
+    public DynamicArray() {
         this(20);
     }
 
@@ -112,7 +112,7 @@ public class ArrayListImplement<E> {
     }
 
     public static void main(String[] args) {
-        ArrayListImplement arr = new ArrayListImplement();
+        DynamicArray arr = new DynamicArray();
         for (int i = 0; i < 10; i++) {
             arr.add(0, i);
             System.out.println(arr.toString());

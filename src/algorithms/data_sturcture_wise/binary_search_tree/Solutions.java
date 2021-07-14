@@ -4,40 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solutions {
-    /**
-     * LeetCode 94: 二叉树的中序遍历
-     * 给定一个二叉树的根节点 root ，返回它的 中序 遍历。
-     * <p>
-     * 输入：root = [1,null,2,3]
-     * 输出：[1,3,2]
-     * <p>
-     * 输入：root = []
-     * 输出：[]
-     * <p>
-     * 输入：root = [1]
-     * 输出：[1]
-     * <p>
-     * 输入：root = [1,2]
-     * 输出：[2,1]
-     * <p>
-     * 输入：root = [1,null,2]
-     * 输出：[1,2]
-     *
-     * @param root
-     * @return
-     */
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList();
-        if (root == null) {
-            return res;
-        }
-        res.addAll(inorderTraversal(root.left));
-        res.add(root.val);
-        res.addAll(inorderTraversal(root.right));
-        return res;
-    }
-
-
     private class TreeNode {
         int val;
         TreeNode left;
@@ -71,6 +37,38 @@ public class Solutions {
             }
         }
     }
+    /**
+     * LeetCode 94: 二叉树的中序遍历
+     * 给定一个二叉树的根节点 root ，返回它的 中序 遍历。
+     * <p>
+     * 输入：root = [1,null,2,3]
+     * 输出：[1,3,2]
+     * <p>
+     * 输入：root = []
+     * 输出：[]
+     * <p>
+     * 输入：root = [1]
+     * 输出：[1]
+     * <p>
+     * 输入：root = [1,2]
+     * 输出：[2,1]
+     * <p>
+     * 输入：root = [1,null,2]
+     * 输出：[1,2]
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList();
+        if (root == null) {
+            return res;
+        }
+        res.addAll(inorderTraversal(root.left));
+        res.add(root.val);
+        res.addAll(inorderTraversal(root.right));
+        return res;
+    }
 
     /**
      * LeetCode 104: 二叉树的最大深度
@@ -80,11 +78,11 @@ public class Solutions {
      * <p>
      * 示例：
      * 给定二叉树 [3,9,20,null,null,15,7]，
-     * 3
-     * / \
-     * 9  20
-     * /  \
-     * 15   7
+     *          3
+     *         / \
+     *        9  20
+     *          /  \
+     *         15   7
      * 返回其最大深度：3
      *
      * @param root
@@ -109,11 +107,11 @@ public class Solutions {
      * 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 的中序遍历中至少存在一个下一个数字。
      * <p>
      * 示例：
-     * 7
-     * / \
-     * 3  15
-     * /  \
-     * 9   20
+     *          7
+     *         / \
+     *        3  15
+     *          /  \
+     *          9   20
      * 输入
      * ["BSTIterator", "next", "next", "hasNext", "next", "hasNext", "next", "hasNext", "next", "hasNext"]
      * [[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
@@ -142,11 +140,11 @@ public class Solutions {
         }
 
         public int next() {
-
+            return 0;
         }
 
         public boolean hasNext() {
-
+            return false;
         }
     }
 

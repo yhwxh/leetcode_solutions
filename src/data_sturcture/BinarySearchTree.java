@@ -8,6 +8,11 @@ import java.util.LinkedList;
  * 1、每个节点都大于左子树所有节点，都小于其右子树所有节点
  * 2、BST是保序的，只能存储可比较的元素
  *
+ * 复杂度分析：
+ *      1、BST 的深度和节点数的关系（在满的时候，即除了叶子节点，每个节点都有左右孩子节点）：n = 2^h - 1; h = log2(n+1)
+ *      2、所以，BST 的增删改查操作的（平均，因为我们是按满二叉树算的）时间复杂度为 O（logn)
+ *      3、BST最差的情况，时间复杂度将退化为 O(n)，而解决这个问题的方法是构建平衡二叉树
+ *
  * @param <E>
  */
 public class BinarySearchTree<E extends Comparable> {
@@ -283,9 +288,12 @@ public class BinarySearchTree<E extends Comparable> {
         }
 
         if (e.compareTo(node.val) < 0){
+            // 继续探底，直到找到要删除的节点
             node.left = remove(node.left, e);
+            // 每次探底将当前节点返回一下
             return node;
         } else if (e.compareTo(node.val) > 0) {
+            // 继续探底，直到找到要删除的节点
             node.right = remove(node.right, e);
             return node;
         } else{
