@@ -1,5 +1,7 @@
 package data_sturcture;
 
+import data_sturcture.interfaces.QueuePrivate;
+
 import java.util.*;
 
 /**

@@ -1,4 +1,4 @@
-package data_sturcture;
+package data_sturcture.interfaces;
 
 public interface UF {
     boolean isConnected(int p, int q);

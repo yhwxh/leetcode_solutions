@@ -1,6 +1,6 @@
 package data_sturcture;
 
-import java.util.Arrays;
+import data_sturcture.interfaces.UF;
 
 public class UnionFind implements UF {
     /** quick find 实现方案，基于数组

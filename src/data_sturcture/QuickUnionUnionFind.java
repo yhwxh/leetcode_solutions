@@ -1,6 +1,8 @@
 package data_sturcture;
 
-public class QuickUnionUnionFind implements UF{
+import data_sturcture.interfaces.UF;
+
+public class QuickUnionUnionFind implements UF {
     /**
      * 并查集的通用解决方案：quick union 方案
      * 基于树（是逻辑上的树，严格说是森林）的实现是这样的

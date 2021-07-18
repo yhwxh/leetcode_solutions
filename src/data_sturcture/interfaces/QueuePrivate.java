@@ -1,4 +1,4 @@
-package data_sturcture;
+package data_sturcture.interfaces;
 
 /**
  * 私有队列接口（自己设计的）

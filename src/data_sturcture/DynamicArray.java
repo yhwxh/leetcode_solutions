@@ -40,6 +40,9 @@ public class DynamicArray<E> {
         data[index] = e;
         size++;
     }
+    public void addLast(E e){
+        add(size, e);
+    }
 
     public E remove(int index) {
         if (index < 0 || index > size) {
@@ -57,6 +60,14 @@ public class DynamicArray<E> {
         return null;
     }
 
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
     public void set(int index, E e) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("Illegal argument");
@@ -69,6 +80,13 @@ public class DynamicArray<E> {
             throw new IllegalArgumentException("Illegal argument");
         }
         return data[index];
+    }
+
+    public E getFirst(){
+        return get(0);
+    }
+    public E getLast(){
+        return get(size-1);
     }
 
     public boolean contains(E e) {
