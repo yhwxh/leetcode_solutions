@@ -5,13 +5,13 @@ package data_sturcture;
  * @param <E>
  */
 public interface QueuePrivate<E> {
-    public void enqueue(E e);
+    void enqueue(E e);
 
-    public E dequeue();
+    E dequeue();
 
-    public E getFront();
+    E getFront();
 
-    public int getSize();
+    int getSize();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 }
