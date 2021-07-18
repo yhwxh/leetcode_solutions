@@ -51,40 +51,4 @@ public class ArrayStack<E> implements Stack<E> {
         res.append("] top");
         return res.toString();
     }
-
-    public static void main(String[] args) {
-        // 利用栈来检查括号匹配问题
-        Solution solution = new Solution();
-        System.out.println(solution.isValid("{([])}"));
-    }
-}
-
-class Solution {
-    public boolean isValid(String s) {
-        // 主旨是：左括号就进栈，右括号就出栈
-        java.util.Stack<Character> stack = new java.util.Stack<Character>();
-        for(int i = 0; i < s.length(); i++){
-            char c = s.charAt(i);
-            if (c == '(' || c == '[' || c == '{'){
-                stack.push(c);
-            } else {
-                // 先判断是否为空
-                if(stack.isEmpty()){
-                    return false;
-                }
-                char topChar = stack.pop();
-                if( c == ')' && topChar!='('){
-                    return false;
-                }
-                if(c == ']' && topChar != '['){
-                    return false;
-                }
-                if(c == '}' && topChar != '{'){
-                    return false;
-                }
-            }
-        }
-        // 这里的返回方式比较难想到
-        return stack.isEmpty();
-    }
 }

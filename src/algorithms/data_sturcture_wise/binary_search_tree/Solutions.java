@@ -38,7 +38,7 @@ public class Solutions {
         }
     }
     /**
-     * LeetCode 94: 二叉树的中序遍历
+     * LeetCode 94: 二叉树的中序遍历 【简单】
      * 给定一个二叉树的根节点 root ，返回它的 中序 遍历。
      * <p>
      * 输入：root = [1,null,2,3]
