@@ -40,6 +40,26 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * 将整数转化成字符串
+     * @param num
+     */
+    public String translateNum(int num){
+        StringBuilder res = new StringBuilder();
+        while (num>0){
+            res.append(num%10);
+            num /= 10;
+        }
+        reverse(res.toString());
+        return res.toString();
+    }
+    private void reverse(String str){
+        int a = 0, b = str.length()-1;
+        while (a < b){
+
+        }
+    }
+
 
     public static void main(String[] args) {
         Solutions s = new Solutions();

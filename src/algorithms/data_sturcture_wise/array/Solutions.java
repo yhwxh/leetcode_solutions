@@ -84,6 +84,97 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * LeetCode 283: 移动零 【简单】
+     * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+     *
+     * Facebook Bloomberg
+     * 示例:
+     * 输入: [0,1,0,3,12]
+     * 输出: [1,3,12,0,0]
+     *
+     * 说明:
+     * 必须在原数组上操作，不能拷贝额外的数组。
+     * 尽量减少操作次数。
+     */
+    public void moveZeroes(int[] nums) {
+        List<Integer> nonZeroElements = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0){
+                nonZeroElements.add(nums[i]);
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (i >= nonZeroElements.size()){
+                nums[i] = 0;
+            } else {
+                nums[i] = nonZeroElements.get(i);
+            }
+        }
+    }
+    public void moveZerosOpt(int[] nums){
+        // 使用双指针，一个指针遍历数组，另一个用来指向非零元素的末尾边界（维护一个[0,k)这样一个区间，来存放非零元素）
+        int k = 0;  // 初始非零区间为[0,0]
+        for (int i = 0; i<nums.length; i++){
+            if (nums[i] != 0) {
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+        for (int i = k; i<nums.length;i++){
+            nums[i] = 0;
+        }
+    }
+
+    public void moveZerosOpt2(int[] nums){
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0){
+                if (i != k) {
+                    int tmp = nums[k];
+                    nums[k] = nums[i];
+                    nums[i] = tmp;
+                }
+                k++;
+            }
+        }
+    }
+
+    /**
+     * LeetCode 27：
+     */
+    public int removeElement(int[] nums, int val) {
+        //TODO
+        return -1;
+    }
+
+
+    /**
+     * 如何写出一个正确的程序：我们以二分查找为例
+     *      1、想出正确的算法思路、逻辑
+     *      2、正确考虑到所有边界问题
+     *          明确变量（边界）的实际意义
+     *          循环不变量（循环过程中，不变的因素是什么）
+     *      3、
+     * @param args
+     */
+    public int binarySearch(int[] arr, int target){
+        int len = arr.length;
+        // l,r 为要查找区域的边界
+        int l = 0, r = len-1;
+        while (l <= r){
+            int mid = l + (r - l) / 2;
+            if (arr[mid] == target){
+                return mid;
+            } else if (target > arr[mid]){
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
 
     }
