@@ -45,7 +45,8 @@
   * PriQueue
 - 线段树:
   * SegmentTree
-- Trie：TODO
+- Trie：
+  * Trie
 - 并查集：
   * UnionFind
   * QuickUnionUnionFind  
