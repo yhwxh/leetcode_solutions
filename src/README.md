@@ -9,7 +9,7 @@
 - 6、【简单】LeetCode 203: [移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/) 【链表】
 - 7、【简单】LeetCode 804: [唯一的摩尔斯密码词](https://leetcode-cn.com/problems/unique-morse-code-words/) 【Set】
 - 8、【中等】LeetCode 347：[前K个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/) 【优先队列】
-- 9、【简单】LeetCode 303: [区域和检查(数组不可变,即不涉及线段树的更新操作)] (https://leetcode-cn.com/problems/range-sum-query-immutable/) 【线段树】
+- 9、【简单】LeetCode 303: [区域和检查(数组不可变,即不涉及线段树的更新操作)](https://leetcode-cn.com/problems/range-sum-query-immutable/) 【线段树】
 - 10、【简单】LeetCode 20: [有效括号](https://leetcode-cn.com/problems/valid-parentheses/) 【栈】
 - 11、【中等】LeetCode 22：[生成括号（生成所有有效括号）](https://leetcode-cn.com/problems/generate-parentheses/) 【字符串、动态规划】
 - 12、【简单】LeetCode 557：[反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) 【双指针】
