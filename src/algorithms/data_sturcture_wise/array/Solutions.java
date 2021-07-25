@@ -6,7 +6,6 @@ public class Solutions {
     /**
      * 什么时候用 Set 什么时候用 Map
      * LeetCode 349：两个数组的交集 【简单】
-     * <p>
      * 给定两个数组，编写一个函数来计算它们的交集。
      * <p>
      * 示例 1：
@@ -87,12 +86,12 @@ public class Solutions {
     /**
      * LeetCode 283: 移动零 【简单】
      * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
-     *
+     * <p>
      * Facebook Bloomberg
      * 示例:
      * 输入: [0,1,0,3,12]
      * 输出: [1,3,12,0,0]
-     *
+     * <p>
      * 说明:
      * 必须在原数组上操作，不能拷贝额外的数组。
      * 尽量减少操作次数。
@@ -100,36 +99,37 @@ public class Solutions {
     public void moveZeroes(int[] nums) {
         List<Integer> nonZeroElements = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0){
+            if (nums[i] != 0) {
                 nonZeroElements.add(nums[i]);
             }
         }
         for (int i = 0; i < nums.length; i++) {
-            if (i >= nonZeroElements.size()){
+            if (i >= nonZeroElements.size()) {
                 nums[i] = 0;
             } else {
                 nums[i] = nonZeroElements.get(i);
             }
         }
     }
-    public void moveZerosOpt(int[] nums){
+
+    public void moveZerosOpt(int[] nums) {
         // 使用双指针，一个指针遍历数组，另一个用来指向非零元素的末尾边界（维护一个[0,k)这样一个区间，来存放非零元素）
         int k = 0;  // 初始非零区间为[0,0]
-        for (int i = 0; i<nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
                 nums[k] = nums[i];
                 k++;
             }
         }
-        for (int i = k; i<nums.length;i++){
+        for (int i = k; i < nums.length; i++) {
             nums[i] = 0;
         }
     }
 
-    public void moveZerosOpt2(int[] nums){
+    public void moveZerosOpt2(int[] nums) {
         int k = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0){
+            if (nums[i] != 0) {
                 if (i != k) {
                     int tmp = nums[k];
                     nums[k] = nums[i];
@@ -141,32 +141,164 @@ public class Solutions {
     }
 
     /**
-     * LeetCode 27：
+     * LeetCode 27：移除元素 【简单】
+     * 给你一个数组 nums和一个值 val，你需要 原地 移除所有数值等于val的元素，并返回移除后数组的新长度。
+     * 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+     * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [3,2,2,3], val = 3
+     * 输出：2, nums = [2,2]
+     * 解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+     * <p>
+     * 示例 2：
+     * 输入：nums = [0,1,2,2,3,0,4,2], val = 2
+     * 输出：5, nums = [0,1,4,0,3]
+     * 解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
      */
     public int removeElement(int[] nums, int val) {
-        //TODO
-        return -1;
+        // 双指针：一个指针用来维护一个[0,k) 的区间，保存所有要留下的元素，同时也维护了新数组的长度
+        int k = 0;
+        int len = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                // 覆盖 [0,k) 中的最后一个元素，也可以替换
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+        return k;
+    }
+
+    /**
+     * LeetCode 26: 删除有序数组中的重复元素【简单】
+     * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+     * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [1,1,2]
+     * 输出：2, nums = [1,2]
+     * 解释：函数应该返回新的长度 2 ，并且原数组 nums 的前两个元素被修改为 1, 2 。不需要考虑数组中超出新长度后面的元素。
+     * <p>
+     * 示例 2：
+     * 输入：nums = [0,0,1,1,1,2,2,3,3,4]
+     * 输出：5, nums = [0,1,2,3,4]
+     * 解释：函数应该返回新的长度 5 ， 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4 。不需要考虑数组中超出新长度后面的元素。
+     */
+    public int removeDuplicates(int[] nums) {
+        // 双指针：一个指针遍历数组，一个指针维护一个[0,k) 的区间，用来装所有非重复元素，同时维护长度
+        if (nums.length == 1) {
+            return 1;
+        } else {
+            int k = 1;
+            for (int i = 1; i < nums.length; i++) {
+                // 因为数组有序，我们只需跟 [0,k）中最后一个元素（索引为k-1的元素）比较就可以
+                if (nums[i] != nums[k - 1]) {
+                    nums[k] = nums[i];
+                    k++;
+                }
+            }
+            return k;
+        }
+    }
+
+
+    /**
+     * LeetCode 80: 删除有序数组中的重复元素【中等】
+     * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 最多出现两次 ，返回删除后数组的新长度。
+     * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [1,1,1,2,2,3]
+     * 输出：5, nums = [1,1,2,2,3]
+     * 解释：函数应返回新长度 length = 5, 并且原数组的前五个元素被修改为 1, 1, 2, 2, 3 。 不需要考虑数组中超出新长度后面的元素。
+     * <p>
+     * 示例 2：
+     * 输入：nums = [0,0,1,1,1,1,2,3,3]
+     * 输出：7, nums = [0,0,1,1,2,3,3]
+     * 解释：函数应返回新长度 length = 7, 并且原数组的前五个元素被修改为 0, 0, 1, 1, 2, 3, 3 。 不需要考虑数组中超出新长度后面的元素。
+     */
+    public int removeDuplicatesII(int[] nums) {
+        // 这里要用到三个指针，相对上面的问题，要多一个指针用来记录相似元素的间隔个数（因为有序，索引可以计算间隔）
+        if (nums.length == 1) {
+            return 1;
+        } else {
+            int k = 1, j = k - 1;
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[i] != nums[k - 1]) {
+                    nums[k] = nums[i];
+                    k++;
+                    // 移动记录距离的指针，每次添加新元素，该指针都要跟最后一个元素重合
+                    j = k - 1;
+                } else {
+                    if (k - j < 2) {
+                        nums[k] = nums[i];
+                        k++;
+                    }
+                }
+            }
+            return k;
+        }
+    }
+
+    /**
+     * LeetCode 75: 颜色分类 【中等】
+     * 给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+     * 此题中，我们使用整数 0、1 和 2 分别表示红色、白色和蓝色。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [2,0,2,1,1,0]
+     * 输出：[0,0,1,1,2,2]
+     * <p>
+     * 示例 2：
+     * 输入：nums = [2,0,1]
+     * 输出：[0,1,2]
+     * <p>
+     * 示例 3：
+     * 输入：nums = [0]
+     * 输出：[0]
+     * <p>
+     * 示例 4：
+     * 输入：nums = [1]
+     * 输出：[1]
+     */
+    public void sortColors(int[] nums) {
+        // 计数排序
+        int[] count = new int[]{0, 0, 0};
+        for (int i = 0; i < nums.length; i++) {
+            count[nums[i]]++;
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if (j < count[0]) {
+                nums[j] = 0;
+            } else if (j >= count[0] && j < count[0] + count[1]) {
+                nums[j] = 1;
+            } else {
+                nums[j] = 2;
+            }
+        }
     }
 
 
     /**
      * 如何写出一个正确的程序：我们以二分查找为例
-     *      1、想出正确的算法思路、逻辑
-     *      2、正确考虑到所有边界问题
-     *          明确变量（边界）的实际意义
-     *          循环不变量（循环过程中，不变的因素是什么）
-     *      3、
+     * 1、想出正确的算法思路、逻辑
+     * 2、正确考虑到所有边界问题
+     * 明确变量（边界）的实际意义
+     * 循环不变量（循环过程中，不变的因素是什么）
+     * 3、
+     *
      * @param args
      */
-    public int binarySearch(int[] arr, int target){
+    public int binarySearch(int[] arr, int target) {
         int len = arr.length;
         // l,r 为要查找区域的边界
-        int l = 0, r = len-1;
-        while (l <= r){
+        int l = 0, r = len - 1;
+        while (l <= r) {
             int mid = l + (r - l) / 2;
-            if (arr[mid] == target){
+            if (arr[mid] == target) {
                 return mid;
-            } else if (target > arr[mid]){
+            } else if (target > arr[mid]) {
                 l = mid + 1;
             } else {
                 r = mid - 1;
@@ -176,6 +308,8 @@ public class Solutions {
     }
 
     public static void main(String[] args) {
-
+        Solutions slt = new Solutions();
+        int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
+        slt.sortColors(testArr);
     }
 }
