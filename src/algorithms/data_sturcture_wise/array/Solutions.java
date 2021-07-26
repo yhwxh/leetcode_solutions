@@ -55,7 +55,8 @@ public class Solutions {
      * 输出结果中每个元素出现的次数，应与元素在两个数组中出现次数的最小值一致。
      * 我们可以不考虑输出结果的顺序。
      *
-     * @param args
+     * @param nums1
+     * @param nums2
      */
     public int[] intersect(int[] nums1, int[] nums2) {
         Map<Integer, Integer> mumsMap1 = new HashMap<>();
@@ -288,7 +289,8 @@ public class Solutions {
      * 循环不变量（循环过程中，不变的因素是什么）
      * 3、
      *
-     * @param args
+     * @param arr
+     * @param target
      */
     public int binarySearch(int[] arr, int target) {
         int len = arr.length;
