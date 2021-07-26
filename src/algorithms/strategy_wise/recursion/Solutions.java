@@ -10,8 +10,8 @@ public class Solutions {
      * 输出：[1,2,3,4,5]
      * <p>
      * 解法：
-     *  1、遍历链表：注意删除后指针不能移动，否则会跳过下一个节点
-     *  2、递归遍历：注意递归返回结果怎么重新把链表串起来
+     * 1、遍历链表：注意删除后指针不能移动，否则会跳过下一个节点
+     * 2、递归遍历：注意递归返回结果怎么重新把链表串起来
      */
 
     // 递归解法
@@ -19,8 +19,10 @@ public class Solutions {
         if (head == null) {
             return null;
         }
+        // 注意这里head的含义不同：等号左边的head是当前函数的head
         head.next = removeElements2(head.next, val);
-        if (head.val == val){
+        // 这里的 head 是当前问题的子问题的head
+        if (head.val == val) {
             return head.next;
         } else {
             return head;
@@ -28,11 +30,11 @@ public class Solutions {
     }
 
     // 非递归解法
-    public ListNode removeElements(ListNode head, int val){
+    public ListNode removeElements(ListNode head, int val) {
         ListNode dummyHead = new ListNode(-1, head);
         ListNode prev = dummyHead;
-        while (prev.next != null){
-            if (prev.next.val == val){
+        while (prev.next != null) {
+            if (prev.next.val == val) {
                 prev.next = prev.next.next;
             } else {
                 prev = prev.next;

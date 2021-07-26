@@ -19,7 +19,7 @@
 - 16、【简单】 LeetCode 283: [移动零](https://leetcode-cn.com/problems/move-zeroes/) 【数组、双指针】
 - 17、【简单】 LeetCode 27: [移除元素](https://leetcode-cn.com/problems/remove-element/) 【数组】
 - 18、【简单】 LeetCode 26: [删除有序数组中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) 【数组、双指针】
-- 19、【中等】 LeetCode 80: [删除有序数组中的重复元素II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)【数组、双指针】
+- 19、【中等】 LeetCode 80: [删除有序数组中的重复元素II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) 【数组、双指针】
 - 20、【中等】 LeetCode 2: [两数相加](https://leetcode-cn.com/problems/add-two-numbers/) 【链表】
 
 ### 数据结构  

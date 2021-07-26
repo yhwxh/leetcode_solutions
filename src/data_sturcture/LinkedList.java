@@ -1,6 +1,18 @@
 package data_sturcture;
 
 public class LinkedList<E> {
+    /**
+     * 在处理链表问题时，遍历链表的指针是指向当前节点还是前继节点都可以的
+     * 如果指针指向前继节点，那么我们要处理的目标节点就是 pre.next 指向的节点
+     * 如果指向的是当前节点，那么我们处理的目标节点就是 cur 指向的节点
+     * 二者区别就是遍历停止的条件，pre 最终指向停留在目标节点前一个节点，cur 停留在在目标节点上
+     *
+     * 一般情况下：
+     * 1）如果涉及到对链表的断开操作，使用前继节点 pre
+     * 2）如果不涉及断开操作，直接操作节点，使用当前节点 cur
+     * 3) 使用前继节点处理的情况多一些，能用cur处理的都可以用pre来处理
+     * @param <E>
+     */
 
     private class Node<E> {
         public E data;
@@ -21,7 +33,12 @@ public class LinkedList<E> {
 
         @Override
         public String toString() {
-            return data.toString();
+            StringBuilder sb = new StringBuilder();
+            for (Node cur = this; cur != null; cur = cur.next) {
+                sb.append(cur.data + "->");
+            }
+            sb.append("null");
+            return sb.toString();
         }
     }
 
@@ -130,18 +147,18 @@ public class LinkedList<E> {
         return remove(size - 1);
     }
 
-    public E get(int index){
-        if (index < 0 || index > size){
+    public E get(int index) {
+        if (index < 0 || index > size) {
             throw new IllegalArgumentException("");
         }
-        Node cur = dummyHead;
+        Node cur = dummyHead.next;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
         return (E) cur.data;
     }
 
-    public E getFirst(){
+    public E getFirst() {
         return get(0);
     }
 

@@ -279,6 +279,45 @@ public class Solutions {
             }
         }
     }
+    public void sortColors2(int[] nums){
+        /** 三路快排
+         * 三个指针维护三个区域
+         */
+        int zeros = -1;  // nums[0,zeros] 用来维护所有0的元素
+        int two = nums.length;  //
+
+        for (int i = 0; i < two; ) {
+            if (nums[i] == 1){
+                i++;
+            } else if (nums[i] == 2){
+                two--;  // 这里先移动了指针，后面取元素的时候就不需要减 1 了
+                swap(nums[i], nums[two]);
+//                i++; // 此时是不需要移动 i 的，它会继续判断是否为零的情况
+            } else {
+                zeros++;
+                swap(nums[i], nums[zeros]);
+                i++;
+            }
+        }
+    }
+    private void swap(int a, int b){
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+
+    // TODO
+    // leetCode 88
+    // leetCode 215
+    // leetCode 167
+    // leetCode 125
+    // leetCode 344
+    // leetCode 345
+    // leetCode 11
+    // leetCode 209
+    // leetCode 3
+    // leetCode 438
+    // leetCode 76
 
 
     /**
