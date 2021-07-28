@@ -89,35 +89,35 @@ public class Solutions {
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode();
-        ListNode cur = dummyHead;
+        ListNode prev = dummyHead;
         while (l1 != null || l2 != null) {
             int addRes = 0;
-            int additionVal = cur.next != null? 1 : 0;
+            int additionVal = prev.next != null? 1 : 0;
 
             if (l1 == null) {
                 addRes = l2.val + additionVal;
-                cur.next = new ListNode(addRes % 10);
+                prev.next = new ListNode(addRes % 10);
                 if (addRes >= 10) {
-                    cur.next.next = new ListNode(1);
+                    prev.next.next = new ListNode(1);
                 }
                 l2 = l2.next;
             } else if (l2 == null) {
                 addRes = l1.val + additionVal;
-                cur.next = new ListNode(addRes % 10);
+                prev.next = new ListNode(addRes % 10);
                 if (addRes >= 10) {
-                    cur.next.next = new ListNode(1);
+                    prev.next.next = new ListNode(1);
                 }
                 l1 = l1.next;
             } else {
                 addRes = l1.val + l2.val + additionVal;
-                cur.next = new ListNode(addRes % 10);
+                prev.next = new ListNode(addRes % 10);
                 if (addRes >= 10) {
-                    cur.next.next = new ListNode(1);
+                    prev.next.next = new ListNode(1);
                 }
                 l1 = l1.next;
                 l2 = l2.next;
             }
-            cur = cur.next;
+            prev = prev.next;
         }
         return dummyHead.next;
     }

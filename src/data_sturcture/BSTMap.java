@@ -92,8 +92,21 @@ public class BSTMap<K extends Comparable<K>, V> {
 
     public Node remove(K key){
         //TODO
-        return null;
+        return remove(root, key);
     }
+    private Node remove(Node node, K key){
+        if (node == null){
+            return null;
+        }
+        if (key.compareTo(node.key) < 0){
+            node.left = remove(node.left, key);
+        } else if (key.compareTo(node.key) > 0){
+            node.right = remove(node.right, key);
+        }
+
+        return node;
+    }
+
     private Node minimum(Node node){
         if (node.left == null) {
             return node;

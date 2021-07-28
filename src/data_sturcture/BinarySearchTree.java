@@ -61,7 +61,7 @@ public class BinarySearchTree<E extends Comparable> {
         }
         Node cur = root;
         while (cur != null) {
-            if (e.compareTo(cur.val) > 0) {
+            if (e.compareTo(cur.val) < 0) {
                 if (cur.left == null) {
                     cur.left = new Node(e);
                     size++;
@@ -69,7 +69,7 @@ public class BinarySearchTree<E extends Comparable> {
                 } else {
                     cur = cur.left;
                 }
-            } else if (e.compareTo(cur.val) < 0) {
+            } else if (e.compareTo(cur.val) > 0) {
                 if (cur.right == null) {
                     cur.right = new Node(e);
                     size++;
@@ -207,12 +207,16 @@ public class BinarySearchTree<E extends Comparable> {
         if (root == null){
             return null;
         }
-        Node cur = root;
-        while (cur != null) {
-            if (cur.left == null) {
-                return cur.left.val;
+        Node dummyHead = new Node(null);
+        dummyHead.left = root;
+        Node prev = dummyHead;
+//        Node cur = root;
+        while (prev.left != null) {
+            if (prev.left == null) {
+                prev.left = prev.left.right;
+                return prev.left.val;
             } else {
-                cur = cur.left;
+                prev = prev.left;
             }
         }
         return null;
@@ -324,6 +328,7 @@ public class BinarySearchTree<E extends Comparable> {
         }
     }
 
+    // TODO
     public E floor(E e){
         return null;
     }

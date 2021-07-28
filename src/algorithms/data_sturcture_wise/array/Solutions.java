@@ -307,18 +307,76 @@ public class Solutions {
     }
 
     // TODO
-    // leetCode 88
-    // leetCode 215
-    // leetCode 167
-    // leetCode 125
-    // leetCode 344
-    // leetCode 345
-    // leetCode 11
-    // leetCode 209
-    // leetCode 3
-    // leetCode 438
-    // leetCode 76
+    // leetCode 88: 合并两个有序数组
+    // leetCode 215:
+    // leetCode 167:
+    // leetCode 125:
+    // leetCode 344:
+    // leetCode 345:
+    // leetCode 11:
+    // leetCode 209:
+    // leetCode 3:
+    // leetCode 438:
+    // leetCode 76:
 
+    /**
+     * LeetCode 14：最长公共前缀
+     * 编写一个函数来查找字符串数组中的最长公共前缀。
+     * 如果不存在公共前缀，返回空字符串 ""。
+     *
+     * 示例 1：
+     * 输入：strs = ["flower","flow","flight"]
+     * 输出："fl"
+     *
+     * 示例 2：
+     * 输入：strs = ["dog","racecar","car"]
+     * 输出：""
+     * 解释：输入不存在公共前缀。
+     *  
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix(String[] strs) {
+        // 最长公共前缀就是所有是所有字符串中最短的，我们先假定一个字符串为公共前缀，然后依次跟其他元素进行判断
+        // 如果其他元素的公共前缀不是它，就缩小公共前缀的长度，知道满足停止条件
+        if (strs.length == 0) return "";
+        String pivot = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (!strs[i].startsWith(pivot)) {
+                if (pivot.length() == 0) return "";
+                pivot = pivot.substring(0, pivot.length() - 1);
+            }
+        }
+        return pivot;
+    }
+
+    /**
+     * LeetCode 122: 买卖股票的最佳时机II（其实是买卖股票的最大利润问题）
+     * 给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+     * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+     * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     *
+     * 如何实现利润最大化的求解本质是：怎么抓住每个上升波段
+     * 1、假定我们知道了买进的最低价格，只要遍历数组，在高于它的价格卖出就可以
+     * 2、可以初始化买入价格为数组的第一个元素（数组必须大于1才能有一次完整交易）
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int sum = 0;
+        // 固定住买入价格
+        int buyPrice = prices[0];
+        // 遍历数组去寻找卖出点
+        for (int k = 1; k < prices.length; k++) {
+            if (prices[k] > buyPrice){
+                sum += prices[k] - buyPrice;
+            }
+            // 当前价格不是最低价格，修改买入价格；如果卖出也要修改最低价格，因为我们要在卖出后的范围重新寻找买入价格
+            buyPrice = prices[k];
+        }
+        return sum;
+    }
 
     /**
      * 如何写出一个正确的程序：我们以二分查找为例
