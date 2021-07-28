@@ -279,17 +279,18 @@ public class Solutions {
             }
         }
     }
-    public void sortColors2(int[] nums){
+
+    public void sortColors2(int[] nums) {
         /** 三路快排
          * 三个指针维护三个区域
          */
         int zeros = -1;  // nums[0,zeros] 用来维护所有0的元素
-        int two = nums.length;  //
+        int two = nums.length;  // nums[two, n-1] 用来装值为2的元素
 
         for (int i = 0; i < two; ) {
-            if (nums[i] == 1){
+            if (nums[i] == 1) {
                 i++;
-            } else if (nums[i] == 2){
+            } else if (nums[i] == 2) {
                 two--;  // 这里先移动了指针，后面取元素的时候就不需要减 1 了
                 swap(nums[i], nums[two]);
 //                i++; // 此时是不需要移动 i 的，它会继续判断是否为零的情况
@@ -300,14 +301,50 @@ public class Solutions {
             }
         }
     }
-    private void swap(int a, int b){
+
+    private void swap(int a, int b) {
         int tmp = a;
         a = b;
         b = tmp;
     }
 
     // TODO
-    // leetCode 88: 合并两个有序数组
+
+    /**
+     * leetCode 88: 合并两个有序数组
+     * 给你两个有序整数数组nums1 和 nums2，请你将 nums2 合并到nums1中，使 nums1 成为一个有序数组。
+     * 初始化nums1 和 nums2 的元素数量分别为m 和 n 。你可以假设nums1 的空间大小等于m + n，这样它就有足够的空间保存来自 nums2 的元素。
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] aux = new int[m + n];
+        for (int i = 0; i < m + n; i++) {
+            if (i < m)
+                aux[i] = nums1[i];
+            else
+                aux[i] = nums2[i - m];
+        }
+        int l = 0, r = m;
+        for (int k = 0; k < nums1.length; k++) {
+            if (l >= m) {
+                nums1[k] = aux[r];
+                r++;
+            } else if (r >= m + n) {
+                nums1[k] = aux[l];
+                l++;
+            } else if (aux[l] <= aux[r]) {
+                nums1[k] = aux[l];
+                l++;
+            } else {
+                nums1[k] = aux[r];
+                r++;
+            }
+        }
+    }
     // leetCode 215:
     // leetCode 167:
     // leetCode 125:
@@ -323,16 +360,17 @@ public class Solutions {
      * LeetCode 14：最长公共前缀
      * 编写一个函数来查找字符串数组中的最长公共前缀。
      * 如果不存在公共前缀，返回空字符串 ""。
-     *
+     * <p>
      * 示例 1：
      * 输入：strs = ["flower","flow","flight"]
      * 输出："fl"
-     *
+     * <p>
      * 示例 2：
      * 输入：strs = ["dog","racecar","car"]
      * 输出：""
      * 解释：输入不存在公共前缀。
      *  
+     *
      * @param strs
      * @return
      */
@@ -355,7 +393,7 @@ public class Solutions {
      * 给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
      * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
      * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-     *
+     * <p>
      * 如何实现利润最大化的求解本质是：怎么抓住每个上升波段
      * 1、假定我们知道了买进的最低价格，只要遍历数组，在高于它的价格卖出就可以
      * 2、可以初始化买入价格为数组的第一个元素（数组必须大于1才能有一次完整交易）
@@ -369,7 +407,7 @@ public class Solutions {
         int buyPrice = prices[0];
         // 遍历数组去寻找卖出点
         for (int k = 1; k < prices.length; k++) {
-            if (prices[k] > buyPrice){
+            if (prices[k] > buyPrice) {
                 sum += prices[k] - buyPrice;
             }
             // 当前价格不是最低价格，修改买入价格；如果卖出也要修改最低价格，因为我们要在卖出后的范围重新寻找买入价格
@@ -410,5 +448,14 @@ public class Solutions {
         Solutions slt = new Solutions();
         int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
         slt.sortColors(testArr);
+
+        //
+        int[] nums1 = new int[]{2,0};
+        int[] nums2 = new int[]{1};
+        slt.merge(nums1, 1, nums2, 1);
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i]+" ");
+        }
+        System.out.println();
     }
 }
