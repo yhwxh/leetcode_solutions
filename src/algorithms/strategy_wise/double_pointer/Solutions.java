@@ -34,7 +34,6 @@ public class Solutions {
                     left++;
                     sum-=nums[left];
                 }
-
             }
         }
         return res;

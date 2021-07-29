@@ -308,10 +308,9 @@ public class Solutions {
         b = tmp;
     }
 
-    // TODO
 
     /**
-     * leetCode 88: 合并两个有序数组
+     * leetCode 88: 合并两个有序数组 (考察的是归并排序的归并过程)
      * 给你两个有序整数数组nums1 和 nums2，请你将 nums2 合并到nums1中，使 nums1 成为一个有序数组。
      * 初始化nums1 和 nums2 的元素数量分别为m 和 n 。你可以假设nums1 的空间大小等于m + n，这样它就有足够的空间保存来自 nums2 的元素。
      *
@@ -345,7 +344,16 @@ public class Solutions {
             }
         }
     }
-    // leetCode 215:
+
+    // TODO
+    /**
+     * leetCode 215: 数组中的第K个最大元素 【中等】
+     *  给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
+     *  请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+     */
+    public int findKthLargest(int[] nums, int k) {
+        return 0;
+    }
     // leetCode 167:
     // leetCode 125:
     // leetCode 344:

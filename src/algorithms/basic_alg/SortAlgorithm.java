@@ -84,7 +84,7 @@ public class SortAlgorithm {
     }
 
     /**
-     * 归并排序：O(n^2)
+     * 归并排序：O(nlogn)
      * 先递归分解数组元素至一个个单独元素，然后将每层元素合并起来
      * 递归会将数组分成 logn 层，每层合并起来是O(n) 复杂度
      * 所以，整体为 O(nlogn) 的复杂度
@@ -111,7 +111,9 @@ public class SortAlgorithm {
         mergeSort(arr, left, mid);  // 对左半部分递归
         mergeSort(arr, mid + 1, right);  // 对右半部分递归
         // 将两部分合并
-        merge(arr, left, mid, right);
+        if (arr[mid+1] < arr[mid])  // 这里是对归并的优化，
+            // 当右半部分第一个元素大于左半部分最后一个元素的时候不进行归并动作，因为此时就是有序的
+            merge(arr, left, mid, right);
     }
 
     private void merge(int[] arr, int left, int mid, int right) {
@@ -161,7 +163,7 @@ public class SortAlgorithm {
         // 遍历对数组的所有分块情况，从最小的分块1个元素开始，两个两个的递增
         for (int sz = 1; sz <= arr.length; sz = sz * 2) {
             // 遍历层中的每个块,每次跨越两个块才能保证两两合并
-            // i 是每个组合的起始位置
+            // i 是每对两两组合的起始位置
             for (int i = 0; i + sz < arr.length; i += 2 * sz) {
                 // 对 arr[i, i+sz-1] 和 arr[i+sz, i+2*sz-1] 合并
                 int boundary = i + 2 * sz - 1 < arr.length - 1 ? i + 2 * sz - 1 : arr.length - 1;   // 边界取最小值
@@ -171,13 +173,85 @@ public class SortAlgorithm {
     }
 
     /**
-     * 快速排序：O(n^2)
-     * 每次把当前元素插入到已经排好序的元素中的合适位置
+     * 快速排序：O(nlogn) ： 20世纪，对世界影响最大的算法之一
+     * 先选定一个基准点 pivot 然后将这个基准点放到合适的位置，使得该基准点左侧的所有数据都比他小，右侧所有数据都比他大
+     * 然后对左右两部分递归完成这个过程
+     *
+     * 所以，该方法的关键是如何将 pivot 放到合适的位置：这个子过程叫做 partition
+     * 1、通常我们使用数组的第一个元素作为基准点 pivot, 它初始时指向当前数组区间的第一个元素
+     * 2、我们的目的是将基准点以后的数据整理成一部分小于 pivot ，一部分大于 pivot 的两个区间
+     * 3、定义一个指向两个区间分界点的指针 sep
+     * 4、小于 pivot 的区间为 arr[pivot+1,sep] , 大于 pivot 的区间为 arr[sep+1,i-1] (i 为遍历数组的指针当前指的索引)
+     * 5、遍历的时候不断保持这个性质就好了
+     * 6、当数组遍历完后，会有三个区间，一个区间只有 pivot 这个元素，一个是小于 pivot 的元素，一个是大于 pivot 的元素
+     * 7、最后，将 pivot 和索引为 sep 的元素交换位置，就找到了 pivot 的合适位置
+     *
+     *
+     * 快排在这几种情况下会退化成 O(n^2) 的复杂度
+     * 1、导致问题的本质是使得元素的划分不平衡
+     * 2、当元素近乎有序的时候（解决方案是 随机选取 povit，而不是永远都指定为第一个元素）
+     * 3、当元素存在大量重复元素的时候（解决方案是 双路快排）
      *
      * @param arr
      */
     public void quickSort(int[] arr) {
+        // 这里都是闭区间
+        quickSort(arr, 0, arr.length-1);
+    }
+    private void quickSort(int[] arr, int start, int end){
+        /**
+         * 对arr[start,end] 区间进行排序
+         */
+        if (start >= end){
+            return;
+        }
+        // 先进行一次 partition 操作，返回 pivot 的合适索引位置
+        int pivot = partition(arr, start, end);
+        // 递归小于pivot的区间（这里右端索引不能是pivot，我们不需要把它包括在内）
+        quickSort(arr, start, pivot-1);  // 左侧区间的头一个元素的索引不是永远都是0（这里犯了个错误，写成了0）
+        quickSort(arr, pivot+1, end);
+    }
+    private int partition(int[] arr, int left, int right){
+        // 优化：随机选取基准点pivot，这样在数据近乎有序的时候会避免分割数据有偏
+        int randomIndex = ((int)Math.random())*(right-left+1)+left;
+        // 还要将随机元素换到第一个位置
+        swap(arr, left, randomIndex);
+        int pivot = left;
+        int sep = left;   // 两个区间的分界点
+        // 从第二个元素开始遍历，第一个被pivot占用了
+        for (int i = left + 1; i <= right; i++) {
+            if (arr[i] < arr[pivot]){
+                swap(arr, i, sep+1);
+                sep++;
+            }
+        }
+        // 最后记得把 pivot 放到合适的位置
+        swap(arr, pivot, sep);
+        return sep;
+    }
 
+    private int partitionTwoWays(int[] arr, int left, int right) {
+        int randomIndex = (int)Math.random()*(right-left+1)+left;
+        swap(arr, left, randomIndex);
+        int pivot = left;
+
+        // arr[left+1,i) <= pivot ; arr(j,right] >= pivot
+        int i = left+1;
+        int j = right;
+        while (i <= j){
+            if (arr[i] < arr[pivot]){
+                i++;
+            } else if (arr[j] > arr[pivot]){
+                j--;
+            } else {
+                swap(arr, i, j);
+                i++;
+                j--;
+            }
+        }
+        // 这里必须是和j指向的元素交换
+        swap(arr, pivot, j);
+        return j;
     }
 
 
@@ -186,16 +260,16 @@ public class SortAlgorithm {
         // function test example
         int[] test = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         // performance test example
-        int[] testPerf = generateTestSamples(100000, false);
+        int[] testPerf = generateTestSamples(1000000, false);
 
         // 测试排序
         Long begin = System.currentTimeMillis();
-        sortAlgorithm.mergeSortBottomUp(testPerf);
+        sortAlgorithm.quickSort(testPerf);
         Long end = System.currentTimeMillis();
         System.out.println("排序用时：" + (end - begin) / 1000.0 + " s");
 
         System.out.print("排序功能测试：");
-        sortAlgorithm.mergeSortBottomUp(test);
+        sortAlgorithm.quickSort(test);
         for (int i = 0; i < test.length; i++) {
             System.out.print(test[i] + " ");
         }
