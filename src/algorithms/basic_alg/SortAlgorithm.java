@@ -190,7 +190,7 @@ public class SortAlgorithm {
      * 快排在这几种情况下会退化成 O(n^2) 的复杂度
      * 1、导致问题的本质是使得元素的划分不平衡
      * 2、当元素近乎有序的时候（解决方案是 随机选取 povit，而不是永远都指定为第一个元素）
-     * 3、当元素存在大量重复元素的时候（解决方案是 双路快排）
+     * 3、当元素存在大量重复元素的时候（解决方案是 双路快排、三路快排）
      *
      * @param arr
      */
@@ -206,7 +206,8 @@ public class SortAlgorithm {
             return;
         }
         // 先进行一次 partition 操作，返回 pivot 的合适索引位置
-        int pivot = partition(arr, start, end);
+//        int pivot = partition(arr, start, end);
+        int pivot = partitionTwoWays(arr, start, end);
         // 递归小于pivot的区间（这里右端索引不能是pivot，我们不需要把它包括在内）
         quickSort(arr, start, pivot-1);  // 左侧区间的头一个元素的索引不是永远都是0（这里犯了个错误，写成了0）
         quickSort(arr, pivot+1, end);
@@ -219,13 +220,14 @@ public class SortAlgorithm {
         int pivot = left;
         int sep = left;   // 两个区间的分界点
         // 从第二个元素开始遍历，第一个被pivot占用了
+        // [left+1,sep]<pivot  [sep,i)>=pivot
         for (int i = left + 1; i <= right; i++) {
             if (arr[i] < arr[pivot]){
                 swap(arr, i, sep+1);
                 sep++;
             }
         }
-        // 最后记得把 pivot 放到合适的位置
+        // 最后记得把 pivot 放到合适的位置（一定要跟<pivot的区间的最后一个元素交换）
         swap(arr, pivot, sep);
         return sep;
     }
@@ -248,8 +250,9 @@ public class SortAlgorithm {
                 i++;
                 j--;
             }
+            // 循环结束后，必定是 i 指向 >=pivot 第一个元素的位置，j指向 <=pivot的最后一个元素的位置
         }
-        // 这里必须是和j指向的元素交换
+        // 这里必须是和j指向的元素交换，因为只能把小于pivot的变量换到pivot的位置，否则性质就不保了
         swap(arr, pivot, j);
         return j;
     }
@@ -258,9 +261,9 @@ public class SortAlgorithm {
     public static void main(String[] args) {
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
         // function test example
-        int[] test = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] test = {5, 3, 4, 7, 1, 2, 2, 7, 3, 6};
         // performance test example
-        int[] testPerf = generateTestSamples(1000000, false);
+        int[] testPerf = generateTestSamples(5000000, false);
 
         // 测试排序
         Long begin = System.currentTimeMillis();
