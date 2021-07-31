@@ -31,4 +31,16 @@ public class ListNode {
         }
     }
 
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        ListNode cur = this;
+        while (cur != null){
+            res.append(cur.val + "->");
+            cur = cur.next;
+        }
+        res.append("null");
+        return res.toString();
+    }
+
 }

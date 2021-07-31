@@ -196,7 +196,7 @@ public class SortAlgorithm {
      */
     public void quickSort(int[] arr) {
         // 这里都是闭区间
-        quickSort(arr, 0, arr.length-1);
+        quickSortThreeWays(arr, 0, arr.length-1);
     }
     private void quickSort(int[] arr, int start, int end){
         /**
@@ -257,6 +257,39 @@ public class SortAlgorithm {
         return j;
     }
 
+    // 三路快排
+    private void quickSortThreeWays(int[] arr, int left, int right) {
+        if (left>=right){
+            return;
+        }
+
+        // 进行partition操作
+        int randomIndex = (int)Math.random()*(right-left+1)+left;
+        swap(arr, left, randomIndex);
+        int pivot = left;
+
+        int lt = left;  // 维护 [left, lt]<pivot 区间的指针，初始为一个无效区间
+        int gt = right+1;  // 维护 [gt, right]>pivot 区间的指针，初始为一个无效区间
+        int i = left+1;  // 维护 [lt+1, gt-1]==pivot 区间的指针
+
+        while (i < gt){
+            if (arr[i] < arr[pivot]){
+                swap(arr, i, lt+1);  // 交换后的第 i 个位置的元素已经是一个被处理过的元素，所以 i要移动
+                lt++;
+                i++;
+            } else if(arr[i] > arr[pivot]){
+                swap(arr, i, gt-1);  // 交换后的第 i 个位置的元素还是一个没被处理过的元素，所以 i不能移动，需要继续判断
+                gt--;
+            } else {
+                i++;
+            }
+        }
+        swap(arr, pivot, lt);
+        // 递归进行三路快排
+        quickSortThreeWays(arr, left, lt-1);
+        quickSortThreeWays(arr, gt, right);
+    }
+
 
     public static void main(String[] args) {
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
@@ -278,10 +311,6 @@ public class SortAlgorithm {
         }
         System.out.println();
 
-//        for (int i = 0; i < testPerf.length; i++) {
-//            System.out.print(testPerf[i] + " ");
-//        }
-//        System.out.println();
     }
 
     private static int[] generateTestSamples(int n, boolean openLog) {

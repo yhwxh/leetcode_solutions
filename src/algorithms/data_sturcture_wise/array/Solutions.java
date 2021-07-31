@@ -354,7 +354,13 @@ public class Solutions {
      * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
      * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
      * <p>
-     * 解题思路：先快排，再去第k个最大值
+     * 解题思路：
+     * 1、思路一：先快排，再去第k个最大值，复杂度为 O(nlogn)
+     * 2、思路二：利用快排 partition 操作的性质：O(n)
+     *    2.1 在寻找基准点的时候，基准点的合适位置，就是该元素最终排好序后的索引位置(每次递归找pivot的时候，已经找到的pivot的位置是不会变的)
+     *    2.2 取出第 K 个最大元素就是取第 K 个（或者 arr.length-k 的位置）索引处的位置
+     *    2.3 所以，我们可以在找pivot的时候判断pivot的索引是否等于 K
+     *    2.4 如果 pivot 比k小，就只在左区间找就好了，否则就只在有区间找
      */
     public int findKthLargest2(int[] nums, int k) {
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
@@ -363,17 +369,22 @@ public class Solutions {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        quickSort(nums, 0, nums.length - 1);
+        quickSort(nums, 0, nums.length - 1,k);
         return nums[nums.length - k];
     }
 
-    private void quickSort(int[] nums, int left, int right) {
+    private void quickSort(int[] nums, int left, int right, int k) {
         if (left >= right) {
             return;
         }
         int pivot = partition2(nums, left, right);
-        quickSort(nums, left, pivot - 1);
-        quickSort(nums, pivot + 1, right);
+        // 这里添加上使用用第二种思路的代码
+        if (pivot == nums.length-k){
+            return;
+        }
+        quickSort(nums, left, pivot - 1,k);
+        quickSort(nums, pivot + 1, right,k);
+
     }
 
     private int partition(int[] nums, int left, int right) {
@@ -474,7 +485,7 @@ public class Solutions {
     /**
      * LeetCode 14：最长公共前缀
      * 编写一个函数来查找字符串数组中的最长公共前缀。
-     * 如果不存在公共前缀，返回空字符串 ""。
+     * 如果不存在公共前缀，返回空字符串""。
      * <p>
      * 示例 1：
      * 输入：strs = ["flower","flow","flight"]
@@ -484,7 +495,6 @@ public class Solutions {
      * 输入：strs = ["dog","racecar","car"]
      * 输出：""
      * 解释：输入不存在公共前缀。
-     *  
      *
      * @param strs
      * @return
@@ -505,10 +515,11 @@ public class Solutions {
 
     /**
      * LeetCode 122: 买卖股票的最佳时机II（其实是买卖股票的最大利润问题）
-     * 给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+     * 给定一个数组 prices ，其中prices[i] 是一支给定股票第 i 天的价格。
      * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
      * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-     * <p>
+     *
+     * 解题思路：
      * 如何实现利润最大化的求解本质是：怎么抓住每个上升波段
      * 1、假定我们知道了买进的最低价格，只要遍历数组，在高于它的价格卖出就可以
      * 2、可以初始化买入价格为数组的第一个元素（数组必须大于1才能有一次完整交易）
@@ -559,15 +570,73 @@ public class Solutions {
         return -1;
     }
 
+    /**
+     * 剑指Offer 51：数组中的你序对 【困难】
+     * 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数
+     *
+     * 解题思路：归并排序的衍生问题
+     * 1、对归并排序对合并过程进行改造，记录逆序对的个数
+     * 2、我们需要利用合并的时候，左右两个子区间是排好序的性质，所以排序这个动作要保留
+     * 3、在寻找当前位置的正确元素的时候，可以同时计算出这个所谓的元素的当前逆序对
+     * 4、如果左侧区间所指元素比右侧区间所指元素大，那么当前元素跟右侧区间指向元素以后的元素所有元素构成逆序，所以该元素产生 right-r+1 个逆序对
+     * 5、反之不构成逆序对
+     * @param args
+     */
+    public int reversePairs(int[] nums){
+        return reversePairs(nums, 0, nums.length - 1);
+    }
+
+    private int reversePairs(int[] nums, int left, int right){
+        if (left >= right){
+            return 0;
+        }
+        int mid = left + (right - left)/2;
+        int sum1 = reversePairs(nums, left, mid);
+        int sum2 = reversePairs(nums, mid + 1, right);
+        return merge(nums, left, mid, right, sum1+sum2);
+    }
+    private int merge(int[] nums, int left, int mid, int right, int counts) {
+        // 遍历左侧子数组的指针
+        int l = left;
+        // 遍历右侧子数组的指针
+        int r = mid+1;
+        // 逆序对计数器: counts
+
+        // 构造一个额外数组，来辅助对两个子数组的排序
+        int[] aux = new int[right - left + 1];
+        for (int i = 0; i < aux.length; i++) {
+            aux[i] = nums[left + i];
+        }
+        // 遍历要合并的数组区间[left, right] (这里不需要创造一个额外数组接受)
+        for (int k = left; k <= right; k++) {
+            if (l > mid){  // 只剩右侧区间的时候,此时该区间都是顺序的，没有逆序对
+                nums[k] = aux[r - left];
+                r++;
+            } else if (r > right){  // 只剩左侧区间的时候，此时该区间是顺序对，没有逆序对
+                nums[k] = aux[l -left];
+                l++;
+            } else{
+                if (aux[l-left] <= aux[r-left]){
+                    nums[k] = aux[l - left];
+                    l++;
+                } else {
+                    nums[k] = aux[r - left];
+                    counts += mid-l+1;
+                    r++;
+                }
+            }
+        }
+        return counts;
+    }
+
     public static void main(String[] args) {
         Solutions slt = new Solutions();
         int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
         slt.sortColors(testArr);
 
-        //
-        int[] nums1 = new int[]{2, 0};
+        int[] nums1 = new int[]{2,4,3,5,1};
         int[] nums2 = new int[]{1};
-        slt.merge(nums1, 1, nums2, 1);
+        System.out.println(slt.reversePairs(nums1));
         for (int i = 0; i < nums1.length; i++) {
             System.out.print(nums1[i] + " ");
         }
