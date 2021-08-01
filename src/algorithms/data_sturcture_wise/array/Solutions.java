@@ -629,6 +629,25 @@ public class Solutions {
         return counts;
     }
 
+
+    /**
+     * LeetCode 1572: 矩阵对角线元素的和 【简单】
+     * @param mat
+     */
+    public int diagonalSum(int[][] mat) {
+        int rows = mat.length;
+        int cols = mat[0].length;
+        int sum = 0;
+        for (int i = 0, j=cols-1; i < rows && j>=0; i++,j--) {
+            if (i==j){
+                sum += mat[i][i];
+            } else{
+                sum += mat[i][i] + mat[i][j];
+            }
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         Solutions slt = new Solutions();
         int[] testArr = new int[]{2, 0, 2, 1, 1, 0};

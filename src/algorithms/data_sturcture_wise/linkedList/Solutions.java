@@ -155,6 +155,7 @@ public class Solutions {
      * 解题思路：
      * 1、定义好新区间的头节点、头节点的前继节点、尾节点、尾节点的后继节点
      * 2、改变四个节点中的指向
+     *
      * @param head
      * @param left
      * @param right
@@ -190,16 +191,47 @@ public class Solutions {
         return dummyHead.next;
     }
 
+    /**
+     * LeetCode 61：旋转链表
+     * 给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。
+     * <p>
+     * 输入：head = [1,2,3,4,5], k = 2
+     * 输出：[4,5,1,2,3]
+     * <p>
+     * 解题思路：
+     * 1、先遍历链表，让尾节点指向头节点
+     * 3、从当前头节点遍历，在k个位置断开
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) return null;
+        ListNode cur = head;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        cur.next = head;
+        for (int i = 0; i < k; i++) {
+            cur = cur.next;
+            head = cur.next;
+        }
+        cur.next = null;
+        return head;
+    }
 
     public static void main(String[] args) {
         // test 203
         int[] arr = new int[]{1, 2, 6, 3, 4, 5, 6};
-        int[] test = {1, 2, 3, 4, 5};
+        int[] test = {1, 2};
         ListNode data = new ListNode(arr);
         ListNode testLinkedList = new ListNode(test);
         Solutions slt = new Solutions();
         System.out.println(slt.removeElements(data, 6));
         System.out.println(testLinkedList);
-        System.out.println(slt.reverseBetween(testLinkedList, 2, 4));
+//        System.out.println(slt.reverseBetween(testLinkedList, 2, 4));
+
+        System.out.println(slt.rotateRight(testLinkedList, 0));
     }
 }
