@@ -477,8 +477,78 @@ public class Solutions {
     // leetCode 344:
     // leetCode 345:
     // leetCode 11:
-    // leetCode 209:
-    // leetCode 3:
+
+    /** leetCode 209: 长度最小的子数组
+     * 给定一个含有 n 个正整数的数组和一个正整数 target 。
+     * 找出该数组中满足其和 ≥ target 的长度最小的 连续子数组[numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。
+     *
+     * 示例：
+     * 输入：target = 7, nums = [2,3,1,2,4,3]
+     * 输出：2
+     * 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
+     *
+     * 解题思路：双指针——滑动窗口
+     * 1、注意边界问题
+     * @param target
+     * @param nums
+     * @return
+     */
+
+    public int minSubArrayLen(int target, int[] nums) {
+        int windowStart = 0;
+        int windowEnd = -1;
+        int sum = 0;
+        int res = nums.length + 1;
+        while (windowStart < nums.length) {
+            // 先确定当前窗口
+            if (sum < target && windowEnd+1 < nums.length){
+                windowEnd++;
+                sum+=nums[windowEnd];
+            } else {
+                sum -= nums[windowStart];
+                windowStart++;
+            }
+            // 然后判断该窗口是否满足条件
+            if (sum >= target){
+                res = res < (windowEnd - windowStart + 1)? res: (windowEnd - windowStart + 1);
+            }
+        }
+        // 注意判断没有最小长度的时候
+        if (res == nums.length + 1) return 0;
+        return res;
+    }
+
+    /** leetCode 3: 无重复字符的最长子串
+     * 给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度。
+     *
+     * 示例1:
+     * 输入: s = "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     *
+     * 解题思路：双指针——滑动窗口
+     * 1、需要借助一个记录所有ASCII码字符是否出现的数组，数组每个索引表示该字符
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int[] freq = new int[256];
+        int left = 0, right = -1;
+        int res = 0;
+        while (left < s.length()){
+            // s的访问索引传入的是字符类型，当作整数类型用的
+            if (right +1 < s.length() && freq[s.charAt(right+1)] == 0){
+                right++;
+                // 如果字符出现就将记录字符串出现次数的数组相应索引赋值为 1， 否则为 0；
+                freq[s.charAt(right)] = 1;
+            } else {
+                freq[s.charAt(left)] = 0;
+                left++;
+            }
+            res = res > (right-left+1)? res:(right-left+1);
+        }
+        return res;
+    }
     // leetCode 438:
     // leetCode 76:
 
@@ -660,5 +730,8 @@ public class Solutions {
             System.out.print(nums1[i] + " ");
         }
         System.out.println();
+        slt.minSubArrayLen(7, new int[]{2,3,1,2,4,3});
+        char a = 'a';
+        System.out.println(testArr[a]);
     }
 }
