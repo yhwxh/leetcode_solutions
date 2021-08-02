@@ -25,20 +25,24 @@
 - 22、【简单】 LeetCode 122: [买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) 【数组、贪心、动态规划】
 - 23、【中等】 LeetCode 75： [颜色分类](https://leetcode-cn.com/problems/sort-colors/) 【计数排序、三路快排】
 - 24、【简单】 LeetCode 88: [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) 【归并排序子过程】
-- 25、【中等】LeetCode 215: [数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) 【快速排序子过程：partition操作】
-- 26、【简单】LeetCode 167: [两数之和II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/) 【碰撞指针】
-- 27、【简单】LeetCode 125: [验证回文串](https://leetcode-cn.com/problems/valid-palindrome/) 【双指针：未实现】
-- 28、【困难】剑指Offer 51: [数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 【归并排序】
-- 29、【困难】LeetCode 629: [k个逆序数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/) 【动态规划】
-- 30、【简单】LeetCode 206: [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/) 【链表遍历：前继节点、当前节点、后继节点】
-- 31、【简单】LeetCode 92: [反转链表II：对指定区间进行反转](https://leetcode-cn.com/problems/reverse-linked-list-ii/) 【链表遍历前继节点、当前节点、后继节点+头尾节点】
-- 32、【简单】LeetCode 141: [判断链表是否有环](https://leetcode-cn.com/problems/linked-list-cycle/) 【快慢指针:快一步：未实现】
-- 33、【中等】LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【快慢指针+Map 或者 对每个节点打上索引:未实现】  
-- 33、【简单】剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【未实现】
-- 34、【简单】LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历】
-- 35、【中等】LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 sie-k处断开】
-- 36、【中等】leetCode 209: [长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) 【滑动窗口】
-- 37、【中等】leetCode 3: [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) 【滑动窗口】
+- 25、【中等】 LeetCode 215: [数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) 【快速排序子过程：partition操作】
+- 26、【简单】 LeetCode 167: [两数之和II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/) 【碰撞指针】
+- 27、【简单】 LeetCode 125: [验证回文串](https://leetcode-cn.com/problems/valid-palindrome/) 【双指针：未实现】
+- 28、【困难】 剑指Offer 51: [数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 【归并排序】
+- 29、【困难】 LeetCode 629: [k个逆序数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/) 【动态规划】
+- 30、【简单】 LeetCode 206: [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/) 【链表遍历：需找到 前继节点、当前节点、后继节点 才能完成一个节点的反转】
+- 31、【简单】 LeetCode 92: [反转链表II：对指定区间进行反转](https://leetcode-cn.com/problems/reverse-linked-list-ii/) 【链表遍历前继节点、当前节点、后继节点+头尾节点】
+- 32、【简单】 LeetCode 141: [判断链表是否有环](https://leetcode-cn.com/problems/linked-list-cycle/) 【快慢指针:快一步：未实现】
+- 33、【中等】 LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【快慢指针+Map 或者 对每个节点打上索引:未实现】  
+- 33、【简单】 剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【未实现】
+- 34、【简单】 LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历】
+- 35、【中等】 LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 size-k 处断开】
+- 36、【中等】 LeetCode 209: [长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) 【滑动窗口】
+- 37、【中等】 LeetCode 3: [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) 【滑动窗口】
+- 38、【简单】 LeetCode 232: [用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要用到两个栈在每次压栈和每次出栈的时候在两个栈之间倒换下数据】
+- 39、【简单】 LeetCode 225: [用对列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要两个队列，一个辅助队列保证后加入的元素在前面】
+- 40、【简单】 LeeCode 703: [返回数据流中第K大的元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/) 【优先队列：维护一个大小为K的最小堆 OR 最大堆】
+- 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 当前节点、后继节点、后继节点的后继节点才能完成两个节点的反转】
 
 ### 数据结构  
 - 动态数组：

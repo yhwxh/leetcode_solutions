@@ -1,4 +1,4 @@
-package algorithms.data_sturcture_wise.stack;
+package algorithms.data_sturcture_wise.stack_queue;
 
 import java.util.Stack;
 

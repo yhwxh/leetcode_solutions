@@ -24,6 +24,11 @@ public class Solutions {
      *
      * 共有 2 种不同翻译, "--...-." 和 "--...--.".
      *
+     * 解题思路：需要有个辅助数组来获取每个字符对应的密码
+     *  1、遍历每个字符串
+     *  2、遍历每个字符串的每个字符，并将字符转为摩尔斯密码并拼接起来
+     *  3、将每个字符串的转化后的密码放入set ，返回 set 的大小
+     *
      */
     public int uniqueMorseRepresentations(String[] words) {
         String[] codeArray = new String[]{
@@ -40,7 +45,7 @@ public class Solutions {
         for (String word : words) {  // 遍历每个单词
             StringBuilder sb = new StringBuilder();
             for (int i=0; i< word.length(); i++) {
-                // 这里巧妙的用字符相对a的便宜，找到了字符对应的密码在密码数组里的索引
+                // 这里巧妙的用字符相对a的偏移，找到了字符对应的密码在密码数组里的索引
                 sb.append(codeArray[word.charAt(i) - 'a']);  // 将单词中每个字符的密码拼接出来
             }
             res.add(sb.toString());

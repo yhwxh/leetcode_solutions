@@ -15,6 +15,11 @@ public class Solutions {
      * 示例 2:
      * 输入: nums = [1], k = 1
      * 输出: [1]
+     *
+     * 解题思路：
+     *  1、先将数组放入Map，记录每个元素的出现次数
+     *  2、将map中的元素加入一个大小为K的最大堆里
+     *  3、遍历最大堆，取出堆中元素，放进数组，返回结果
      */
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();

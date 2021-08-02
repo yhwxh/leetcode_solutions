@@ -2,6 +2,8 @@ package algorithms.data_sturcture_wise.linkedList;
 
 import utils.ListNode;
 
+import java.util.List;
+
 public class Solutions {
     /**
      * LeetCode 203: 移除链表元素 【简单】
@@ -192,6 +194,38 @@ public class Solutions {
     }
 
     /**
+     * LeetCode 24: 两两交换链表中的节点
+     * 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+     * 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+     *
+     * 输入：head = [1,2,3,4]
+     * 输出：[2,1,4,3]
+     *
+     * 解题思路：
+     *
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        ListNode prev = dummyHead;
+        while(prev.next != null && prev.next.next != null){
+            // 记录下三个节点
+            ListNode cur = prev.next;
+            ListNode suc = cur.next;
+            ListNode sucSuc = suc.next;
+            // 改变三个节点的指向
+            prev.next = suc;
+            cur.next = sucSuc;
+            suc.next = cur;
+            // 移动指针
+            prev = cur;
+        }
+        return dummyHead.next;
+    }
+
+    /**
      * LeetCode 61：旋转链表
      * 给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。
      * <p>
@@ -224,7 +258,7 @@ public class Solutions {
     public static void main(String[] args) {
         // test 203
         int[] arr = new int[]{1, 2, 6, 3, 4, 5, 6};
-        int[] test = {1, 2};
+        int[] test = {1, 2,3,4};
         ListNode data = new ListNode(arr);
         ListNode testLinkedList = new ListNode(test);
         Solutions slt = new Solutions();
@@ -233,5 +267,6 @@ public class Solutions {
 //        System.out.println(slt.reverseBetween(testLinkedList, 2, 4));
 
         System.out.println(slt.rotateRight(testLinkedList, 0));
+        System.out.println(slt.swapPairs(testLinkedList));
     }
 }
