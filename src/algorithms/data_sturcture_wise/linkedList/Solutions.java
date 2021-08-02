@@ -201,7 +201,7 @@ public class Solutions {
      * 输入：head = [1,2,3,4]
      * 输出：[2,1,4,3]
      *
-     * 解题思路：
+     * 解题思路：必须知道 前继节点、当前节点、后继节点
      *
      * @param head
      * @return
@@ -211,11 +211,11 @@ public class Solutions {
         dummyHead.next = head;
         ListNode prev = dummyHead;
         while(prev.next != null && prev.next.next != null){
-            // 记录下三个节点
+            // 记录下三个节点，不然交换完后不能正确移动指针
             ListNode cur = prev.next;
             ListNode suc = cur.next;
             ListNode sucSuc = suc.next;
-            // 改变三个节点的指向
+            // 改变三个节点的指向：改变指向要保证改变的先后顺序，不然容易出错
             prev.next = suc;
             cur.next = sucSuc;
             suc.next = cur;

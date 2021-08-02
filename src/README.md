@@ -42,7 +42,21 @@
 - 38、【简单】 LeetCode 232: [用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要用到两个栈在每次压栈和每次出栈的时候在两个栈之间倒换下数据】
 - 39、【简单】 LeetCode 225: [用对列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要两个队列，一个辅助队列保证后加入的元素在前面】
 - 40、【简单】 LeeCode 703: [返回数据流中第K大的元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/) 【优先队列：维护一个大小为K的最小堆 OR 最大堆】
-- 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 当前节点、后继节点、后继节点的后继节点才能完成两个节点的反转】
+- 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 前继节点、当前节点、后继节点 才能完成两个节点的反转】
+- 42、【简单】 LeetCode 242: [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) 【Set OR Map ：未实现】
+- 43、【简单】 LeetCode 202: [快乐数](https://leetcode-cn.com/problems/happy-number/) 【Set OR Map ：未实现】
+- 44、【简单】 LeetCode 290: [单词规律](https://leetcode-cn.com/problems/word-pattern/) 【Set OR Map ：未实现】
+- 44、【简单】 LeetCode 205: [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/) 【Set OR Map ：未实现】
+- 45、【中等】 LeetCode 451: [根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) 【Set OR Map ：未实现】
+- 46、【简单】 LeetCode 1: [两数之和](https://leetcode-cn.com/problems/two-sum/) 【Set OR Map】
+- 47、【中等】 LeetCode 15: [三数之和](https://leetcode-cn.com/problems/3sum/) 【Set OR Map ：未实现】
+- 48、【中等】 LeetCode 18: [四数之和](https://leetcode-cn.com/problems/4sum/) 【Set OR Map ：未实现】
+- 49、【中等】 LeetCode 16: [最接近的三树之和](https://leetcode-cn.com/problems/3sum-closest/) 【Set OR Map ：未实现】
+- 50、【中等】 LeetCode 454: [四数相加II](https://leetcode-cn.com/problems/4sum-ii/) 【Set OR Map ：未实现】
+- 51、【中等】 LeetCode 49: [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/) 【Set OR Map ：未实现】
+- 52、【中等】 LeetCode 447: [回旋镖数量](https://leetcode-cn.com/problems/number-of-boomerangs/) 【Set OR Map ：未实现】
+- 53、【困难】 LeetCode 149: [直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/) 【Set OR Map：未实现】
+
 
 ### 数据结构  
 - 动态数组：
