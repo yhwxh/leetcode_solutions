@@ -234,25 +234,37 @@ public class Solutions {
      * <p>
      * 解题思路：
      * 1、先遍历链表，让尾节点指向头节点
-     * 3、从当前头节点遍历，在k个位置断开
+     * 3、从当前头节点遍历，找到下一个（k+1）节点作为新链表的头节点，并在第k个位置断开
+     * 4、注意特殊情况：当移动此时大于链表长度时，本质上就是移动 k mode n(k%n) 次
      *
      * @param head
      * @param k
      * @return
      */
     public ListNode rotateRight(ListNode head, int k) {
-        if (head == null) return null;
-        ListNode cur = head;
-        while (cur.next != null) {
-            cur = cur.next;
+        if (head == null || head.next == null /*|| k==0*/) return head;
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        ListNode prev = dummyHead;
+        int count = 0;
+        while (prev.next != null) {
+            prev = prev.next;
+            count++;
         }
-        cur.next = head;
-        for (int i = 0; i < k; i++) {
-            cur = cur.next;
-            head = cur.next;
+        // 尾节点指向头节点
+        prev.next = head;
+        // 由于有环,移动次数也会循环，移动真实的移动次数变为 k %= count;
+        k %= count;
+        // 重新判断 k 是否为 0；
+//        if (k == 0) return head;
+        // 后面的步骤可以覆盖k==0的情况，所以不用单独判断 k==0
+        for (int i = 0; i < count - k; i++) {
+            // 初始时，pre指向链表最后一个元素，形成闭环后就相当于原链表头节点的前继节点
+            prev = prev.next;
         }
-        cur.next = null;
-        return head;
+        ListNode newHead = prev.next;
+        prev.next = null;
+        return newHead;
     }
 
     public static void main(String[] args) {

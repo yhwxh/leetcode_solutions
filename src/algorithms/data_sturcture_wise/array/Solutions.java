@@ -347,8 +347,6 @@ public class Solutions {
         }
     }
 
-    // TODO
-
     /**
      * leetCode 215: 数组中的第K个最大元素 【中等】
      * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
@@ -357,10 +355,10 @@ public class Solutions {
      * 解题思路：
      * 1、思路一：先快排，再去第k个最大值，复杂度为 O(nlogn)
      * 2、思路二：利用快排 partition 操作的性质：O(n)
-     *    2.1 在寻找基准点的时候，基准点的合适位置，就是该元素最终排好序后的索引位置(每次递归找pivot的时候，已经找到的pivot的位置是不会变的)
-     *    2.2 取出第 K 个最大元素就是取第 K 个（或者 arr.length-k 的位置）索引处的位置
-     *    2.3 所以，我们可以在找pivot的时候判断pivot的索引是否等于 K
-     *    2.4 如果 pivot 比k小，就只在左区间找就好了，否则就只在有区间找
+     * 2.1 在寻找基准点的时候，基准点的合适位置，就是该元素最终排好序后的索引位置(每次递归找pivot的时候，已经找到的pivot的位置是不会变的)
+     * 2.2 取出第 K 个最大元素就是取第 K 个（或者 arr.length-k 的位置）索引处的位置
+     * 2.3 所以，我们可以在找pivot的时候判断pivot的索引是否等于 K
+     * 2.4 如果 pivot 比k小，就只在左区间找就好了，否则就只在有区间找
      */
     public int findKthLargest2(int[] nums, int k) {
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
@@ -369,7 +367,7 @@ public class Solutions {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        quickSort(nums, 0, nums.length - 1,k);
+        quickSort(nums, 0, nums.length - 1, k);
         return nums[nums.length - k];
     }
 
@@ -379,11 +377,11 @@ public class Solutions {
         }
         int pivot = partition2(nums, left, right);
         // 这里添加上使用用第二种思路的代码
-        if (pivot == nums.length-k){
+        if (pivot == nums.length - k) {
             return;
         }
-        quickSort(nums, left, pivot - 1,k);
-        quickSort(nums, pivot + 1, right,k);
+        quickSort(nums, left, pivot - 1, k);
+        quickSort(nums, pivot + 1, right, k);
 
     }
 
@@ -428,24 +426,25 @@ public class Solutions {
         nums[index2] = tmp;
     }
 
-    /** leetCode 167: 两数之和II - 输入有序数组 【简单】
+    /**
+     * leetCode 167: 两数之和II - 输入有序数组 【简单】
      * 给定一个已按照 升序排列  的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。
      * 函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 <= answer[0] < answer[1] <= numbers.length 。
      * 你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。
-     *
+     * <p>
      * 示例 1：
      * 输入：numbers = [2,7,11,15], target = 9
      * 输出：[1,2]
      * 解释：2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
-     *
+     * <p>
      * 示例 2：
      * 输入：numbers = [2,3,4], target = 6
      * 输出：[1,3]
-     *
+     * <p>
      * 示例 3：
      * 输入：numbers = [-1,0], target = -1
      * 输出：[1,2]
-     *
+     * <p>
      * 解题思路：碰撞指针
      * 1、两个指针同时从最左边和最右边相向移动
      * 2、判断当前元素和是否满足条件
@@ -458,37 +457,42 @@ public class Solutions {
      */
     public int[] twoSum(int[] numbers, int target) {
         int[] res = new int[2];
-        int left=0;
-        int right= numbers.length-1;
+        int left = 0;
+        int right = numbers.length - 1;
 
-        while(left <right){
+        while (left < right) {
             int curSum = numbers[left] + numbers[right];
-            if( curSum < target){
+            if (curSum < target) {
                 left++;
-            } else if(curSum > target){
+            } else if (curSum > target) {
                 right--;
-            } else{
-                return new int[]{left+1, right+1};
+            } else {
+                return new int[]{left + 1, right + 1};
             }
         }
         return null;
     }
+
+
+    // TODO
     // leetCode 125:
     // leetCode 344:
     // leetCode 345:
     // leetCode 11:
 
-    /** leetCode 209: 长度最小的子数组
+    /**
+     * leetCode 209: 长度最小的子数组
      * 给定一个含有 n 个正整数的数组和一个正整数 target 。
      * 找出该数组中满足其和 ≥ target 的长度最小的 连续子数组[numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。
-     *
+     * <p>
      * 示例：
      * 输入：target = 7, nums = [2,3,1,2,4,3]
      * 输出：2
      * 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
-     *
+     * <p>
      * 解题思路：双指针——滑动窗口
      * 1、注意边界问题
+     *
      * @param target
      * @param nums
      * @return
@@ -501,16 +505,16 @@ public class Solutions {
         int res = nums.length + 1;
         while (windowStart < nums.length) {
             // 先确定当前窗口
-            if (sum < target && windowEnd+1 < nums.length){
+            if (sum < target && windowEnd + 1 < nums.length) {
                 windowEnd++;
-                sum+=nums[windowEnd];
+                sum += nums[windowEnd];
             } else {
                 sum -= nums[windowStart];
                 windowStart++;
             }
             // 然后判断该窗口是否满足条件
-            if (sum >= target){
-                res = res < (windowEnd - windowStart + 1)? res: (windowEnd - windowStart + 1);
+            if (sum >= target) {
+                res = res < (windowEnd - windowStart + 1) ? res : (windowEnd - windowStart + 1);
             }
         }
         // 注意判断没有最小长度的时候
@@ -518,16 +522,18 @@ public class Solutions {
         return res;
     }
 
-    /** leetCode 3: 无重复字符的最长子串
+    /**
+     * leetCode 3: 无重复字符的最长子串
      * 给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度。
-     *
+     * <p>
      * 示例1:
      * 输入: s = "abcabcbb"
      * 输出: 3
      * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
-     *
+     * <p>
      * 解题思路：双指针——滑动窗口
      * 1、需要借助一个记录所有ASCII码字符是否出现的数组，数组每个索引表示该字符
+     *
      * @param s
      * @return
      */
@@ -535,9 +541,9 @@ public class Solutions {
         int[] freq = new int[256];
         int left = 0, right = -1;
         int res = 0;
-        while (left < s.length()){
+        while (left < s.length()) {
             // s的访问索引传入的是字符类型，当作整数类型用的
-            if (right +1 < s.length() && freq[s.charAt(right+1)] == 0){
+            if (right + 1 < s.length() && freq[s.charAt(right + 1)] == 0) {
                 right++;
                 // 如果字符出现就将记录字符串出现次数的数组相应索引赋值为 1， 否则为 0；
                 freq[s.charAt(right)] = 1;
@@ -545,7 +551,7 @@ public class Solutions {
                 freq[s.charAt(left)] = 0;
                 left++;
             }
-            res = res > (right-left+1)? res:(right-left+1);
+            res = res > (right - left + 1) ? res : (right - left + 1);
         }
         return res;
     }
@@ -588,7 +594,7 @@ public class Solutions {
      * 给定一个数组 prices ，其中prices[i] 是一支给定股票第 i 天的价格。
      * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
      * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-     *
+     * <p>
      * 解题思路：
      * 如何实现利润最大化的求解本质是：怎么抓住每个上升波段
      * 1、假定我们知道了买进的最低价格，只要遍历数组，在高于它的价格卖出就可以
@@ -613,12 +619,223 @@ public class Solutions {
     }
 
     /**
+     * 剑指Offer 51：数组中的你序对 【困难】
+     * 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数
+     * <p>
+     * 解题思路：归并排序的衍生问题
+     * 1、对归并排序对合并过程进行改造，记录逆序对的个数
+     * 2、我们需要利用合并的时候，左右两个子区间是排好序的性质，所以排序这个动作要保留
+     * 3、在寻找当前位置的正确元素的时候，可以同时计算出这个所谓的元素的当前逆序对
+     * 4、如果左侧区间所指元素比右侧区间所指元素大，那么当前元素跟右侧区间指向元素以后的元素所有元素构成逆序，所以该元素产生 right-r+1 个逆序对
+     * 5、反之不构成逆序对
+     *
+     * @param nums
+     */
+    public int reversePairs(int[] nums) {
+        return reversePairs(nums, 0, nums.length - 1);
+    }
+
+    private int reversePairs(int[] nums, int left, int right) {
+        if (left >= right) {
+            return 0;
+        }
+        int mid = left + (right - left) / 2;
+        int sum1 = reversePairs(nums, left, mid);
+        int sum2 = reversePairs(nums, mid + 1, right);
+        return merge(nums, left, mid, right, sum1 + sum2);
+    }
+
+    private int merge(int[] nums, int left, int mid, int right, int counts) {
+        // 遍历左侧子数组的指针
+        int l = left;
+        // 遍历右侧子数组的指针
+        int r = mid + 1;
+        // 逆序对计数器: counts
+
+        // 构造一个额外数组，来辅助对两个子数组的排序
+        int[] aux = new int[right - left + 1];
+        for (int i = 0; i < aux.length; i++) {
+            aux[i] = nums[left + i];
+        }
+        // 遍历要合并的数组区间[left, right] (这里不需要创造一个额外数组接受)
+        for (int k = left; k <= right; k++) {
+            if (l > mid) {  // 只剩右侧区间的时候,此时该区间都是顺序的，没有逆序对
+                nums[k] = aux[r - left];
+                r++;
+            } else if (r > right) {  // 只剩左侧区间的时候，此时该区间是顺序对，没有逆序对
+                nums[k] = aux[l - left];
+                l++;
+            } else {
+                if (aux[l - left] <= aux[r - left]) {
+                    nums[k] = aux[l - left];
+                    l++;
+                } else {
+                    nums[k] = aux[r - left];
+                    counts += mid - l + 1;
+                    r++;
+                }
+            }
+        }
+        return counts;
+    }
+
+
+    /**
+     * LeetCode 1572: 矩阵对角线元素的和 【简单】
+     * <p>
+     * 解题思路：
+     * 1、确定好边界
+     * 2、主对角线元素为 mat[i][i]
+     * 3、副对角线元素为 mat[i][j]
+     * 4、注意交叉位置的处理
+     *
+     * @param mat
+     */
+    public int diagonalSum(int[][] mat) {
+        int rows = mat.length;
+        int cols = mat[0].length;
+        int sum = 0;
+        for (int i = 0, j = cols - 1; i < rows && j >= 0; i++, j--) {
+            if (i == j) {
+                sum += mat[i][i];
+            } else {
+                sum += mat[i][i] + mat[i][j];
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * LeetCode 74：搜索二维矩阵（搜索矩阵中的元素）
+     * 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+     * 每行中的整数从左到右按升序排列。
+     * 每行的第一个整数大于前一行的最后一个整数。
+     * <p>
+     * 解题思路：
+     * 思路一：根据给定矩阵的性质，将矩阵中元素按行拼接后是有序的，所以可以使用二分查找
+     * 思路二：对每行（列）进行二分搜索
+     * 1、从第一列开始，对当前列进行二分搜索，直到剩下一个元素
+     * 2、如果该元素是要找当元素就返回true，否则就比较要找的元素与当前元素大小
+     * 3、如果大，就对该元素所在行进行二分搜索，否则对该元素所在行对上一行进行二分搜索
+     *
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix.length == 0) return false;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        // 将矩阵中的元素想象为平铺在一个数组中，根据数组位置推断该元素在矩阵中的位置
+        int left = 0, right = rows * columns - 1;
+        while (left <= right) {
+            // 计算当前元素在 [left,right] 中的索引
+            int mid = left + (right - left) / 2;
+            // 推断 mid 在矩阵中的索引：矩阵中行号就是 mid 与每行元素个数的商
+            int curRow = mid / columns;
+            // 矩阵中列号就是 mid 与每行元素个数的模
+            int curCol = mid % columns;
+            if (target == matrix[curRow][curCol]) {
+                return true;
+            } else if (target < matrix[curRow][curCol]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * LeetCode 240：搜索二维矩阵 II
+     * 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+     * <p>
+     * 每行的元素从左到右升序排列。
+     * 每列的元素从上到下升序排列。
+     * <p>
+     * 解题思路：利用 matrix 的性质
+     * 思路一：以矩阵的右上角（或者左下角）为起点
+     * 1、从右上角开始，如果要查找元素比当前元素大，则向该元素的下一行移动（该元素左边都比他小）
+     * 2、如果要查找元素比该元素小，就像该元素的左边一列移动（因为该元素下面的元素都比他大）
+     * 3、直到找到该元素
+     *
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrixII(int[][] matrix, int target) {
+        if (matrix.length == 0 || matrix == null) {
+            return false;
+        }
+        // 初始化当前位置
+        int row = 0;
+        int col = matrix[0].length - 1;
+        while (row < matrix.length && col >= 0) {
+            int cur = matrix[row][col];
+            if (target == cur) {
+                return true;
+            } else if (target > cur) {
+                row++;
+            } else if (target < cur) {
+                col--;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 剑指Offer 29：顺时针打印数组
+     * <p>
+     * 解题思路：
+     * 界定好边界
+     *
+     * @param matrix
+     * @return
+     */
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return null;
+        }
+        int[] res = new int[matrix.length * matrix[0].length];
+        // 初始矩阵的四个化边界：上边界、下边界、左边界、右边界
+        int u = 0, d = matrix.length-1, l = 0, r = matrix[0].length-1;
+
+        while (true){
+            // TODO
+
+        }
+//        return res;
+    }
+
+
+    public static void main(String[] args) {
+        Solutions slt = new Solutions();
+        int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
+        slt.sortColors(testArr);
+
+        int[] nums1 = new int[]{2, 4, 3, 5, 1};
+        int[] nums2 = new int[]{1};
+        System.out.println(slt.reversePairs(nums1));
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i] + " ");
+        }
+        System.out.println();
+        slt.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3});
+
+        // test matrix
+        int[][] matrix = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
+        slt.searchMatrixII(matrix, 20);
+    }
+
+
+    /**
      * 如何写出一个正确的程序：我们以二分查找为例
      * 1、想出正确的算法思路、逻辑
      * 2、正确考虑到所有边界问题
      * 明确变量（边界）的实际意义
      * 循环不变量（循环过程中，不变的因素是什么）
-     * 3、
      *
      * @param arr
      * @param target
@@ -638,100 +855,5 @@ public class Solutions {
             }
         }
         return -1;
-    }
-
-    /**
-     * 剑指Offer 51：数组中的你序对 【困难】
-     * 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数
-     *
-     * 解题思路：归并排序的衍生问题
-     * 1、对归并排序对合并过程进行改造，记录逆序对的个数
-     * 2、我们需要利用合并的时候，左右两个子区间是排好序的性质，所以排序这个动作要保留
-     * 3、在寻找当前位置的正确元素的时候，可以同时计算出这个所谓的元素的当前逆序对
-     * 4、如果左侧区间所指元素比右侧区间所指元素大，那么当前元素跟右侧区间指向元素以后的元素所有元素构成逆序，所以该元素产生 right-r+1 个逆序对
-     * 5、反之不构成逆序对
-     * @param args
-     */
-    public int reversePairs(int[] nums){
-        return reversePairs(nums, 0, nums.length - 1);
-    }
-
-    private int reversePairs(int[] nums, int left, int right){
-        if (left >= right){
-            return 0;
-        }
-        int mid = left + (right - left)/2;
-        int sum1 = reversePairs(nums, left, mid);
-        int sum2 = reversePairs(nums, mid + 1, right);
-        return merge(nums, left, mid, right, sum1+sum2);
-    }
-    private int merge(int[] nums, int left, int mid, int right, int counts) {
-        // 遍历左侧子数组的指针
-        int l = left;
-        // 遍历右侧子数组的指针
-        int r = mid+1;
-        // 逆序对计数器: counts
-
-        // 构造一个额外数组，来辅助对两个子数组的排序
-        int[] aux = new int[right - left + 1];
-        for (int i = 0; i < aux.length; i++) {
-            aux[i] = nums[left + i];
-        }
-        // 遍历要合并的数组区间[left, right] (这里不需要创造一个额外数组接受)
-        for (int k = left; k <= right; k++) {
-            if (l > mid){  // 只剩右侧区间的时候,此时该区间都是顺序的，没有逆序对
-                nums[k] = aux[r - left];
-                r++;
-            } else if (r > right){  // 只剩左侧区间的时候，此时该区间是顺序对，没有逆序对
-                nums[k] = aux[l -left];
-                l++;
-            } else{
-                if (aux[l-left] <= aux[r-left]){
-                    nums[k] = aux[l - left];
-                    l++;
-                } else {
-                    nums[k] = aux[r - left];
-                    counts += mid-l+1;
-                    r++;
-                }
-            }
-        }
-        return counts;
-    }
-
-
-    /**
-     * LeetCode 1572: 矩阵对角线元素的和 【简单】
-     * @param mat
-     */
-    public int diagonalSum(int[][] mat) {
-        int rows = mat.length;
-        int cols = mat[0].length;
-        int sum = 0;
-        for (int i = 0, j=cols-1; i < rows && j>=0; i++,j--) {
-            if (i==j){
-                sum += mat[i][i];
-            } else{
-                sum += mat[i][i] + mat[i][j];
-            }
-        }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-        Solutions slt = new Solutions();
-        int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
-        slt.sortColors(testArr);
-
-        int[] nums1 = new int[]{2,4,3,5,1};
-        int[] nums2 = new int[]{1};
-        System.out.println(slt.reversePairs(nums1));
-        for (int i = 0; i < nums1.length; i++) {
-            System.out.print(nums1[i] + " ");
-        }
-        System.out.println();
-        slt.minSubArrayLen(7, new int[]{2,3,1,2,4,3});
-        char a = 'a';
-        System.out.println(testArr[a]);
     }
 }
