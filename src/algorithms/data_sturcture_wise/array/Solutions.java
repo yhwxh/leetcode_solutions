@@ -789,24 +789,95 @@ public class Solutions {
      * 剑指Offer 29：顺时针打印数组
      * <p>
      * 解题思路：
-     * 界定好边界
-     *
+     * 1、界定好边界
+     * 2、按照 从左到右、从上到下、从右到左、从下到上 的顺序打印
+     * 3、每扫过一行或者一列数据，相应边界进行缩减 1
+     * 4、直到任意一个边界有交叉
      * @param matrix
      * @return
      */
     public int[] spiralOrder(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
-            return null;
+            return new int[0];
         }
         int[] res = new int[matrix.length * matrix[0].length];
+        int count = 0;
         // 初始矩阵的四个化边界：上边界、下边界、左边界、右边界
-        int u = 0, d = matrix.length-1, l = 0, r = matrix[0].length-1;
+        int top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;
 
-        while (true){
-            // TODO
+        while (true) {
+            // step1:从左到右打印当前行的所有元素，即 [left,right] 这个区间
+            if (left > right) break;
+            for (int i = left; i <= right; i++) {
+                res[count] = matrix[top][i];
+                count++;
+            }
+            // 从左向右打印完一行，我们将上边界 top 指针下移一位
+            top++;
 
+            // step2：从上到下打印当前列的所有元素，即 [top,bottom] 这个区间
+            if (top > bottom) break;
+            for (int j = top; j <= bottom; j++) {
+                res[count] = matrix[j][right];
+                count++;
+            }
+            // 从上到下打印完，右侧边界 right 向左移动一位
+            right--;
+
+            // step3：从右到左打印当前行的所有元素，即 [right,left] 这个区间
+            if (right < left) break;
+            for (int k = right; k >= left; k--) {
+                res[count] = matrix[bottom][k];
+                count++;
+            }
+            // 从右到左打印完，底部边界 bottom 向上移动一位
+            bottom--;
+
+            // step4：从下到上打印当前列的所有元素，即 [bottom,top] 这个区间
+            if (bottom < top) break;
+            for (int m = bottom; m >= top; m--) {
+                res[count] = matrix[m][left];
+                count++;
+            }
+            // 从下到上打印完，左侧边界 left 向右移动一位
+            left++;
         }
-//        return res;
+        return res;
+    }
+
+    /**
+     * LeetCode 189: 反转数值 【中等】
+     * 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+     * <p>
+     * 示例：
+     * 输入: nums = [1,2,3,4,5,6,7], k = 3
+     * 输出: [5,6,7,1,2,3,4]
+     * <p>
+     * 解题思路：右移k个位置，本质是将数组后k个元素放到数组前面
+     * 1、先将数组进行反转
+     * 2、确定要移动元素个数k
+     * 3、将 [0,k-1] 这个区间的元素反转，回到原来数组的顺序状态
+     * 4、将 [k,size-1] 这个区间的元素反转，回到原来数组的顺序状态
+     *
+     * @param nums
+     * @param k
+     */
+    public void rotate(int[] nums, int k) {
+        if (nums == null || k == 0) return;
+        reverseArr(nums, 0, nums.length - 1);
+        k %= nums.length;
+
+        reverseArr(nums, 0, k - 1);
+        reverseArr(nums, k, nums.length - 1);
+    }
+
+    private void reverseArr(int[] arr, int start, int end) {
+        if (start > end) {
+            throw new IllegalArgumentException("illegal argument");
+        }
+        for (int i = start, k = end; i < k; i++, k--) {
+            swap(arr, i, k);
+        }
     }
 
 
@@ -826,7 +897,13 @@ public class Solutions {
 
         // test matrix
         int[][] matrix = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
+        int[][] matrix2 = {{1, 2, 3}, {4, 5, 6},{7,8,9}};
         slt.searchMatrixII(matrix, 20);
+        int[] printMatrix = slt.spiralOrder(matrix2);
+        for (int i = 0; i < printMatrix.length; i++) {
+            System.out.print(printMatrix[i] + " ");
+        }
+        System.out.println("\n end");
     }
 
 

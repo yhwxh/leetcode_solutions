@@ -34,7 +34,7 @@
 - 31、【简单】 LeetCode 92: [反转链表II：对指定区间进行反转](https://leetcode-cn.com/problems/reverse-linked-list-ii/) 【链表遍历前继节点、当前节点、后继节点+头尾节点】
 - 32、【简单】 LeetCode 141: [判断链表是否有环](https://leetcode-cn.com/problems/linked-list-cycle/) 【快慢指针:快一步：未实现】
 - 33、【中等】 LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【快慢指针+Map 或者 对每个节点打上索引:未实现】  
-- 33、【简单】 剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【边界问题：未实现】
+- 33、【简单】 剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【边界问题】
 - 34、【简单】 LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历：边界问题】
 - 35、【中等】 LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 size-k 处断开】
 - 36、【中等】 LeetCode 209: [长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) 【滑动窗口】
@@ -43,7 +43,7 @@
 - 39、【简单】 LeetCode 225: [用对列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要两个队列，一个辅助队列保证后加入的元素在前面】
 - 40、【简单】 LeeCode 703: [返回数据流中第K大的元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/) 【借助 优先队列：维护一个大小为K的最小堆 OR 最大堆】
 - 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 前继节点、当前节点、后继节点 才能完成两个节点的反转】
-- 42、【简单】 LeetCode 242: [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) 【借助 Set OR Map ：未实现】
+- 42、【简单】 LeetCode 242: [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) 【借助 数组 OR Map】
 - 43、【简单】 LeetCode 202: [快乐数](https://leetcode-cn.com/problems/happy-number/) 【借助 Set OR Map ：未实现】
 - 44、【简单】 LeetCode 290: [单词规律](https://leetcode-cn.com/problems/word-pattern/) 【借助 Set OR Map ：未实现】
 - 44、【简单】 LeetCode 205: [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/) 【借助 Set OR Map ：未实现】
@@ -61,6 +61,7 @@
 - 56、【困难】 剑指Offer 59-1: [滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 【借助 优先队列 或者 普通队列：未实现】
 - 57、【中等】 LeetCode 74: [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) 【数组遍历：需要点trick 或者 二分搜索】
 - 58、【中等】 LeetCode 240: [搜索二维矩阵II（矩阵中点元素）](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/) 【数组遍历：需要点trick】
+- 59、【中等】 LeetCode 189: [反转数值](https://leetcode-cn.com/problems/rotate-array/) 【类似反转链表：先整体反转，再分段反转】
 
 ### 数据结构  
 - 动态数组：

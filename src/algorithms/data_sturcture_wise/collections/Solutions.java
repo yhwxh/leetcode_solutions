@@ -94,12 +94,102 @@ public class Solutions {
 
     /**
      * LeetCode 447：回旋镖数量 【中等】
+     * 给定平面上 n 对 互不相同 的点 points ，其中 points[i] = [xi, yi] 。回旋镖 是由点 (i, j, k) 表示的元组 ，
+     * 其中 i 和 j 之间的距离和 i 和 k 之间的距离相等（需要考虑元组的顺序）。
+     * 返回平面上所有回旋镖的数量。
+     *
+     * 示例 1：
+     * 输入：points = [[0,0],[1,0],[2,0]]
+     * 输出：2
+     * 解释：两个回旋镖为 [[1,0],[0,0],[2,0]] 和 [[1,0],[2,0],[0,0]]
+     *
+     * 解题思路：
+     *  1、计算每两个点之间点距离
+     *  2、使用map将距离和距离出现点次数保存下来
+     *
      * @param points
      * @return
      */
     public int numberOfBoomerangs(int[][] points) {
         // TODO
+        if (points == null || points.length<3) return 0;
+        for (int i = 0; i < points.length-1; i++) {
+            for (int j = 1; j < points.length; j++) {
+                int dist = points[0][0];
+            }
+        }
         return 0;
+    }
+
+    /**
+     * LeetCode 242: 有效的字母异位词 【简单】
+     * 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+     * 注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+     *
+     * 示例 1:
+     * 输入: s = "anagram", t = "nagaram"
+     * 输出: true
+     *
+     * 示例 2:
+     * 输入: s = "rat", t = "car"
+     * 输出: false
+     *
+     * 解题思路：
+     *  思路一：借助map
+     *      1、用一个map 记录其中一个字符串中字符的出现次数
+     *      2、遍历另一个字符，判断每个字符跟map中的字符次数是否抵消
+     *      3、如果都抵消，就满足条件，否则不满足
+     *  思路二：借助一个记录所有字母的数组
+     *      1、因为两个字符串满足条件的话，两个字符串的长度必须相等，所以可以将两个字符串放到一个循环遍历
+     *      2、遍历字符串，将一个字符串中出现字符的出现记录下来，出现一次增加一次次数，将另一个字符串出现的字符去消减原来的记录
+     *      3、如果满足条件，最终数组中记录的次数都是0，否则不满足条件
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public boolean isAnagram(String s, String t){
+        if (s == null || t == null || s.length() != t.length())
+            return false;
+        // 记录26个小写英文字母，下标表示所有字符，相应元素表示该字符在字符串中出现次数
+        int[] records = new int[26];
+        for (int i = 0; i < s.length(); i++){
+            // 用其中一个字符串中的字符，来记录字符出现次数
+            records[s.charAt(i) - 'a']++;  // 这里使用了每个字符相对'a'的偏移作为索引
+            // 用另一个字符串中的字符，来消减字符的出现次数
+            records[t.charAt(i) - 'a']--;
+        }
+        // 检查所有字符的出现次数是否完全被消除
+        for (int j = 0; j < 26; j++) {
+            if (records[j] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAnagram2(String s, String t) {
+        if (s == null || t == null || s.length() != t.length())
+            return false;
+        Map<Character, Integer> record = new HashMap();
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            if (record.containsKey(cur)) {
+                record.put(cur, record.get(cur) + 1);
+            } else {
+                record.put(cur, 1);
+            }
+        }
+        for (int j = 0; j < t.length(); j++) {
+            char curJ = t.charAt(j);
+            if (!record.containsKey(curJ)) {
+                return false;
+            }
+            record.put(curJ, record.get(curJ) - 1);
+            if (record.get(curJ) == 0)
+                record.remove(curJ);
+        }
+        return record.isEmpty();
     }
 
     public static void main(String[] args) {
