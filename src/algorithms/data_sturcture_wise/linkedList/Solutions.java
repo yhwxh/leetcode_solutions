@@ -267,18 +267,103 @@ public class Solutions {
         return newHead;
     }
 
+    /**LeetCode 83: 删除排序链表中的重复元素 【简单】
+     * 存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除所有重复的元素，使每个元素 只出现一次 。
+     * 返回同样按升序排列的结果链表。
+     *
+     * 解题思路：
+     *  1、不需要虚拟头节点，这个会带来删除头节点的危险，而头节点是不会被删除的
+     *  2、永远返回头节点就行
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null) return head;
+        ListNode prev = head;
+
+        while(prev.next != null){
+            ListNode cur = prev.next;
+            if(cur.val == prev.val){
+                prev.next = cur.next;
+            } else{
+                prev = cur;
+            }
+        }
+        return head;
+    }
+
+    /**
+     * LeetCode 19: 删除链表的倒数第N个元素
+     * 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+     * 进阶：你能尝试使用一趟扫描实现吗？
+     *
+     * 解题思路：
+     *  思路一：遍历两次链表
+     *      1、第一次，记录链表元素个数
+     *      2、重新遍历（只需从1遍历到n-k），找到要删除节点的前继节点
+     *  思路二：使用双指针维护一个要删除节点的前继节点和Null的区间，同时移动区间，找到要删除节点的前继节点
+     *      1、先从虚拟头节点遍历链表N+1次，找到区间的右侧边界
+     *      2、再同时移动两个指针，知道右侧指针到达Null，此时左侧指针指向的节点就是要删除节点的前继节点
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+
+        // 我们要让p和q两个指针维护一个跨度为 n+1 的区间, p 指向要删除节点的前继节点，q指向空，这两个指针正好间隔n个节点
+        ListNode p = dummyHead;
+        ListNode q = dummyHead;
+
+        // 初始化这个区间
+        for(int i = 0; i<n+1; i++){
+            q = q.next;
+        }
+        // 此时 p 到 q 正好是一个间隔 n 个节点的区间，同时移动两个指针，知道q指针指向 null，那么p指针就是要删除节点的前继节点
+        while(q!=null){
+            q=q.next;
+            p=p.next;
+        }
+
+        ListNode delNode = p.next;
+        p.next = delNode.next;
+        return dummyHead.next;
+    }
+     public ListNode removeNthFromEnd2(ListNode head, int n) {
+         if(head == null) return head;
+         int count = 0;
+         ListNode cur = head;
+         while(cur!=null){
+             count++;
+             cur=cur.next;
+         }
+         if(n > count) return head;
+         ListNode dummyHead = new ListNode();
+         dummyHead.next = head;
+         ListNode prev = dummyHead;
+         for(int i=1;i<=count-n; i++){
+             prev = prev.next;
+         }
+         ListNode delNode = prev.next;
+         prev.next = delNode.next;
+
+         return dummyHead.next;
+     }
+
     public static void main(String[] args) {
         // test 203
         int[] arr = new int[]{1, 2, 6, 3, 4, 5, 6};
-        int[] test = {1, 2,3,4};
-        ListNode data = new ListNode(arr);
+        int[] test = {1,1,1, 2,3,4};
+        ListNode data = new ListNode(new int[]{0,0,0,0,0});
         ListNode testLinkedList = new ListNode(test);
         Solutions slt = new Solutions();
-        System.out.println(slt.removeElements(data, 6));
-        System.out.println(testLinkedList);
-//        System.out.println(slt.reverseBetween(testLinkedList, 2, 4));
-
-        System.out.println(slt.rotateRight(testLinkedList, 0));
-        System.out.println(slt.swapPairs(testLinkedList));
+//        System.out.println(slt.removeElements(data, 6));
+//        System.out.println(testLinkedList);
+////        System.out.println(slt.reverseBetween(testLinkedList, 2, 4));
+//
+//        System.out.println(slt.rotateRight(testLinkedList, 0));
+//        System.out.println(slt.swapPairs(testLinkedList));
+        System.out.println(slt.deleteDuplicates(data));
     }
 }
