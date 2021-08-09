@@ -62,6 +62,9 @@
 - 57、【中等】 LeetCode 74: [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) 【数组遍历：需要点trick 或者 二分搜索】
 - 58、【中等】 LeetCode 240: [搜索二维矩阵II（矩阵中点元素）](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/) 【数组遍历：需要点trick】
 - 59、【中等】 LeetCode 189: [反转数值](https://leetcode-cn.com/problems/rotate-array/) 【类似反转链表：先整体反转，再分段反转】
+- 60、【简单】 LeetCode 219: [存在重复元素II](https://leetcode-cn.com/problems/contains-duplicate-ii/) 【借助 Set】
+- 61、【中等】 LeetCode 220: [存在重复元素III](https://leetcode-cn.com/problems/contains-duplicate-iii/) 【借助 Set 并需要trick】
+- 62、【中等】 LeetCode 19: [删除链表的倒数第N个元素](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/) 【链表+双指针】
 
 ### 数据结构  
 - 动态数组：

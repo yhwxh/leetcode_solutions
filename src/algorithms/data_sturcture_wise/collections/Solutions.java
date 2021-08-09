@@ -94,8 +94,8 @@ public class Solutions {
 
     /**
      * LeetCode 447：回旋镖数量 【中等】
-     * 给定平面上 n 对 互不相同 的点 points ，其中 points[i] = [xi, yi] 。回旋镖 是由点 (i, j, k) 表示的元组 ，
-     * 其中 i 和 j 之间的距离和 i 和 k 之间的距离相等（需要考虑元组的顺序）。
+     * 给定平面上 n 对 互不相同 的点 points ，其中 points[i] = [xi, yi] 。回旋镖 是由点 (i, j, k) 表示的元组 ，
+     * 其中 i 和 j 之间的距离和 i 和 k 之间的距离相等（需要考虑元组的顺序）。
      * 返回平面上所有回旋镖的数量。
      *
      * 示例 1：
@@ -111,22 +111,43 @@ public class Solutions {
      * @return
      */
     public int numberOfBoomerangs(int[][] points) {
-        // TODO
         if (points == null || points.length<3) return 0;
-        for (int i = 0; i < points.length-1; i++) {
-            for (int j = 1; j < points.length; j++) {
-                int dist = points[0][0];
+        int res = 0;
+        // 遍历每个数据点
+        for (int i = 0; i < points.length; i++) {
+            // 给每个数据点创建一个map，来装该点与其他点点距离和个数
+            Map<Integer, Integer> record = new HashMap<>();
+            for (int j = 0; j < points.length; j++) {
+                if(i==j)continue;
+                int dist = distance(points[i], points[j]);
+                if (record.containsKey(dist))
+                    record.put(dist, record.get(dist)+1);
+                else
+                    record.put(dist, 1);
+            }
+            // 记录了每个数据点和其他点距离个数后，遍历map，查看有多少满足条件点数组
+            for (Map.Entry<Integer, Integer> e: record.entrySet()) {
+                // 当某个距离下的数据点个数大于等于2的时候才满足条件
+                if (e.getValue() >= 2){
+                    // 因为要考虑元组间的顺序，所以满足条件的个数为一个A(n,m)的排列
+                    res += e.getValue()*(e.getValue()-1);
+                }
             }
         }
-        return 0;
+        return res;
+    }
+
+    private int distance(int[] a, int[] b) {
+        // 严格讲，距离需要开平方，但是开平方会带来浮点数，由于误差点存在，在Map中用浮点数作为key是不安全的，所以可以不对其开平方处理
+        return (int)(Math.pow(a[0]-b[0],2) + Math.pow(a[1]-b[1],2));
     }
 
     /**
      * LeetCode 242: 有效的字母异位词 【简单】
      * 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
-     * 注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+     * 注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
      *
-     * 示例 1:
+     * 示例 1:
      * 输入: s = "anagram", t = "nagaram"
      * 输出: true
      *
@@ -192,6 +213,100 @@ public class Solutions {
         return record.isEmpty();
     }
 
+    /**
+     * LeetCode 219：存在重复元素II 【简单】
+     * 给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，
+     * 并且 i 和 j 的差的 绝对值 至多为 k。
+     *
+     * 示例1:
+     * 输入: nums = [1,2,3,1], k = 3
+     * 输出: true
+     *
+     * 示例 2:
+     * 输入: nums = [1,0,1,1], k = 1
+     * 输出: true
+     *
+     * 示例 3:
+     * 输入: nums = [1,2,3,1,2,3], k = 2
+     * 输出: false
+     *
+     * 解题思路：该问题等价于在固定长度为k的窗口中，是否存在两个元素的值相等
+     *  1、我们需要将窗口外的元素去一个地方查找有没有，所以这里需要一个 set 来记录窗口中的元素，来辅助查找
+     *  2、当 Set 中的元素个数小于k的时候就找到了满足条件的元素，那么必定在窗口内也满足
+     *  3、如果 Set 的元素个数大于k，还没找到，就向后移动一下窗口继续判断
+     *  4、这里不需要在数组上定义指针来维护窗口，维护Set的大小就是我们要的窗口大小
+     * @param nums
+     * @param k
+     * @return
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Set<Integer> record = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            int cur = nums[i];
+            if (record.contains(cur)){
+                return true;
+            } else {
+                record.add(cur);
+                // 维护 set的大小，始终让他保持为 k
+                if (record.size()>k){
+                    // 删除窗口最左侧的数据
+                    record.remove(nums[i-k]);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * LeetCode 220：存在重复元素III 【中等】
+     * 给你一个整数数组 nums 和两个整数 k 和 t 。
+     * 请你判断是否存在 两个不同下标 i 和 j，使得 abs(nums[i] - nums[j]) <= t ，同时又满足 abs(i - j) <= k 。
+     * 如果存在则返回 true，不存在返回 false。
+     *
+     * 示例1：
+     * 输入：nums = [1,2,3,1], k = 3, t = 0
+     * 输出：true
+     *
+     * 示例 2：
+     * 输入：nums = [1,0,1,1], k = 1, t = 2
+     * 输出：true
+     *
+     * 示例 3：
+     * 输入：nums = [1,5,9,1,5,9], k = 2, t = 3
+     * 输出：false
+     *
+     * 解题思路：将问题等价转化一下，两个元素的差值不超过t，其实就是相当于在 [v-t, v+t] 这个区间找一个数
+     *  1、满足条件的值必定在 [v-t, v+t] 这个区间里
+     *  2、如果 treeSet 中的元素完全被 [v-t, v+t] 这个区间覆盖，那么肯定有满足条件的元素
+     *
+     * @param nums
+     * @param k
+     * @param t
+     * @return
+     */
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        // 这里需要Set有顺序，所以用treeSet
+        TreeSet<Long> record = new TreeSet<>(  );
+        for (int i = 0; i < nums.length; i++) {
+            long cur = nums[i];
+            // 当 treeSet 中的最大值存在，且不能比满足条件的 [v-t, v+t] 区间的最小值小
+            Long ceiling = record.ceiling((long) nums[i] - (long) t);
+            // record 中所有元素落在 [v-t, v+t] 这个区间里的时候，必定存在满足条件的元素
+            if (ceiling!=null && ceiling <= cur+t){
+                //
+                return true;
+            } else {
+                record.add(cur);
+                // 维护 set的大小，始终让他保持为 k
+                if (record.size()>k){
+                    // 删除窗口最左侧的数据
+                    record.remove((long)nums[i-k]);
+                }
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int[] test = {2, 7, 11, 15};
         Solutions solutions = new Solutions();
@@ -200,5 +315,8 @@ public class Solutions {
             System.out.print(i + " ");
         }
         System.out.println();
+
+        int[][] test2 = {{0,0},{1,0},{-1,0},{0,1},{0,-1}};
+        System.out.println(solutions.numberOfBoomerangs(test2));
     }
 }

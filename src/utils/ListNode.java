@@ -40,10 +40,10 @@ public class ListNode {
         Set<Integer> tmp = new HashSet<>();
         ListNode cur = this;
         while (cur != null){
-            if (tmp.contains(cur.val)){
-                res.append(cur.val);
-                break;
-            }
+//            if (tmp.contains(cur.val)){
+//                res.append(cur.val);
+//                break;
+//            }
             res.append(cur.val + "->");
             tmp.add(cur.val);
             cur = cur.next;
