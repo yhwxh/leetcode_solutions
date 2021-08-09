@@ -267,6 +267,37 @@ public class Solutions {
         return newHead;
     }
 
+
+    /**
+     * LeetCode 141: 环形链表（判断链表是否有环）
+     * 给定一个链表，判断链表中是否有环。
+     * 如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。
+     * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
+     * 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。
+     * 如果链表中存在环，则返回 true 。 否则，返回 false 。
+     *
+     * 解题思路：
+     *  思路一：使用Set，如果某个节点在Set中出现过，就有环，否则没有
+     *  思路二：快慢指针：如果快慢指针相遇，则有环
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null) return false;
+        ListNode p = head;
+        ListNode q = head.next;
+
+        // 当两个指针没相遇就一直循环
+        while(p != q){
+            // 如果快指针指向空，或者快指针当下个节点指向空，就表示没环
+            if(q==null || q.next==null)
+                return false;
+            p = p.next;
+            q = q.next.next;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         // test 203
         int[] arr = new int[]{1, 2, 6, 3, 4, 5, 6};
