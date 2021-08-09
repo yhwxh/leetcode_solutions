@@ -267,7 +267,6 @@ public class Solutions {
         return newHead;
     }
 
-<<<<<<< HEAD
 
     /**
      * LeetCode 141: 环形链表（判断链表是否有环）
@@ -298,7 +297,7 @@ public class Solutions {
         }
         return true;
     }
-=======
+
     /**LeetCode 83: 删除排序链表中的重复元素 【简单】
      * 存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除所有重复的元素，使每个元素 只出现一次 。
      * 返回同样按升序排列的结果链表。
@@ -382,7 +381,6 @@ public class Solutions {
 
          return dummyHead.next;
      }
->>>>>>> 65c92f9afb217e656e200119bc9d3caca8a41af0
 
     public static void main(String[] args) {
         // test 203
