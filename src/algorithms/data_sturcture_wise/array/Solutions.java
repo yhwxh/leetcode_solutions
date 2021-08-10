@@ -294,21 +294,16 @@ public class Solutions {
                 i++;
             } else if (nums[i] == 2) {
                 two--;  // 这里先移动了指针，后面取元素的时候就不需要减 1 了
-                swap(nums[i], nums[two]);
+                swap(nums, i, two);
 //                i++; // 此时是不需要移动 i 的，它会继续判断是否为零的情况
             } else {
                 zeros++;
-                swap(nums[i], nums[zeros]);
+                swap(nums, i, zeros);
                 i++;
             }
         }
     }
 
-    private void swap(int a, int b) {
-        int tmp = a;
-        a = b;
-        b = tmp;
-    }
 
 
     /**
@@ -473,12 +468,178 @@ public class Solutions {
         return null;
     }
 
+    /**
+     * leetCode 125: 验证回文串 【简单】（回文串就是正读和反渎结果一样）
+     * 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+     * 说明：本题中，我们将空字符串定义为有效的回文串。
+     *
+     * 示例 1:
+     * 输入: "A man, a plan, a canal: Panama"
+     * 输出: true
+     * 解释："amanaplanacanalpanama" 是回文串
+     *
+     * 示例 2:
+     * 输入: "race a car"
+     * 输出: false
+     * 解释："raceacar" 不是回文串
+     *
+     * 解题思路：
+     *  思路一：将字符串反转，看字符串是否相等
+     *  思路二：双指针，判断左右两个指针指向的字符是否相等
+     * @param s
+     * @return
+     */
+    public boolean isPalindrome(String s) {
+        if (s==null || s.length()<=0) return true;
+        // 因为不区分大小写，所以先将 s 转为小写
+        s = s.toLowerCase();
+        int left = 0, right = s.length()-1;
+        while (left < right){
+            // 跳过非字符和数字的字符(注意，这里不是一个if判断，而是一个循环，一定要跳过所有非法字符，if判断只能跳过一个)
+            // 而且这里也必须做边界判断，否则会有越界情况
+            while (left<right && !Character.isLetterOrDigit(s.charAt(left)))
+                left++;
+            while (left<right && !Character.isLetterOrDigit(s.charAt(right)))
+                right--;
+            // 还得判断一次 left<right ，因为上面如果发生移动，left<right 就不一定成立了
+            if (left <right && s.charAt(left)!=s.charAt(right)){
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    /** leetCode 344: 反转字符串
+     * 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+     * 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+     * 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符
+     *
+     * 示例 1：
+     * 输入：["h","e","l","l","o"]
+     * 输出：["o","l","l","e","h"]
+     *
+     * 解题思路：碰撞指针
+     * @param s
+     */
+    public void reverseString(char[] s) {
+        if(s==null || s.length == 0){
+            throw new IllegalArgumentException("");
+        }
+//        int head = 0, tail = s.length-1;
+//        while (head < tail){
+//            char tmp = s[head];
+//            s[head] = s[tail];
+//            s[tail] = tmp;
+//            head++;
+//            tail--;
+//        }
+        for(int head=0, tail=s.length-1; head<tail; head++,tail--){
+            char tmp = s[head];
+            s[head] = s[tail];
+            s[tail] = tmp;
+        }
+    }
 
     // TODO
-    // leetCode 125:
-    // leetCode 344:
     // leetCode 345:
     // leetCode 11:
+
+    /**
+     * LeetCode 541：反转字符串II 【简单】
+     * 给定一个字符串 s 和一个整数 k，从字符串开头算起，每 2k 个字符反转前 k 个字符。
+     * 如果剩余字符少于 k 个，则将剩余字符全部反转。
+     * 如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
+     *
+     * 示例 1：
+     * 输入：s = "abcdefg", k = 2
+     * 输出："bacdfeg"
+     *
+     * 示例 2：
+     * 输入：s = "abcd", k = 2
+     * 输出："bacd"
+     *
+     * 解题思路：界定好边界，移动指针
+     *  1、两个指针，维护一个长度为k的区域
+     *  2、对区域内元素反转
+     *  3、指针要每次移动 2k 个
+     * @param s
+     * @param k
+     * @return
+     */
+    public String reverseStr(String s, int k) {
+        char[] arr = s.toCharArray();
+        reverseArr(arr, k);
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            res.append(arr[i]);
+        }
+        return res.toString();
+    }
+    private void reverseArr(char[] arr, int k){
+        if (arr == null || arr.length <= 0) {
+            throw new IllegalArgumentException("");
+        }
+        int a = 0, b = k - 1;
+        int len = arr.length;
+
+        // 只要左边界没有到头，就还有剩余元素，就需反转
+        while (a < len) {
+            // 考虑特殊情况：剩余不足k个时，要反转对区间有变化
+            if (b > len - 1) {
+                reverse(arr, a, len-1);
+                break;
+            }
+            reverse(arr, a, b);
+            // 每隔 2k 个移动指针
+            a += 2 * k;
+            b += 2 * k;
+        }
+    }
+    private void reverse(char[] arrary, int start, int end) {
+        while (start < end) {
+            char temp = arrary[start];
+            arrary[start] = arrary[end];
+            arrary[end] = temp;
+
+            start++;
+            end--;
+        }
+    }
+
+    /**
+     * LeetCode 557：反转字符串中的单词III 【简单】
+     * 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+     *
+     * 示例：
+     * 输入："Let's take LeetCode contest"
+     * 输出："s'teL ekat edoCteeL tsetnoc"
+     *
+     * 解题思路：双指针
+     * 1、用 [l, right) 区间表示一个单词，当right 指向空格或者数组结尾时停止
+     * 2、将这个区间中的字符反转
+     * 3、左指针移动到 ringt+1 处，右指针移动到 right+1 处
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        if (s == null || s.length()<=0) return null;
+        char[] strChars = s.toCharArray();
+        int left=0, right =0;
+
+        while (right<=s.length()){
+            if (right == s.length() || strChars[right]==' '){
+                reverse(strChars, left, right-1);
+                left = right+1;
+                right = right +1;
+            } else {
+                right++;
+            }
+        }
+        return new String(strChars);
+    }
 
     /**
      * leetCode 209: 长度最小的子数组
@@ -904,6 +1065,9 @@ public class Solutions {
             System.out.print(printMatrix[i] + " ");
         }
         System.out.println("\n end");
+
+        String testStr = "A man, a plan, a canal: Panama";
+        System.out.println(slt.isPalindrome(testStr));
     }
 
 

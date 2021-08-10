@@ -2,6 +2,9 @@ package algorithms.strategy_wise.recursion;
 
 import utils.ListNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solutions {
     /**
      * LeetCode 203: 移除链表元素 【简单】
@@ -28,7 +31,6 @@ public class Solutions {
             return head;
         }
     }
-
     // 非递归解法
     public ListNode removeElements(ListNode head, int val) {
         ListNode dummyHead = new ListNode(-1, head);
@@ -41,6 +43,46 @@ public class Solutions {
             }
         }
         return dummyHead.next;
+    }
+
+    /**
+     * LeetCode 22: 括号生成 【中等】
+     * 数字 n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+     *
+     * 示例 1：
+     * 输入：n = 3
+     * 输出：["((()))","(()())","(())()","()(())","()()()"]
+     *
+     * 示例 2：
+     * 输入：n = 1
+     * 输出：["()"]
+     *
+     * 解题思路：递归+确定好如何生成括号是合法的
+     *  1、做括号的个数和有括号的个数都必须等于n
+     *  2、当做括号和有括号用完后，返回结果
+     *  3、如果做括号没用完，就可以一直添加左括号
+     *  4、右括号不能先添加，只有做括号个数大于右括号个数时才能添加
+     */
+    // 这里需要一个全局变量，来装所有有效括号
+    private List<String> res = new ArrayList<>();
+    public List<String> generateParenthesis(int n) {
+        parenthesis(0, 0, n, "");
+        return res;
+    }
+    // 定义一个递归函数：left用来记录左括号使用个数，right用来记录右括号使用个数
+    private void parenthesis(int left, int right, int n, String pare){
+        if (left == n && right == n){
+            res.add(pare);
+            return;
+        }
+        // 只要左括号没用完就递归添加左括号
+        if (left < n){
+            parenthesis(left + 1, right, n, pare+"(");
+        }
+        // 当左括号个数比右括号多的时候，添加右括号
+        if (left > right){
+            parenthesis(left, right+1, n, pare+")");
+        }
     }
 
 }

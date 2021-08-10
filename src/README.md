@@ -4,17 +4,17 @@
 - 1、【简单】 LeetCode 349: [两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/) 【借用 Set 或 Map】
 - 2、【简单】 LeetCode 350: [两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) 【借用 Set 或 Map】
 - 3、【简单】 LeetCode 94: [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/) 【BST 的递归遍历：当前节点】
-- 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【BST：未实现】
-- 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：未实现】
+- 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【BST：<font color=red>未实现</font>】
+- 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：<font color=red>未实现</font>】
 - 6、【简单】 LeetCode 203: [移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/) 【链表遍历 OR 递归：前继节点、后继节点】
 - 7、【简单】 LeetCode 804: [唯一的摩尔斯密码词](https://leetcode-cn.com/problems/unique-morse-code-words/) 【借用 Set】
 - 8、【中等】 LeetCode 347: [前K个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/) 【优先队列】
 - 9、【简单】 LeetCode 303: [区域和检查(数组不可变,即不涉及线段树的更新操作)](https://leetcode-cn.com/problems/range-sum-query-immutable/) 【线段树】
-- 10、【简单】 LeetCode 20: [有效括号](https://leetcode-cn.com/problems/valid-parentheses/) 【栈】
-- 11、【中等】 LeetCode 22: [生成括号（生成所有有效括号）](https://leetcode-cn.com/problems/generate-parentheses/) 【字符串、动态规划：<font color=red>未实现</font>】
-- 12、【简单】 LeetCode 557: [反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) 【双指针：<font color=red>未实现</font>】
-- 13、【简单】 LeetCode 344: [反转字符串](https://leetcode-cn.com/problems/reverse-string/) 【双指针、递归：<font color=red>未实现</font>】
-- 14、【简单】 LeetCode 541: [反转字符串 II](https://leetcode-cn.com/problems/reverse-string-ii/) 【双指针、字符串：<font color=red>未实现</font>】
+- 10、【简单】 LeetCode 20: [有效括号](https://leetcode-cn.com/problems/valid-parentheses/) 【借用 栈】
+- 11、【中等】 LeetCode 22: [生成括号（生成所有有效括号）](https://leetcode-cn.com/problems/generate-parentheses/) 【递归：确定好左右括号添加的原则】
+- 12、【简单】 LeetCode 557: [反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) 【双指针：确定好每个词的边界】
+- 13、【简单】 LeetCode 344: [反转字符串](https://leetcode-cn.com/problems/reverse-string/) 【双指针、递归】
+- 14、【简单】 LeetCode 541: [反转字符串 II](https://leetcode-cn.com/problems/reverse-string-ii/) 【双指针、字符串：确定好边界和移动间隔】
 - 15、【中等】 LeetCode 930: [和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum/) 【滑动窗口】
 - 16、【简单】 LeetCode 283: [移动零](https://leetcode-cn.com/problems/move-zeroes/) 【双指针】
 - 17、【简单】 LeetCode 27: [移除元素](https://leetcode-cn.com/problems/remove-element/) 【双指针】
@@ -27,13 +27,13 @@
 - 24、【简单】 LeetCode 88: [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) 【归并排序子过程】
 - 25、【中等】 LeetCode 215: [数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) 【快速排序子过程：partition操作】
 - 26、【简单】 LeetCode 167: [两数之和II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/) 【碰撞指针】
-- 27、【简单】 LeetCode 125: [验证回文串](https://leetcode-cn.com/problems/valid-palindrome/) 【双指针：未实现】
+- 27、【简单】 LeetCode 125: [验证回文串](https://leetcode-cn.com/problems/valid-palindrome/) 【双指针：注意边界检查】
 - 28、【困难】 剑指Offer 51: [数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 【归并排序】
 - 29、【困难】 LeetCode 629: [k个逆序数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/) 【动态规划】
 - 30、【简单】 LeetCode 206: [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/) 【链表遍历：需找到 前继节点、当前节点、后继节点 才能完成一个节点的反转】
 - 31、【简单】 LeetCode 92: [反转链表II：对指定区间进行反转](https://leetcode-cn.com/problems/reverse-linked-list-ii/) 【链表遍历前继节点、当前节点、后继节点+头尾节点】
 - 32、【简单】 LeetCode 141: [判断链表是否有环](https://leetcode-cn.com/problems/linked-list-cycle/) 【快慢指针:快一步就可以】
-- 33、【中等】 LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【快慢指针+Map 或者 对每个节点打上索引:未实现】  
+- 33、【中等】 LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【快慢指针+Map 或者 对每个节点打上索引:<font color=red>未实现</font>】  
 - 33、【简单】 剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【边界问题】
 - 34、【简单】 LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历：边界问题】
 - 35、【中等】 LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 size-k 处断开】
