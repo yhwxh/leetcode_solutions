@@ -311,39 +311,54 @@ public class Solutions {
      * LeetCode 202: 快乐数
      * 编写一个算法来判断一个数 n 是不是快乐数。
      *
-     * 「快乐数」定义为：
+     * 快乐数 定义为：
      * 对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。
      * 然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。
-     * 如果 可以变为  1，那么这个数就是快乐数。
+     * 如果 可以变为 1，那么这个数就是快乐数。
      * 如果 n 是快乐数就返回 true ；不是，则返回 false 。
      *
      * 示例 1：
      * 输入：19
      * 输出：true
      * 解释：
-     * 12 + 92 = 82
-     * 82 + 22 = 68
-     * 62 + 82 = 100
-     * 12 + 02 + 02 = 1
+     * 1^2 + 9^2 = 82
+     * 82 + 2^2 = 68
+     * 6^2 + 8^2 = 100
+     * 1^2 + 0^2 + 0^2 = 1
      *
      * 示例 2：
      * 输入：n = 2
      * 输出：false
      *
      * 解题思路：
-     * 1、定义一个 Set 记录每次更新的数
+     * 1、定义一个 Set 记录每个 n 的各个位上数值的平方和
+     * 2、各位数值的平方和不为1的时候(即n为1的时候)就继续遍历
+     * 3、遍历过程中，先对当前数值的各位数值进行平方求和
+     * 4、判断求和结果是否重复过， 如果是就返回false，否则加入set，并更新n为平方和
      * @param n
      * @return
      */
     public boolean isHappy(int n) {
-        //TODO
+        // 用来记录各位数值平方之和
         Set<Integer> sumRecord = new HashSet();
-        int newSum = 0;
-        while(n%10!=0){
-            newSum += (n%10)*(n%10);
-            n = n/10;
+        // n 在动态变化，n不为1的时候就继续遍历
+        while (n !=1){
+            // 每次初始化各位数值平方和
+            int newSum = 0;
+            // 对各位数值进行平方和计算
+            while(n > 0){
+                newSum += (n%10)*(n%10);
+                n = n/10;
+            }
+            // 判断平方和在之前是否出现过
+            if (sumRecord.contains(newSum)){
+                return false;
+            }
+            sumRecord.add(newSum);
+            // 更新 n
+            n = newSum;
         }
-        return false;
+        return true;
     }
 
     public static void main(String[] args) {
@@ -357,5 +372,6 @@ public class Solutions {
 
         int[][] test2 = {{0,0},{1,0},{-1,0},{0,1},{0,-1}};
         System.out.println(solutions.numberOfBoomerangs(test2));
+        System.out.println(solutions.isHappy(19));
     }
 }
