@@ -197,10 +197,10 @@ public class Solutions {
      * LeetCode 24: 两两交换链表中的节点
      * 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
      * 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
-     *
+     * <p>
      * 输入：head = [1,2,3,4]
      * 输出：[2,1,4,3]
-     *
+     * <p>
      * 解题思路：必须知道 前继节点、当前节点、后继节点
      *
      * @param head
@@ -210,7 +210,7 @@ public class Solutions {
         ListNode dummyHead = new ListNode();
         dummyHead.next = head;
         ListNode prev = dummyHead;
-        while(prev.next != null && prev.next.next != null){
+        while (prev.next != null && prev.next.next != null) {
             // 记录下三个节点，不然交换完后不能正确移动指针
             ListNode cur = prev.next;
             ListNode suc = cur.next;
@@ -275,22 +275,23 @@ public class Solutions {
      * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
      * 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。
      * 如果链表中存在环，则返回 true 。 否则，返回 false 。
-     *
+     * <p>
      * 解题思路：
-     *  思路一：使用Set，如果某个节点在Set中出现过，就有环，否则没有
-     *  思路二：快慢指针：如果快慢指针相遇，则有环
+     * 思路一：使用Set，如果某个节点在Set中出现过，就有环，否则没有
+     * 思路二：快慢指针：如果快慢指针相遇，则有环
+     *
      * @param head
      * @return
      */
     public boolean hasCycle(ListNode head) {
-        if(head == null || head.next == null) return false;
+        if (head == null || head.next == null) return false;
         ListNode p = head;
         ListNode q = head.next;
 
         // 当两个指针没相遇就一直循环
-        while(p != q){
+        while (p != q) {
             // 如果快指针指向空，或者快指针当下个节点指向空，就表示没环
-            if(q==null || q.next==null)
+            if (q == null || q.next == null)
                 return false;
             p = p.next;
             q = q.next.next;
@@ -298,25 +299,27 @@ public class Solutions {
         return true;
     }
 
-    /**LeetCode 83: 删除排序链表中的重复元素 【简单】
+    /**
+     * LeetCode 83: 删除排序链表中的重复元素 【简单】
      * 存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除所有重复的元素，使每个元素 只出现一次 。
      * 返回同样按升序排列的结果链表。
-     *
+     * <p>
      * 解题思路：
-     *  1、不需要虚拟头节点，这个会带来删除头节点的危险，而头节点是不会被删除的
-     *  2、永远返回头节点就行
+     * 1、不需要虚拟头节点，这个会带来删除头节点的危险，而头节点是不会被删除的
+     * 2、永远返回头节点就行
+     *
      * @param head
      * @return
      */
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null) return head;
+        if (head == null) return head;
         ListNode prev = head;
 
-        while(prev.next != null){
+        while (prev.next != null) {
             ListNode cur = prev.next;
-            if(cur.val == prev.val){
+            if (cur.val == prev.val) {
                 prev.next = cur.next;
-            } else{
+            } else {
                 prev = cur;
             }
         }
@@ -327,14 +330,15 @@ public class Solutions {
      * LeetCode 19: 删除链表的倒数第N个元素
      * 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
      * 进阶：你能尝试使用一趟扫描实现吗？
-     *
+     * <p>
      * 解题思路：
-     *  思路一：遍历两次链表
-     *      1、第一次，记录链表元素个数
-     *      2、重新遍历（只需从1遍历到n-k），找到要删除节点的前继节点
-     *  思路二：使用双指针维护一个要删除节点的前继节点和Null的区间，同时移动区间，找到要删除节点的前继节点
-     *      1、先从虚拟头节点遍历链表N+1次，找到区间的右侧边界
-     *      2、再同时移动两个指针，知道右侧指针到达Null，此时左侧指针指向的节点就是要删除节点的前继节点
+     * 思路一：遍历两次链表
+     * 1、第一次，记录链表元素个数
+     * 2、重新遍历（只需从1遍历到n-k），找到要删除节点的前继节点
+     * 思路二：使用双指针维护一个要删除节点的前继节点和Null的区间，同时移动区间，找到要删除节点的前继节点
+     * 1、先从虚拟头节点遍历链表N+1次，找到区间的右侧边界
+     * 2、再同时移动两个指针，知道右侧指针到达Null，此时左侧指针指向的节点就是要删除节点的前继节点
+     *
      * @param head
      * @param n
      * @return
@@ -348,39 +352,40 @@ public class Solutions {
         ListNode q = dummyHead;
 
         // 初始化这个区间
-        for(int i = 0; i<n+1; i++){
+        for (int i = 0; i < n + 1; i++) {
             q = q.next;
         }
         // 此时 p 到 q 正好是一个间隔 n 个节点的区间，同时移动两个指针，知道q指针指向 null，那么p指针就是要删除节点的前继节点
-        while(q!=null){
-            q=q.next;
-            p=p.next;
+        while (q != null) {
+            q = q.next;
+            p = p.next;
         }
 
         ListNode delNode = p.next;
         p.next = delNode.next;
         return dummyHead.next;
     }
-     public ListNode removeNthFromEnd2(ListNode head, int n) {
-         if(head == null) return head;
-         int count = 0;
-         ListNode cur = head;
-         while(cur!=null){
-             count++;
-             cur=cur.next;
-         }
-         if(n > count) return head;
-         ListNode dummyHead = new ListNode();
-         dummyHead.next = head;
-         ListNode prev = dummyHead;
-         for(int i=1;i<=count-n; i++){
-             prev = prev.next;
-         }
-         ListNode delNode = prev.next;
-         prev.next = delNode.next;
 
-         return dummyHead.next;
-     }
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        if (head == null) return head;
+        int count = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            count++;
+            cur = cur.next;
+        }
+        if (n > count) return head;
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        ListNode prev = dummyHead;
+        for (int i = 1; i <= count - n; i++) {
+            prev = prev.next;
+        }
+        ListNode delNode = prev.next;
+        prev.next = delNode.next;
+
+        return dummyHead.next;
+    }
 
     /**
      * LeetCode 142：环形链表II（判断链表是否有环，返回链表入环处位置）【中等】
@@ -388,38 +393,56 @@ public class Solutions {
      * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
      * 如果 pos 是 -1，则在该链表中没有环。注意，pos 仅仅是用于标识环的情况，并不会作为参数传递到函数中。
      * 说明：不允许修改给定的链表。
-     *
+     * <p>
      * 进阶：
      * 你是否可以使用 O(1) 空间解决此题？
-     *
+     * <p>
      * 输入：head = [3,2,0,-4], pos = 1
      * 输出：返回索引为 1 的链表节点
      * 解释：链表中有一个环，其尾部连接到第二个节点。
-     *
+     * <p>
      * 解题思路：
-     *  思路一：借用Set，每遍历一个节点查看Set中是否存在，若存在，就表明有环，而且就是入环节点，否则加入Set继续遍历
-     *  思路二：
+     * 思路一：借用Set，每遍历一个节点查看Set中是否存在，若存在，就表明有环，而且就是入环节点，否则加入Set继续遍历
+     * 思路二：需要利用一个结论性的性质：如果链表有环，当快慢指针相遇当时候，一个指向head的指针和原来的快指针同时移动k次，两个指针必定在入环扣的节点相遇
+     * k是head节点到入环节点的间隔节点数
+     * 1、设定快慢指针，快指针每次移动两个节点，慢指针每次移动一个节点
+     * 2、移动快慢指针，直到两个指针相遇
+     * 3、设定一个指向head的新指针，同时移动slow指针和新指针，两个指针相遇的节点就是入环节点
+     *
      * @param head
      * @return
      */
     public ListNode detectCycle(ListNode head) {
-        // TODO
+        if (head == null) return null;
+        // 先找到快慢指针相遇的位置
+        ListNode slow = head;
+        ListNode fast = head.next;
+        // 注意，这里快慢指针的初始不是指向的同一个节点，这导致相遇的时候指向的节点也会不一样（这里这种初始话会比指向同一个节点提前一个节点相遇）
+        while (fast != slow) {
+            if (fast == null || fast.next == null) {
+                return null;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        // 经过上面操作后，两个指针相遇。再同时移动快指针和新的初始指向head的慢指针，再次相遇就是链表入口节点
         ListNode dummyHead = new ListNode();
         dummyHead.next = head;
-        ListNode prev = dummyHead;
-        int pos = -1;
-        while(prev.next != null){
-
+        // 由于上面快慢指针初始化的方式，导致我们要循环的次数多一个，从head开始算第一次移动
+        ListNode newSlow = dummyHead;
+        while (newSlow != slow) {
+            newSlow = newSlow.next;
+            slow = slow.next;
         }
-        return null;
+        return slow;
     }
 
 
     public static void main(String[] args) {
         // test 203
         int[] arr = new int[]{1, 2, 6, 3, 4, 5, 6};
-        int[] test = {1,1,1, 2,3,4};
-        ListNode data = new ListNode(new int[]{0,0,0,0,0});
+        int[] test = {1, 1, 1, 2, 3, 4};
+        ListNode data = new ListNode(new int[]{0, 0, 0, 0, 0});
         ListNode testLinkedList = new ListNode(test);
         Solutions slt = new Solutions();
 //        System.out.println(slt.removeElements(data, 6));
