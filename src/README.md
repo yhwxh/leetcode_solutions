@@ -45,7 +45,7 @@
 - 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 前继节点、当前节点、后继节点 才能完成两个节点的反转】
 - 42、【简单】 LeetCode 242: [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) 【借助 数组 OR Map】
 - 43、【简单】 LeetCode 202: [快乐数](https://leetcode-cn.com/problems/happy-number/) 【借助 Set OR Map】
-- 44、【简单】 LeetCode 290: [单词规律](https://leetcode-cn.com/problems/word-pattern/) 【借助 Set OR Map ：<font color=red>未实现</font>】
+- 44、【简单】 LeetCode 290: [单词规律](https://leetcode-cn.com/problems/word-pattern/) 【借助两个 Map】
 - 44、【简单】 LeetCode 205: [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 45、【中等】 LeetCode 451: [根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 46、【简单】 LeetCode 1: [两数之和](https://leetcode-cn.com/problems/two-sum/) 【借助 Set OR Map】
