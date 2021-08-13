@@ -156,7 +156,8 @@ public class Solutions {
      * <p>
      * 解题思路：
      * 1、定义好新区间的头节点、头节点的前继节点、尾节点、尾节点的后继节点
-     * 2、改变四个节点中的指向
+     * 2、保存好区间的前继节点
+     * 3、改变记录下四个节点中的指向（不需要区间里的每个节点都操作，只需要改变头尾就行）
      *
      * @param head
      * @param left
@@ -164,14 +165,21 @@ public class Solutions {
      * @return
      */
     public ListNode reverseBetween(ListNode head, int left, int right) {
+        // 设置一个虚拟头节点
         ListNode dummyHead = new ListNode();
         dummyHead.next = head;
         ListNode prev = dummyHead;
+        // 定义遍历的节点，初始为头节点
         ListNode cur = head;
+        // 区间链表的前继节点
         ListNode subHeadPrev = null;
+        // 区间链表的头节点
         ListNode subHead = null;
+        // 区间链表的尾节点
         ListNode subTail = null;
+        // 区间链表的后继节点
         ListNode subTailSuc = null;
+        // 遍历链表，寻找区间的头节点、头节点的前继节点、尾节点、尾节点的后继节点
         for (int i = 1; i <= right; i++) {
             ListNode suc = cur.next;
             if (i == left) {
@@ -188,6 +196,7 @@ public class Solutions {
             prev = cur;
             cur = suc;
         }
+        // 改变指向
         subHeadPrev.next = subTail;
         subHead.next = subTailSuc;
         return dummyHead.next;
