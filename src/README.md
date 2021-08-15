@@ -65,6 +65,9 @@
 - 60、【简单】 LeetCode 219: [存在重复元素II](https://leetcode-cn.com/problems/contains-duplicate-ii/) 【借助 Set】
 - 61、【中等】 LeetCode 220: [存在重复元素III](https://leetcode-cn.com/problems/contains-duplicate-iii/) 【借助 Set 并需要trick】
 - 62、【中等】 LeetCode 19: [删除链表的倒数第N个元素](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/) 【链表+双指针】
+- 63、【简单】 LeetCode 70: [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
+- 64、【中等】 LeetCode 120: [三角形的最短路径](https://leetcode-cn.com/problems/triangle/) 【动态规划】
+- 65、【中等】 LeetCode 64: [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
 
 ### 数据结构  
 - 动态数组：
