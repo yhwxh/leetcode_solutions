@@ -69,6 +69,12 @@
 - 64、【中等】 LeetCode 120: [三角形的最短路径](https://leetcode-cn.com/problems/triangle/) 【动态规划】
 - 65、【中等】 LeetCode 64: [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
 - 66、【中等】 LeetCode 343: [整数拆分](https://leetcode-cn.com/problems/integer-break/) 【动态规划】
+- 67、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
+- 68、【中等】 LeetCode 91: [解码方法](https://leetcode-cn.com/problems/decode-ways/) 【动态规划：<font color=red>未实现</font>】
+- 69、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
+- 70、【中等】 LeetCode 62: [不同路径](https://leetcode-cn.com/problems/unique-paths/) 【动态规划：<font color=red>未实现</font>】
+- 71、【中等】 LeetCode 63: [不同路径II](https://leetcode-cn.com/problems/unique-paths-ii/) 【动态规划：<font color=red>未实现</font>】
+
 
 ### 数据结构  
 - 动态数组：
