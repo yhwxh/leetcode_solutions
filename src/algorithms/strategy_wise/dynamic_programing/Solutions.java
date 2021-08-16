@@ -1,8 +1,7 @@
-package algorithms.strategy_wise.dynamic_plan;
+package algorithms.strategy_wise.dynamic_programing;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Solutions {
     /**
@@ -103,8 +102,16 @@ public class Solutions {
     }
     // 对空间进行优化:这里需要自下而上的递推
     public int minimumTotal2(List<List<Integer>> triangle) {
+        /**
+         * 遍历要保证两点：
+         *  1、确保每个元素被扫描到
+         *  2、明确扫描到顺序
+         *  此题的扫描顺序就有点需要注意
+         *  另外，申请保留状态的空间是n，遍历完三角形的最后一层，保留的就是最后一层中每个元素的最小路径和
+         *  三角形前几层的遍历的时候，数组只使用了部分
+         */
         int len = triangle.size();
-        // 用来记录上一行每个元素的最下路径和，初始为每个元素的路径和为0（因为数组从索引0开始，这里index=0的位置是多余的）
+        // 用来记录每个元素的最小路径和，初始为每个元素的路径和为0（因为数组从索引0开始，这里index=0的位置是多余的）
         int[] dp = new int[len];
         dp[0] = triangle.get(0).get(0);
         // 遍历每一行
@@ -130,30 +137,97 @@ public class Solutions {
      * 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
      * 说明：每次只能向下或者向右移动一步。
      *
-     * 解题思路：动态规划
+     * 解题思路：动态规划（正解）
+     * 解法一：修改原数组
+     *  遍历矩阵，修改每个元素的值为当前路径最小值，最后返回右下角元素的值
+     * 解法二：不修改原数组
+     *  设置一个等于列数的数组，用来装当前行每个元素的最小路径和（记录前面所有状态）
+     *  当前元素如果是第一个元素，那么只能从上一行对应位置到达此元素，所以转移方程为 dp[j] = dp[j]+cur 【此时的j是上一行的记录】
+     *  当前元素如果是第一行的元素，那么只能从当前元素前一个元素到达，所以转移方程为 dp[j] = dp[j-1]+cur 【此时的j-1是当前行的记录】
+     *  否则，转移方程为 dp[j] = min(dp[j],dp[j-1]) + cur
+     *  最后返回状态数组的最后一个元素
+     *
+     *  PS：动态规划需要遍历到所有元素，所有元素不一定要都保留状态
      *
      * @param grid
      * @return
      */
     public int minPathSum(int[][] grid) {
-        //TODO
         int len = grid.length;
-        int res = grid[0][0];
+        int cols = grid[0].length;
+        // 记录当前行每个元素的状态，初始时元素状态都为0，相当于第一行的上一行
+        int[] dpRecord = new int[cols];
+        // 遍历矩阵每一行
         for (int i = 0; i < len; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                res+=Math.min(grid[i][j+1], grid[i+1][j]);
+            // 第一个元素的转移方程
+            dpRecord[0] = dpRecord[0] + grid[i][0];
+            // 遍历当前行每个元素
+            for (int j = 1; j < cols; j++) {
+                // 第一行只能从左边到达
+                if (i==0){
+                    dpRecord[j] = dpRecord[j-1] + grid[i][j];
+                } else {
+                    dpRecord[j] = Math.min(dpRecord[j], dpRecord[j - 1]) + grid[i][j];
+                }
             }
+            // 最后一个元素的转移方程
+//            dpRecord[cols-1] = dpRecord[cols-2] + grid[i][cols-1];
         }
-        return res;
+        return dpRecord[cols-1];
     }
 
-        // 测试
+
+    /**
+     * LeetCode 343：整数拆分
+     * 给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
+     *
+     * 示例 1:
+     * 输入: 2
+     * 输出: 1
+     * 解释: 2 = 1 + 1, 1 × 1 = 1。
+     *
+     * 示例 2:
+     * 输入: 10
+     * 输出: 36
+     * 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+     *
+     * 解题思路：动态规划
+     * 1、状态记录：申请一个 n+1 的空间，记录所有数值的状态
+     * 2、扫描所有元素（一个整数 n 可看作从 1 到 n 个数值）
+     * 3、转移方程：dp[n] = max(dp[n],i*(i-1),i*dp[n-1])
+     *
+     * @param n
+     * @return
+     */
+    public int integerBreak(int n) {
+        //TODO
+        // 记录元素i分解后的最大乘积（这里数组大小为n和n+1都可以，这里主要是为了让索引和实际情况对应）
+        int[] pdRecord = new int[n + 1];
+        pdRecord[1] = 1;
+        // 对每个元素求最大乘积
+        for (int i = 1; i <= n; i++) {
+            // 自底向上，遍历i被分解的所有可能情况，计算i的最大乘积
+            for (int j = 1; j <= i-1; j++) {
+                // 每个可能包括：只拆分成当前元素和
+                pdRecord[i] = max3(j*(i-j), j*pdRecord[j-1], pdRecord[j]);
+            }
+        }
+        return pdRecord[n];
+    }
+    private int max3(int a, int b, int c){
+        return Math.max(a, Math.max(b, c));
+    }
+
+    // 测试
     public static void main(String[] args) {
         Solutions slt = new Solutions();
         int[][] raw = new int[][]{{-1},{2,3},{1,-1,-3}};
         int[][] raw2 = new int[][]{{2},{3,4},{6,5,7},{4,1,8,3}};
+        int[][] testMinPathSum = {{1,3,1},{1,5,1},{4,2,1}};
         List<List<Integer>> test = generateData(raw);
         System.out.println(slt.minimumTotal2(test));
+
+        System.out.println(slt.minPathSum(testMinPathSum));
     }
     private static List<List<Integer>> generateData(int[][] raw){
         List<List<Integer>> test = new ArrayList<>();

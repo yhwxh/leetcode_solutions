@@ -68,6 +68,7 @@
 - 63、【简单】 LeetCode 70: [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
 - 64、【中等】 LeetCode 120: [三角形的最短路径](https://leetcode-cn.com/problems/triangle/) 【动态规划】
 - 65、【中等】 LeetCode 64: [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
+- 66、【中等】 LeetCode 343: [整数拆分](https://leetcode-cn.com/problems/integer-break/) 【动态规划】
 
 ### 数据结构  
 - 动态数组：
