@@ -470,6 +470,68 @@ public class Solutions {
         return null;
     }
 
+
+    /**
+     * LeetCode 15: 三数之和 【中等】
+     * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+     * 注意：答案中不可以包含重复的三元组。
+     *
+     * 示例 1：
+     * 输入：nums = [-1,0,1,2,-1,-4]
+     * 输出：[[-1,-1,2],[-1,0,1]]
+     *
+     * 解题思路：
+     *  1、先对数组排序：因为要求返回结果不重复，所以不能暴力扫描，排序后方便判断是否重复
+     *  2、扫描数组，先固定第一个元素，
+     *  3、然后使用双向指针来遍历剩余元素，判断是否满足条件
+     *      如果剩余元素的和比固定元素的相反数大，需要向前移动右侧指针
+     *      如果剩余元素的和比固定元素的相反数小，需要向后移动左侧指针
+     *      否则，满足条件，同时相向移动两个指针
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        // 扫描数组，固定第一个元素，然后判断剩余元素
+        for (int first = 0; first < n; ++first) {
+            // 排除重复情况：如果下个元素和上个元素重复，剩余结果中也会有重复，所以遍历两个重复结果没区别
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+            // 初始化两个指针
+            int second = first + 1;
+            int third = n - 1;
+            // 三数之和，固定第一个元素后，剩余元素的和
+            int target = -nums[first];
+            // 枚举 b
+            while (second < third) {
+                // 需要和上一次枚举的数不相同
+                if (second > first + 1 && nums[second] == nums[second - 1]) {
+                    second++;
+                    continue;
+                }
+                // 这里不是用if判断，而是while循环，因为可以能有重复，需要多次判断
+                while (nums[second] + nums[third] > target) {
+                    third--;
+                }
+                if (nums[second] + nums[third] == target) {
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(nums[first]);
+                    list.add(nums[second]);
+                    list.add(nums[third]);
+                    res.add(list);
+                    second++;
+                    third--;
+                }
+            }
+        }
+        return res;
+    }
+
+
     /**
      * leetCode 125: 验证回文串 【简单】（回文串就是正读和反渎结果一样）
      * 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。

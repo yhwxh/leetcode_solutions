@@ -49,7 +49,7 @@
 - 44、【简单】 LeetCode 205: [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 45、【中等】 LeetCode 451: [根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 46、【简单】 LeetCode 1: [两数之和](https://leetcode-cn.com/problems/two-sum/) 【借助 Set OR Map】
-- 47、【中等】 LeetCode 15: [三数之和](https://leetcode-cn.com/problems/3sum/) 【借助 Set OR Map ：<font color=red>未实现</font>】
+- 47、【中等】 LeetCode 15: [三数之和](https://leetcode-cn.com/problems/3sum/) 【先排序，再双指针】
 - 48、【中等】 LeetCode 18: [四数之和](https://leetcode-cn.com/problems/4sum/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 49、【中等】 LeetCode 16: [最接近的三树之和](https://leetcode-cn.com/problems/3sum-closest/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 50、【中等】 LeetCode 454: [四数相加II](https://leetcode-cn.com/problems/4sum-ii/) 【借助 Set OR Map ：<font color=red>未实现</font>】
