@@ -118,7 +118,7 @@ public class Solutions {
 
     public void moveZerosOpt(int[] nums) {
         // 使用双指针，一个指针遍历数组，另一个用来指向非零元素的末尾边界（维护一个[0,k)这样一个区间，来存放非零元素）
-        int k = 0;  // 初始非零区间为[0,0]
+        int k = 0;  // 初始非零区间为[0,0)
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
                 nums[k] = nums[i];
@@ -353,10 +353,11 @@ public class Solutions {
      * 2、思路二：利用快排 partition 操作的性质：O(n)
      * 2.1 在寻找基准点的时候，基准点的合适位置，就是该元素最终排好序后的索引位置(每次递归找pivot的时候，已经找到的pivot的位置是不会变的)
      * 2.2 取出第 K 个最大元素就是取第 K 个（或者 arr.length-k 的位置）索引处的位置
-     * 2.3 所以，我们可以在找pivot的时候判断pivot的索引是否等于 K
+     * 2.3 所以，我们可以调用多次partition操作，在找到pivot的合适位置时候判断pivot的索引是否等于 K
      * 2.4 如果 pivot 比k小，就只在左区间找就好了，否则就只在有区间找
      */
     public int findKthLargest2(int[] nums, int k) {
+        // 快排方式
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
         sortAlgorithm.quickSort(nums);
         return nums[nums.length - k];
