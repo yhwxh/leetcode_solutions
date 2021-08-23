@@ -494,41 +494,42 @@ public class Solutions {
     public List<List<Integer>> threeSum(int[] nums) {
         int n = nums.length;
         Arrays.sort(nums);
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        // 扫描数组，固定第一个元素，然后判断剩余元素
-        for (int first = 0; first < n; ++first) {
-            // 排除重复情况：如果下个元素和上个元素重复，剩余结果中也会有重复，所以遍历两个重复结果没区别
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        // 固定第一个元素，不需要遍历完所有元素，当剩余元素不足3个当时候就不需要遍历了
+        for (int first = 0; first < n-2; first++) {
+            // 需要和上一次枚举的数不相同
             if (first > 0 && nums[first] == nums[first - 1]) {
                 continue;
             }
-            // 初始化两个指针
-            int second = first + 1;
+            // 双向指针：右侧指针
             int third = n - 1;
-            // 三数之和，固定第一个元素后，剩余元素的和
+            // 固定三个数中的一个，剩余两个元素的和
             int target = -nums[first];
             // 枚举 b
-            while (second < third) {
+            for (int second = first + 1; second < n; second++) {
                 // 需要和上一次枚举的数不相同
                 if (second > first + 1 && nums[second] == nums[second - 1]) {
-                    second++;
                     continue;
                 }
-                // 这里不是用if判断，而是while循环，因为可以能有重复，需要多次判断
-                while (nums[second] + nums[third] > target) {
+                // 这里需要遍历完所有的重复，所以用了个while循环，而不是一个if判断
+                while (second < third && nums[second] + nums[third] > target) {
                     third--;
+                }
+                // 如果指针重合，随着 b 后续的增加
+                // 就不会有满足 a+b+c=0 并且 b<c 的 c 了，可以退出循环
+                if (second == third) {
+                    break;
                 }
                 if (nums[second] + nums[third] == target) {
                     List<Integer> list = new ArrayList<Integer>();
                     list.add(nums[first]);
                     list.add(nums[second]);
                     list.add(nums[third]);
-                    res.add(list);
-                    second++;
-                    third--;
+                    ans.add(list);
                 }
             }
         }
-        return res;
+        return ans;
     }
 
 
