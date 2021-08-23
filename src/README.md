@@ -4,7 +4,7 @@
 - 1、【简单】 LeetCode 349: [两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/) 【借用 Set 或 Map】
 - 2、【简单】 LeetCode 350: [两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) 【借用 Set 或 Map】
 - 3、【简单】 LeetCode 94: [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/) 【BST 的递归遍历：当前节点】
-- 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【BST：<font color=red>未实现</font>】
+- 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【二叉树：递归计算左右子树最大深度】
 - 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：<font color=red>未实现</font>】
 - 6、【简单】 LeetCode 203: [移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/) 【链表遍历 OR 递归：前继节点、后继节点】
 - 7、【简单】 LeetCode 804: [唯一的摩尔斯密码词](https://leetcode-cn.com/problems/unique-morse-code-words/) 【借用 Set】
@@ -74,7 +74,8 @@
 - 69、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
 - 70、【中等】 LeetCode 62: [不同路径](https://leetcode-cn.com/problems/unique-paths/) 【动态规划：<font color=red>未实现</font>】
 - 71、【中等】 LeetCode 63: [不同路径II](https://leetcode-cn.com/problems/unique-paths-ii/) 【动态规划：<font color=red>未实现</font>】
-
+- 72、【简单】 LeetCode 111: [二叉树最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) 【二叉树：递归判断当前节点的左右子树的深度，并需要分情况讨论当前节点各种可能子树的情况】
+- 73、【简单】 LeetCode 236: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
 
 ### 数据结构  
 - 动态数组：
