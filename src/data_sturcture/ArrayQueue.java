@@ -3,6 +3,9 @@ package data_sturcture;
 import data_sturcture.interfaces.Queue;
 
 public class ArrayQueue<E> implements Queue<E> {
+    /**
+     * 基于动态数组实现的队列
+     */
     DynamicArray<E> array;
 
     public ArrayQueue(int capacity) {

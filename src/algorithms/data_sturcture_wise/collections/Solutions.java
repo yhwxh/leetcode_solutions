@@ -116,7 +116,7 @@ public class Solutions {
         int res = 0;
         // 遍历每个数据点
         for (int i = 0; i < points.length; i++) {
-            // 给每个数据点创建一个map，来装该点与其他点点距离和个数
+            // 给每个数据点创建一个map，来装该点与其他点点距离和个数：key 为 距离，value 为距离当前数据点等于该距离的距离点个数
             Map<Integer, Integer> record = new HashMap<>();
             for (int j = 0; j < points.length; j++) {
                 if (i == j) continue;

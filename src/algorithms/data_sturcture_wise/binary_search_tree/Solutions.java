@@ -181,26 +181,75 @@ public class Solutions {
      * 输入：p = [1,2,3], q = [1,2,3]
      * 输出：true
      *
+     * 解题思路：递归
+     *  1、递归判断左右子树是否相等
+     *  2、判断左右子树的时候要分情况讨论
+     *      2.1 左子树为空，右子树为空 => 此时两树相同，返回true
+     *      2.2 当左子树为空，右子树不为空；左子树不为空，右子树为空 => 左右子树不同，返回false
+     *      2.3 左右子树都不为空的时候，递归探底
      * @param p
      * @param q
      * @return
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        //TODO
         if (p==null && q==null) return true;
 
-        if (p.left != null && q.left==null && p.left != null && q.left != null)
+        // 当左子树为空，右子树不为空；左子树不为空，右子树为空
+        if (p ==null || q == null) return false;
+
+        // 需要在当前节点相等，且都有左右子树的情况下，对左右子树进行递归探底。如果相等，会碰到终止条件，返回true
+        if (p.val == q.val){
+            // 左子树相同，右子树也相同才相同
             return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-        else if (p.left != null && q.left == null)
+        } else {
             return false;
-        else if (p.right != null )
-            return false;
-        else
-            return false;
+        }
     }
 
     /**
-     * LeetCode 173: 二叉搜索树迭代器
+     * LeetCode 101: 对称二叉树
+     * 给定一个二叉树，检查它是否是镜像对称的。
+     * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+     *
+     *     1
+     *    / \
+     *   2   2
+     *  / \ / \
+     * 3  4 4  3
+     *  
+     * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+     *
+     *     1
+     *    / \
+     *   2   2
+     *    \   \
+     *    3    3
+     *
+     * 解题思路：递归（此题类似 leetcode 100）
+     *  1、递归的对比两颗子树是否是对称的（左子树跟右子树比较）
+     *  2、判断左右子树的时候要分情况讨论
+     *     2.1 左子树为空，右子树为空 => 此时两树对称，返回true
+     *     2.2 当左子树为空，右子树不为空；左子树不为空，右子树为空 => 左右子树不对称，返回false
+     *     2.3 左右子树都不为空的时候，递归探底
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        return compareLeftRight(root.left, root.right);
+    }
+    private boolean compareLeftRight(TreeNode left, TreeNode right){
+        if (left==null && right==null) return true;
+        if (left == null || right == null) return false;
+        if (left.val == right.val){
+            return compareLeftRight(left.left, right.right) && compareLeftRight(left.right, right.left);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * LeetCode 173: 二叉搜索树迭代器 【中等】
      * 实现一个二叉搜索树迭代器类BSTIterator ，表示一个按中序遍历二叉搜索树（BST）的迭代器：
      * BSTIterator(TreeNode root) 初始化 BSTIterator 类的一个对象。
      * BST 的根节点 root 会作为构造函数的一部分给出。
@@ -234,21 +283,39 @@ public class Solutions {
      * bSTIterator.next();    // 返回 20
      * bSTIterator.hasNext(); // 返回 False
      *
+     * 解题思路：主要是在构造函数中通过中序遍历记录下元素顺序
+     *  1、声明一个 int 指针，指向当前访问元素所在的索引
+     *  2、构造函数中调用中序遍历，记录二叉树中序遍历的元素顺序
+     *  3、如果当前索引没有超出元素个数，则可以继续访问下一个元素
+     *
      * @param
      * @return
      */
     private class BSTIterator {
-
+        // 记录下一个要访问元素的索引
+        private int index;
+        private List<Integer> valRecord;
         public BSTIterator(TreeNode root) {
-
+            index = 0;
+            valRecord = new ArrayList<>();
+            // 按中序遍历顺序记录下所有节点的元素
+            inOrder(root);
         }
 
         public int next() {
-            return 0;
+            // 每次调用 next ，返回当前指针指向的元素，然后右移一位当前指针
+            return valRecord.get(index++);
         }
 
         public boolean hasNext() {
-            return false;
+            // 当指针指向列表尾部的时候返回false,最终指针指向索引等于size
+            return index < valRecord.size();
+        }
+        private void inOrder(TreeNode root){
+            if (root == null) return;
+            inOrder(root.left);
+            valRecord.add(root.val);
+            inOrder(root.right);
         }
     }
 

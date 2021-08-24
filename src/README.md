@@ -5,7 +5,7 @@
 - 2、【简单】 LeetCode 350: [两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) 【借用 Set 或 Map】
 - 3、【简单】 LeetCode 94: [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/) 【BST 的递归遍历：当前节点】
 - 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【二叉树：递归计算左右子树最大深度】
-- 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：<font color=red>未实现</font>】
+- 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：主要是要在构造函数中实现中序遍历，并且有个指针记录下一个元素的索引】
 - 6、【简单】 LeetCode 203: [移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/) 【链表遍历 OR 递归：前继节点、后继节点】
 - 7、【简单】 LeetCode 804: [唯一的摩尔斯密码词](https://leetcode-cn.com/problems/unique-morse-code-words/) 【借用 Set】
 - 8、【中等】 LeetCode 347: [前K个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/) 【优先队列】
@@ -54,7 +54,7 @@
 - 49、【中等】 LeetCode 16: [最接近的三树之和](https://leetcode-cn.com/problems/3sum-closest/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 50、【中等】 LeetCode 454: [四数相加II](https://leetcode-cn.com/problems/4sum-ii/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 51、【中等】 LeetCode 49: [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/) 【借助 Set OR Map ：<font color=red>未实现</font>】
-- 52、【中等】 LeetCode 447: [回旋镖数量](https://leetcode-cn.com/problems/number-of-boomerangs/) 【借助 Set OR Map ：<font color=red>未实现</font>】
+- 52、【中等】 LeetCode 447: [回旋镖数量](https://leetcode-cn.com/problems/number-of-boomerangs/) 【借助Map ：记录每个数据点距离其他点的距离，以及该距离下有多少个数据点】
 - 53、【困难】 LeetCode 149: [直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/) 【借助 Set OR Map：<font color=red>未实现</font>】
 - 54、【困难】 LeetCode 239: [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
 - 55、【困难】 LeetCode 480: [滑动窗口中位数](https://leetcode-cn.com/problems/sliding-window-median/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
@@ -76,6 +76,8 @@
 - 71、【中等】 LeetCode 63: [不同路径II](https://leetcode-cn.com/problems/unique-paths-ii/) 【动态规划：<font color=red>未实现</font>】
 - 72、【简单】 LeetCode 111: [二叉树最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) 【二叉树：递归判断当前节点的左右子树的深度，并需要分情况讨论当前节点各种可能子树的情况】
 - 73、【简单】 LeetCode 236: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
+- 74、【简单】 LeetCode 100: [相同的树](https://leetcode-cn.com/problems/same-tree/) 【二叉树：递归判断左右子树是否相同，分情况讨论是否相同】
+- 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
 
 ### 数据结构  
 - 动态数组：
