@@ -78,6 +78,7 @@
 - 73、【简单】 LeetCode 236: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
 - 74、【简单】 LeetCode 100: [相同的树](https://leetcode-cn.com/problems/same-tree/) 【二叉树：递归判断左右子树是否相同，分情况讨论是否相同】
 - 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
+- 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
 
 ### 数据结构  
 - 动态数组：

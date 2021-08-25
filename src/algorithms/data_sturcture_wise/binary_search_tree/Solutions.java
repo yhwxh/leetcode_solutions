@@ -334,6 +334,64 @@ public class Solutions {
         return false;
     }
 
+    /**
+     * LeetCode 112: 路径总和 【简单】
+     * 给你二叉树的根节点root 和一个表示目标和的整数targetSum ，判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和targetSum 。
+     * 叶子节点 是指没有子节点的节点。
+     *
+     * 解题思路：递归【对于二叉树中，对于叶子节点的判断要注意是有陷阱的】
+     * 1、确定终止条件：左右子树为空时，判断当前节点的值是否是要找的值
+     * 2、递归判断左右子树是否能找到一个满足条件的路径
+     *
+     *
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        // 注意递归终止条件是判断是否是叶子节点，不是简单的节点为空就行了（有可能某一个子树为空，但不是叶子节点）
+        if (root.left == null && root.right == null) return root.val==targetSum;
+
+        // 不是叶子节点就继续判断左右子树是否能找到满足条件的路径
+        return hasPathSum(root.left, targetSum-root.val) || hasPathSum(root.right, targetSum-root.val);
+    }
+
+    /**
+     * LeetCode 404: 左叶子之和
+     * 计算给定二叉树的所有左叶子之和。
+     *
+     * 示例：
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 在这个二叉树中，有两个左叶子，分别是 9 和 15，所以返回 24
+     *
+     * 解题思路：递归
+     * 1、终止条件为左右子树为空,本题特别的是还得多判断下是否是左叶子节点，此时返回该节点的值
+     * 2、否则继续递归找叶子节点，并求和
+     * @param root
+     * @return
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        //TODO
+        return sumLeaves(root, 0);
+    }
+    private int sumLeaves(TreeNode node, int sum){
+        if (node == null) return 0;
+        // 这里需要注意的是：除了判断是叶子节点，还得确定是左叶子节点
+        if (node.left!=null){  // 其实这里需要看到叶子节点及其父节点
+            if(node.left.left == null && node.left.right == null){
+                // 这里要返回左节点的值
+                return sum+=node.left.val;
+            }
+        }
+        int leftSum = sumLeaves(node.left, sum);
+        int rightSum = sumLeaves(node.right, sum);
+        return leftSum + rightSum;
+    }
 
 
     public static void main(String[] args) {
