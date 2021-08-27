@@ -371,28 +371,130 @@ public class Solutions {
      *
      * 解题思路：递归
      * 1、终止条件为左右子树为空,本题特别的是还得多判断下是否是左叶子节点，此时返回该节点的值
-     * 2、否则继续递归找叶子节点，并求和
+     * 2、否则继续递归找叶子节点，将子树的叶子节点的值累加上来
+     * 3、这里需要注意的是，在终止条件判断的时候，如果直接return 节点的值，会出现提前退出的情况，所以需要一个全局变量来记录返回值
      * @param root
      * @return
      */
+    int res = 0;
     public int sumOfLeftLeaves(TreeNode root) {
-        //TODO
-        return sumLeaves(root, 0);
-    }
-    private int sumLeaves(TreeNode node, int sum){
-        if (node == null) return 0;
+        if (root == null) return 0;
         // 这里需要注意的是：除了判断是叶子节点，还得确定是左叶子节点
-        if (node.left!=null){  // 其实这里需要看到叶子节点及其父节点
-            if(node.left.left == null && node.left.right == null){
-                // 这里要返回左节点的值
-                return sum+=node.left.val;
+        if (root.left!=null){  // 其实这里需要看到叶子节点及其父节点
+            if(root.left.left == null && root.left.right == null){
+                // 这里要返回左节点的值, 如果直接return，这里会提前终止，所以需要一个全局变量来存储结果
+                res += root.left.val;
             }
         }
-        int leftSum = sumLeaves(node.left, sum);
-        int rightSum = sumLeaves(node.right, sum);
-        return leftSum + rightSum;
+        sumOfLeftLeaves(root.left);
+        sumOfLeftLeaves(root.right);
+        return res;
     }
 
+    /**
+     * LeetCode 257: 二叉树所有路径 【简单】
+     * 给定一个二叉树，返回所有从根节点到叶子节点的路径。
+     * 说明:叶子节点是指没有子节点的节点。
+     *
+     * 示例:
+     * 输入:
+     *
+     *    1
+     *  /   \
+     * 2     3
+     *  \
+     *   5
+     *
+     * 输出: ["1->2->5", "1->3"]
+     * 解释: 所有根节点到叶子节点的路径为: 1->2->5, 1->3
+     *
+     * 解题思路：递归，注意每次递归的返回值比较复杂
+     *  1、终止条件：当节点为叶子节点时，返回叶子节点的值
+     *  2、递归寻找左右子树的路径
+     *
+     * @param root
+     * @return
+     */
+    public List<String> binaryTreePaths(TreeNode root) {
+        // res保存每棵树的路径，而且，随着递归过程结束（从下往上），res中保存的路径由小变大
+        // 这里 res 工作的过程是：每轮递归创建个空的，然后将本轮子树的路径拷贝过来，再补上本轮节点的值
+        List<String> res = new ArrayList<>();
+        if (root==null) return res;
+        // 递归终止条件
+        if (root.left == null && root.right == null){
+            res.add(String.valueOf(root.val));
+            // 这里要return一下，不然上一轮的递归拿不到下一轮递归的结果
+            return res;
+        }
+        // 递归：触底反弹
+        List<String> leftPath = binaryTreePaths(root.left);  // 对左子树递归
+        // 遍历上次递归子树的结果，生成当前子树的路径（这里需要注意的是，leftPath存的是当前子树的子树的路径）
+        for (int i = 0; i < leftPath.size(); i++) {  // 这里访问的节点跟上面递归访问的节点差一个代差
+            res.add(String.valueOf(root.val) + "->" + leftPath.get(i));
+        }
+
+        // 同理，对右子树递归
+        List<String> rightPath = binaryTreePaths(root.right);  // 对左子树递归
+        for (int i = 0; i < rightPath.size(); i++) {
+            res.add(String.valueOf(root.val) + "->" + rightPath.get(i));
+        }
+
+        // 当递归反弹到root节点后，相应左右子树生成的路径也add到了 res 中，最后 return res就保存了所有路径的字符串
+        return res;
+    }
+
+    /**
+     * LeetCode 113：路径总和II 【中等】
+     * 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+     * 叶子节点 是指没有子节点的节点。
+     *
+     * 示例：
+     * 输入：root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+     * 输出：[[5,4,11,2],[5,8,4,5]]
+     *
+     * 解题思路：
+     *  1、
+     *
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> finalRes = new ArrayList<>();
+        List<List<Integer>> allPaths = getPaths(root);
+        for (List<Integer> list:allPaths){
+            int sum = 0;
+            for (int i = 0; i < list.size(); i++) {
+                sum+=list.get(i);
+            }
+            if (sum == targetSum){
+                finalRes.add(list);
+            }
+        }
+        return finalRes;
+    }
+
+    private List<List<Integer>> getPaths(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        if (root.left == null && root.right == null){
+            List<Integer> path = new ArrayList<>();
+            path.add(root.val);
+            res.add(path);
+            return res;
+        }
+        List<List<Integer>> leftPath = getPaths(root.left);
+        for (int i = 0; i < leftPath.size(); i++) {
+            leftPath.get(i).add(0,root.val);
+            res.add(leftPath.get(i));
+        }
+        List<List<Integer>> rightPaht = getPaths(root.right);
+        for (int i = 0; i < rightPaht.size(); i++) {
+            rightPaht.get(i).add(0,root.val);
+            res.add(rightPaht.get(i));
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Solutions s = new Solutions();

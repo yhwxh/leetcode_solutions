@@ -79,7 +79,9 @@
 - 74、【简单】 LeetCode 100: [相同的树](https://leetcode-cn.com/problems/same-tree/) 【二叉树：递归判断左右子树是否相同，分情况讨论是否相同】
 - 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
 - 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
-
+- 77、【简单】 LeetCode 257: [二叉树所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)  【二叉树：递归查找左右子树的路径，注意终止条件的判断，注意递归中变量的先后关系和层级关系】
+- 78、【中等】 LeetCode 113: [路径总和II](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归】
+ 
 ### 数据结构  
 - 动态数组：
   * DynamicArray
