@@ -30,6 +30,7 @@ public class Solutions {
         }
         // 按频次大小排序的堆
         PriorityQueue<Integer> pq = new PriorityQueue<>(
+                // 前 - 后：表示升序； 后 - 前：表示降序
                 (a, b) -> map.get(a) - map.get(b)
         );
         for (int key: map.keySet()){
@@ -93,24 +94,34 @@ public class Solutions {
         }
         return res;
     }
-    // 最大堆实现
-    public int[] maxSlidingWindow2(int[] nums, int k){
-        if (nums == null || nums.length==0) return null;
+    // 优先队列（最大堆）实现
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        if (nums==null || nums.length<k) return null;
+        // 结果中，最大值的个数跟窗口的个数有关：n-k+1个
         int[] res = new int[nums.length-k+1];
-        PriorityQueue<Integer> pq = new PriorityQueue<>(
-                (a, b) -> a - b
+        // 定义一个优先队列，维护滑动窗口覆盖到的所有元素的最大值（不一定是k个，可能多余K个）
+        PriorityQueue<int[]> kTh = new PriorityQueue<>(
+                // 最大堆的话就是 后-前
+                (a,b)->b[0]-a[0]
         );
-        for (int i = 0; i < nums.length; i++) {
-            if(i<k-1) {
-                pq.add(nums[i]);
-            } else
-            // 从第 k 个元素开始形成一个窗口
-            if (nums[i]>=pq.peek()){
-                // 每移动一个元素
-                pq.remove();
-                pq.add(nums[i]);
-                res[i-k+1] = pq.peek();
+        // 初始优先队列，将k个元素先存入优先队列
+        for (int i = 0; i < k; i++) {
+            kTh.add(new int[]{nums[i], i});
+        }
+        // 初始res中第一个最大值
+        res[0] = kTh.peek()[0];
+        // 遍历数组，移动滑动窗口，查找每个最大值: 从第K个元素开始
+        for (int i = k; i < nums.length; i++) {
+            // 先将当前第i个元素加入队列：此时i是新进入窗口的
+            kTh.add(new int[]{nums[i],i});
+            // 维护下队列中的元素，删除被划过的元素：元素i进入窗口，同时还有一个元素滑出窗口
+            while(kTh.peek()[1] <= i-k){ // 这里就是要维护一下当前窗口中最大值
+                // 循环只有当最大值走出窗口才会触发，如果其一直在窗口中，那么就会一直保留，同时队列中元素会一直增加，而且队列里还保留了被滑出的非最大值的元素
+                // 如果当前队列状态是：最大元素为被滑出的元素，则从队列剔除（因为剔除后还有可能是无效的最大值，所以要用wile循环）
+                kTh.poll();
             }
+            // 将窗口中最大值加入res
+            res[i - k + 1] = kTh.peek()[0];
         }
         return res;
     }
