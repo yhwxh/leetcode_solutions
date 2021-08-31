@@ -56,9 +56,9 @@
 - 51、【中等】 LeetCode 49: [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 52、【中等】 LeetCode 447: [回旋镖数量](https://leetcode-cn.com/problems/number-of-boomerangs/) 【借助Map ：记录每个数据点距离其他点的距离，以及该距离下有多少个数据点】
 - 53、【困难】 LeetCode 149: [直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/) 【借助 Set OR Map：<font color=red>未实现</font>】
-- 54、【困难】 LeetCode 239: [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
+- 54、【困难】 LeetCode 239: [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/) 【借助 优先队列 或者 双端队列：关键在于怎么维护窗口中的最大值：不必保证队列必须k个元素，只要队列中最大值是窗口覆盖范围内的就行】
 - 55、【困难】 LeetCode 480: [滑动窗口中位数](https://leetcode-cn.com/problems/sliding-window-median/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
-- 56、【困难】 剑指Offer 59-1: [滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
+- 56、【困难】 剑指Offer 59-1: [滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 【借助 优先队列 或者 双端队列：同 LeetCode 239】
 - 57、【中等】 LeetCode 74: [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) 【数组遍历：需要点trick 或者 二分搜索】
 - 58、【中等】 LeetCode 240: [搜索二维矩阵II（矩阵中点元素）](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/) 【数组遍历：需要点trick】
 - 59、【中等】 LeetCode 189: [反转数值](https://leetcode-cn.com/problems/rotate-array/) 【类似反转链表：先整体反转，再分段反转】

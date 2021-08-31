@@ -15,25 +15,22 @@ public class Solutions {
      * 输出：15
      */
     public int numSubarraysWithSum(int[] nums, int goal) {
+        //TODO
         int res = 0;
         int left = 0, right = 0;
         int sum = nums[0];
-        while (left < nums.length-1 || right < nums.length-1) {
+        while (left <=right && right<nums.length) {
             if (sum < goal) {
                 right++;
-                sum += nums[right];
+                if (right<=nums.length-1)
+                    sum += nums[right];
             } else if (sum > goal) {
-                left++;
                 sum -= nums[left];
-            } else {
+                left++;
+            } else if (sum==goal){
                 res++;
-                if (right < nums.length - 1){
-                    right++;
-                    sum+=nums[right];
-                } else if (left < nums.length-1){
-                    left++;
-                    sum-=nums[left];
-                }
+                sum-=nums[left];
+                left++;
             }
         }
         return res;
@@ -57,6 +54,39 @@ public class Solutions {
         while (a < b){
 
         }
+    }
+
+    /**
+     * LeetCode 42: 接雨水 【困难】
+     * 给定n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+     *
+     * 示例 1：
+     * 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+     * 输出：6
+     * 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+     *
+     * 解题思路：碰撞指针
+     *
+     * @param height
+     * @return
+     */
+    public int trap(int[] height) {
+        //TODO
+        // 定义遍历数组的左右指针
+        int left=0, right = height.length-1;
+        // 记录返回结果
+        int res = 0;
+        // 定义记录当前元素左侧[0,i-1]最大值, 和当前元素右侧[i+1,height.lenght-1]的最大值
+        int leftMax =0, rightMax = 0;
+        // 遍历数组，左右指针交替遍历完整个数组
+        while (left<right){
+            // 分情况移动指针
+            if (height[left] < height[right]){
+
+            }
+
+        }
+        return res;
     }
 
 

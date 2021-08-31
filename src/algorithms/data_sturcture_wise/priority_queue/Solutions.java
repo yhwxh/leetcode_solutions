@@ -71,32 +71,42 @@ public class Solutions {
      *
      * 解题思路：
      *  思路1：最大堆
-     *  思路2：队列，令队列的队首永远保留者当前队列的最大值，所以，关键是如何维护这个队列
+     *  思路2：队列，令队列的队首永远保留者当前队列的最大值，所以，关键是如何维护这个队列（队列中元素个数最多k个）
      *      1、初始时，队列为空，第一个元素加入队列后，队列中最大值就是当前元素
-     *      2、第二个元素加入的时候，判断该元素与队首元素谁大，若新元素大，则让新元素替换原来最大值位置，进入队首；若不比它大，就保留
-     *      3、后续加入的元素重复 （2）中判断，
+     *      2、第二个元素加入的时候，判断该元素与队尾元素谁大（需要从队尾来操作），若新元素大，则让队尾出队（poll），直到队列中没有比新元素大的元素（新元素把队列中所有比他小的清理掉才能入队）【这一步必须从队尾操作】
+     *      3、而且，每新加一个元素（滑动窗口移动一次）都要判断一下当前队首元素是不是有效最大值（因为有可能最大值已经滑出窗口覆盖区间）【这一步必须从队首操作】
+     *      4、所以，最终队列中元素的状态是：要么就一个最大值，要么就是从大到小排序后的2～K个值
      * @param nums
      * @param k
      * @return
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
-        //TODO
-        if (nums == null || nums.length==0) return null;
+        if (nums == null || nums.length<=1) return nums;
         int[] res = new int[nums.length - k + 1];
-        Queue<Integer> window = new LinkedList<>();
+        // 创建一个双端队列（必须是双端队列），这里存放的是索引，不是元素值，这样会方便点儿，因为后面需要看队首元素是不是有效最大值（就是看索引是不是滑过了 [i-k+1, i] 这个范围）
+        Deque<Integer> queueMax = new LinkedList<>();
         for (int i = 0; i < nums.length; i++) {
-            if (i==0) window.add(nums[i]);
-            else {
-                if (window.size()==k)
-                    window.poll();
-                window.add(nums[i]);
+            // 先判断队列中的队尾元素是否需要出队（这里需要队尾能有队首的操作，所以双端队列）：就是比较当前队尾元素是否比新来的元素小，如果小，就让队尾元素出队，给新来的老大让位
+            while (!queueMax.isEmpty() && nums[queueMax.peekLast()]<=nums[i]){
+                // 新来的老大需要把所有比他小的队尾先干掉，所以这里要一个while循环，不是一个if就能完成的
+                queueMax.pollLast();
+            }
+            // 不满足的时候，可以直接将新元素加入队尾
+            queueMax.addLast(i);
+            // 加入后，此时的队首元素还是原来的老大，但是它有可过时了
+            if (queueMax.peek() <= i-k){
+                queueMax.poll();
+            }
+            // 最大值保存：在窗口够数的时候才能记录，当遍历元素个数小于窗口覆盖数量的时候，还不足以能够判断窗口的最大值
+            if (i>=k-1){
+                res[i-k+1] = nums[queueMax.peek()];
             }
         }
         return res;
     }
     // 优先队列（最大堆）实现
     public int[] maxSlidingWindow2(int[] nums, int k) {
-        if (nums==null || nums.length<k) return null;
+        if (nums==null || nums.length<2) return nums;
         // 结果中，最大值的个数跟窗口的个数有关：n-k+1个
         int[] res = new int[nums.length-k+1];
         // 定义一个优先队列，维护滑动窗口覆盖到的所有元素的最大值（不一定是k个，可能多余K个）
@@ -124,5 +134,28 @@ public class Solutions {
             res[i - k + 1] = kTh.peek()[0];
         }
         return res;
+    }
+
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        if (nums==null) return null;
+        double[] res = new double[nums.length -k +1];
+        int windowSize = k;
+        if (nums.length<k){
+            windowSize = nums.length;
+        }
+        for (int i = 0; i <= nums.length-k+1; i++) {
+            double mid = 0;
+            for (int j = i; j <= i+windowSize-1; j++) {
+                mid += nums[i];
+            }
+            res[i] = mid/windowSize;
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        Solutions slt = new Solutions();
+        int[] test = new int[]{7,2,4};
+        slt.maxSlidingWindow(test, 2);
     }
 }
