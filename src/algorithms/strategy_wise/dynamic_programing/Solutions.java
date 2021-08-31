@@ -30,6 +30,7 @@ public class Solutions {
      *  思路二【正解】：动态规划（自下向上的解题思路）：不需要递归
      *      此题中，状态转移方程为：f(n) = f(n-1)+f(n-2)
      *      即，当前步骤的结果为前两步之和
+     *      动态规划中，状态的定义是：上 k 阶台阶需要的步数
      * @param n
      * @return
      */
@@ -153,6 +154,11 @@ public class Solutions {
      * @return
      */
     public int minPathSum(int[][] grid) {
+        /**
+         * 状态记录只需要记录每行中每个元素的状态就行，因为最终结果只需要直到最后一行最后一个元素就行，前面几行是为更新后面行的状态而存在的
+         * 不断更新每行的状态，从第一行遍历到最后一行，最后的状态就是最后一行每个元素的状态
+         * 而要求的结果就是最后一行最后一个元素的值
+         */
         int len = grid.length;
         int cols = grid[0].length;
         // 记录当前行每个元素的状态，初始时元素状态都为0，相当于第一行的上一行
@@ -212,7 +218,7 @@ public class Solutions {
             // 自底向上，遍历i被分解成 j + (i-j)，计算i的最大乘积
             for (int j = 1; j <= i-1; j++) {
                 // 每个可能包括：分割的j和(i-j)恰好就是最大值结果、当前值✖️子问题的最优解、当前值
-                pdRecord[i] = max3(j*(i-j), j*pdRecord[i-j], pdRecord[i]);
+                pdRecord[i] = max3(j*(i-j), j*pdRecord[i-j], pdRecord[j]);
             }
         }
         return pdRecord[n];

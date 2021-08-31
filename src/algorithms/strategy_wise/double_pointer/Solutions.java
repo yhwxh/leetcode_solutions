@@ -66,12 +66,13 @@ public class Solutions {
      * 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
      *
      * 解题思路：碰撞指针
+     *  1、注意，每个位置上能装水的高度取决于该位置左边的最大高度和右边的最大高度的最小值
      *
      * @param height
      * @return
      */
     public int trap(int[] height) {
-        //TODO
+        if (height==null || height.length==0) return 0;
         // 定义遍历数组的左右指针
         int left=0, right = height.length-1;
         // 记录返回结果
@@ -80,11 +81,23 @@ public class Solutions {
         int leftMax =0, rightMax = 0;
         // 遍历数组，左右指针交替遍历完整个数组
         while (left<right){
-            // 分情况移动指针
-            if (height[left] < height[right]){
+            // 注意这里的左边最大值和右边最大值对应的是不同指针上的最大值
+            // 计算当前左指针所指元素的左侧的最大值，即[0,left]，这里没有[left, height.length-1]这个区间的最大值
+            leftMax = Math.max(leftMax, height[left]);
+            // 计算当前右指针所指元素的右侧最大值，即[right,height.length-1]，这里没有[0, right]这个区间的最大值
+            rightMax = Math.max(rightMax, height[right]);
 
+            // 接下来看是怎么移动指针的:什么时候能确定装多少水，就计算哪个。我们不需[left, height.length-1]的最大值和[0, right]的最大值
+            if (leftMax < rightMax){
+                // 当left左侧的最大值比right右侧最大值小的时候，如果left右侧最大值大于rightMax，那么leftMax必定是最大值中的最小的那个
+                // 此时已经能确定left处能装多少水了
+                res += leftMax - height[left];
+                left++;
+            } else {
+                // 同理，右侧也是这么个道理
+                res += rightMax - height[right];
+                right--;
             }
-
         }
         return res;
     }

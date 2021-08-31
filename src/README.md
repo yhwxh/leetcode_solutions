@@ -81,6 +81,7 @@
 - 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
 - 77、【简单】 LeetCode 257: [二叉树所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)  【二叉树：递归查找左右子树的路径，注意终止条件的判断，注意递归中变量的先后关系和层级关系】
 - 78、【中等】 LeetCode 113: [路径总和II](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归】
+- 79、【困难】 LeetCode 42: [接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)  【双指针：需要明确什么决定某个位置的水位】
  
 ### 数据结构  
 - 动态数组：
