@@ -227,6 +227,47 @@ public class Solutions {
         return Math.max(a, Math.max(b, c));
     }
 
+
+    /**
+     * LeetCode 300：最长递增子序列
+     * 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
+     * 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。
+     *
+     * 注意：子序列是不连续的，子串才连续
+     *
+     * 解题思路：动态规划
+     *  1、状态定义：dp[i] 表示以第i个元素结尾的数组，其最长递增子序列是多少
+     *  2、状态转移方程：dp[i] = max(dp[i],dp[j]) 就是i前所有比i小的元素结尾的子数组中递增子序列最大的那个再加1
+     *  3、返回结果：最后返回所有状态中最大的那个
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS(int[] nums) {
+        if (nums== null || nums.length==0) return 0;
+        // 定义状态数组(相当于每个元素结尾的数组的最大递增子序列初始为0)
+        int[] dp = new int[nums.length];
+        // 遍历数组中每个元素，为每个元素结尾的数组找到它的最大递增子序列
+        for (int i = 0; i < nums.length; i++) {
+            // 为每个元素初始化为1，因为1个元素的时候最大递增子序列长度就是1
+            dp[i] = 1;
+            // 为每个元素找最大递增子序列还需要遍历该元素前的所有元素的最大递增子序列
+            for (int j = 0; j < i; j++) {
+                // 因为是递增序列，i前的元素需要都比i索引上的元素小才行，大就不是递增了
+                if (nums[j] < nums[i]) {
+                    // dp[i]的最大递增序列需要 + 1，因为i跟前面也构成递增
+                    dp[i] = Math.max(dp[i], dp[j]+1);
+                }
+            }
+        }
+        // 返回最大值
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+
     // 测试
     public static void main(String[] args) {
         Solutions slt = new Solutions();

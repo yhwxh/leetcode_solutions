@@ -82,6 +82,9 @@
 - 77、【简单】 LeetCode 257: [二叉树所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)  【二叉树：递归查找左右子树的路径，注意终止条件的判断，注意递归中变量的先后关系和层级关系】
 - 78、【中等】 LeetCode 113: [路径总和II](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归】
 - 79、【困难】 LeetCode 42: [接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)  【双指针：需要明确什么决定某个位置的水位】
+- 80、【中等】 LeetCode 5: [最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/) 【双指针：需要将每个字符作为中心，向两边遍历找最长回文，而且需要分奇偶情况】
+- 81、【中等】 LeetCode 300: [最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/) 【动态规划：状态为以每个元素结尾的数组的最长递增子序列，转移为当前元素之前的数组的最长子序列的最大值+1，返回状态中的最大值】
+ 
  
 ### 数据结构  
 - 动态数组：

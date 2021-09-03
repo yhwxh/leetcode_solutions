@@ -102,6 +102,59 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * LeetCode 5：最长回文子串 【中等】
+     * 给你一个字符串 s，找到 s 中最长的回文子串。
+     *
+     * 示例 1：
+     * 输入：s = "babad"
+     * 输出："bab"
+     * 解释："aba" 同样是符合题意的答案。
+     *
+     * 解题思路：双指针，需要从中间往两边遍历着找回文串
+     *  1、遍历字符串中每一个字符，让每个字符作为"回文串"的中心字符
+     *  2、从当前字符向两边遍历，寻找以当前字符为中心的"回文串"：
+     *      2.1 由于是从中心往两边遍历，如果遇到不符合的情况，那么再往后遍历也不是回文串了，所以，遇到不对称就停止就行了，当前覆盖区域就是最新的最大回文串
+     *      2.2 每次遍历，最长的子串是看左右指针哪个先到边界
+     *      2.3 遍历时需要考虑子串的奇偶问题，奇数个好扩展，偶数个需要两个指针来操作
+     *  3、更新子串，返回最终结果
+     *
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        String res = "";
+        if (s == null || s.length() == 0) return res;
+        // 遍历字符串中每个字符，以当前字符作为回文串中心，更新现在的回文串
+        for (int i = 0; i < s.length(); i++) {
+            // 奇数的时候，获取最大回文串
+            String left = palindrome(s, i, i);
+            // 偶数时，最大回文串
+            String right = palindrome(s, i-1, i);
+            // 选取最长的更新
+            res = res.length() > left.length()? res: left;
+            // 奇偶的都要更新一次
+            res = res.length() > right.length()? res:right;
+        }
+        return res;
+    }
+    private String palindrome(String s, int l, int r){
+        /**
+         * 该函数返回以 l和 r为中心的子串
+         * 之所以两个指针，是因为有奇偶的问题
+         *  当回文串字符个数为奇数， 则有 l=r 的两个指针
+         *  偶数时，有l<r两个指针,且 l+1=r
+         */
+        // 在没超出左边界或者右边界的时候移动，当左右指针字符不等时，就是最长回文了，因为再向两边遍历都不能构成回文了
+        while (l>=0 && r < s.length() && s.charAt(l) == s.charAt(r)){
+            // 向左侧移动，终点是左边界
+            l--;
+            // 向右侧移动，终点是右边界
+            r++;
+        }
+        // 注意：由于上面移动结束时停留在非对称的区间上，即(l,r)，所以，截取的时候要注意索引
+        return s.substring(l+1, r);    // 理论上区间是[l+1, r-1],但r不会取到
+    }
 
     public static void main(String[] args) {
         Solutions s = new Solutions();
