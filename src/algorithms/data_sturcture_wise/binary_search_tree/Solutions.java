@@ -477,6 +477,7 @@ public class Solutions {
     private List<List<Integer>> getPaths(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;
+        // 递归终止条件：叶子节点的时候
         if (root.left == null && root.right == null){
             List<Integer> path = new ArrayList<>();
             path.add(root.val);

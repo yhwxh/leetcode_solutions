@@ -1,6 +1,9 @@
 package algorithms.strategy_wise.dynamic_programing;
 
+import sun.awt.IconInfo;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solutions {
@@ -266,6 +269,53 @@ public class Solutions {
             res = Math.max(res, dp[i]);
         }
         return res;
+    }
+
+    /**
+     * LeetCode 322：找零钱 【中等】
+     * 给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
+     * 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。
+     * 你可以认为每种硬币的数量是无限的。
+     *
+     * 比如，输入面值为[1，2，5，7，10]的数组
+     * 输出金额为14的结果：2
+     *
+     * 解题思路：动态规划
+     *  1、状态定义：将金额看作一个[0,n] 的数组，n就是金额，那么状态就是每个金额的最优解
+     *  2、状态转移方程：当前金额可分解为小于该金额的任何面值加剩余金额的最优解(即dp[i-j])，所以有 dp[i] = dp[j]+dp[i-j]（其中j为小于i的任意面值）
+     *      2.1 所有面值中，找最小的那个
+     *  3、返回所有状态中的最后一个
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public int coinChange(int[] coins, int amount) {
+        // 定义状态数组：将amount分解为 [0,amount] 的 n+1 个元素，每个元素代表相应金额的最优解
+        int[] dp = new int[amount + 1];
+        // 这里初始化为-1会方便点
+        Arrays.fill(dp,-1);
+        // 第一个元素初始化为0
+        dp[0] = 0;
+
+        // 给每个金额找到一个最优解
+        for (int i = 1; i < amount+1; i++) {
+            // 在所有面值中，为当前金额i，寻找所有可能组合中最有的那个，每个金额都应该能被分解为某个面值和剩余金额的最优解才行（这里需要分解成两部分，就是两个约束，一个是被分解的面额，一个是剩余金额的最优解，缺一不行）
+            for (int j = 0; j < coins.length; j++) {
+                // 注意这里判断i可被分解的条件：当面值小于要求解的金额的话，不一定可被分解，还得你比这个金额小的其他最优解也得存在才行（这说明当前面值i是可按面值分解的，否则不能分解）
+                if (coins[j]<=i && dp[i-coins[j]]!=-1){ //第一个条件说明有可被分解的面额；第二个条件是约束分解后有剩余金额的最优解
+                    if (dp[i] == -1) {
+                        // 当第 i 个状态第一次更新时，直接替换；不是第一次更新时，要取最小
+                        dp[i] = dp[i - coins[j]] + 1;
+                    }else {
+                        // 需要注意的是，i和j不是同一个含义，j是索引，i是金额，i和coins[j] 才是同一含义
+                        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                    }
+                }
+            }
+        }
+        // 返回状态数组的最后一个
+        return dp[amount];
     }
 
     // 测试

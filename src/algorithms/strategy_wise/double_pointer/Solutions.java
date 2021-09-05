@@ -88,7 +88,7 @@ public class Solutions {
             rightMax = Math.max(rightMax, height[right]);
 
             // 接下来看是怎么移动指针的:什么时候能确定装多少水，就计算哪个。我们不需[left, height.length-1]的最大值和[0, right]的最大值
-            if (leftMax < rightMax){
+            if (leftMax < rightMax){ // 当左侧能确定时，就计算左侧指针指向的位置能装多少水，并移动指针
                 // 当left左侧的最大值比right右侧最大值小的时候，如果left右侧最大值大于rightMax，那么leftMax必定是最大值中的最小的那个
                 // 此时已经能确定left处能装多少水了
                 res += leftMax - height[left];

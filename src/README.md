@@ -1,8 +1,8 @@
 # 涉及到的题目和数据结构
 
 ### 题目
-- 1、【简单】 LeetCode 349: [两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/) 【借用 Set 或 Map】
-- 2、【简单】 LeetCode 350: [两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) 【借用 Set 或 Map】
+- 1、【简单】 LeetCode 349: [两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/) 【借用 Set：重复元素只返回一个，所以set就可以】
+- 2、【简单】 LeetCode 350: [两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) 【借用Map：重复元素返回个数最少的，需要记录次数】
 - 3、【简单】 LeetCode 94: [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/) 【BST 的递归遍历：当前节点】
 - 4、【简单】 LeetCode 104: [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) 【二叉树：递归计算左右子树最大深度】
 - 5、【中等】 LeetCode 173: [二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/) 【BST：主要是要在构造函数中实现中序遍历，并且有个指针记录下一个元素的索引】
@@ -11,7 +11,7 @@
 - 8、【中等】 LeetCode 347: [前K个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/) 【优先队列】
 - 9、【简单】 LeetCode 303: [区域和检查(数组不可变,即不涉及线段树的更新操作)](https://leetcode-cn.com/problems/range-sum-query-immutable/) 【线段树】
 - 10、【简单】 LeetCode 20: [有效括号](https://leetcode-cn.com/problems/valid-parentheses/) 【借用 栈】
-- 11、【中等】 LeetCode 22: [生成括号（生成所有有效括号）](https://leetcode-cn.com/problems/generate-parentheses/) 【递归：确定好左右括号添加的原则】
+- 11、【中等】 LeetCode 22: [<font color=green>生成括号（生成所有有效括号）</font>](https://leetcode-cn.com/problems/generate-parentheses/) 【递归：确定好左右括号添加的原则】
 - 12、【简单】 LeetCode 557: [反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) 【双指针：确定好每个词的边界】
 - 13、【简单】 LeetCode 344: [反转字符串](https://leetcode-cn.com/problems/reverse-string/) 【双指针、递归】
 - 14、【简单】 LeetCode 541: [反转字符串 II](https://leetcode-cn.com/problems/reverse-string-ii/) 【双指针、字符串：确定好边界和移动间隔】
@@ -22,7 +22,7 @@
 - 19、【中等】 LeetCode 80: [删除有序数组中的重复元素II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) 【双指针+慢指针】
 - 20、【中等】 LeetCode 2: [两数相加](https://leetcode-cn.com/problems/add-two-numbers/) 【链表遍历】
 - 21、【简单】 LeetCode 14: [最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/) 【字符串】
-- 22、【简单】 LeetCode 122: [买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) 【数组、贪心、动态规划】
+- 22、【简单】 LeetCode 122: [<font color=green>买卖股票的最佳时机II</font>](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) 【数组、贪心、动态规划】
 - 23、【中等】 LeetCode 75： [颜色分类](https://leetcode-cn.com/problems/sort-colors/) 【计数排序、三路快排】
 - 24、【简单】 LeetCode 88: [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) 【归并排序子过程】
 - 25、【中等】 LeetCode 215: [数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) 【快速排序子过程：partition操作】
@@ -34,7 +34,7 @@
 - 31、【简单】 LeetCode 92: [反转链表II：对指定区间进行反转](https://leetcode-cn.com/problems/reverse-linked-list-ii/) 【链表遍历前继节点、当前节点、后继节点+头尾节点】
 - 32、【简单】 LeetCode 141: [判断链表是否有环](https://leetcode-cn.com/problems/linked-list-cycle/) 【快慢指针:快一步就可以】
 - 33、【中等】 LeetCode 142: [判断链表是否有环II](https://leetcode-cn.com/problems/linked-list-cycle-ii/) 【借助 Set 或者 快慢指针并利用带环链表相遇后的性质：同时移动慢指针和新指针，会在入环节点相遇】  
-- 33、【简单】 剑指Offer 29 : [顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【边界问题】
+- 33、【简单】 剑指Offer 29 : [<font color=green>顺时针打印矩阵</font>](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/) 【边界问题】
 - 34、【简单】 LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历：边界问题】
 - 35、【中等】 LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 size-k 处断开】
 - 36、【中等】 LeetCode 209: [长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) 【滑动窗口】
@@ -56,7 +56,7 @@
 - 51、【中等】 LeetCode 49: [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/) 【借助 Set OR Map ：<font color=red>未实现</font>】
 - 52、【中等】 LeetCode 447: [回旋镖数量](https://leetcode-cn.com/problems/number-of-boomerangs/) 【借助Map ：记录每个数据点距离其他点的距离，以及该距离下有多少个数据点】
 - 53、【困难】 LeetCode 149: [直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/) 【借助 Set OR Map：<font color=red>未实现</font>】
-- 54、【困难】 LeetCode 239: [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/) 【借助 优先队列 或者 双端队列：关键在于怎么维护窗口中的最大值：不必保证队列必须k个元素，只要队列中最大值是窗口覆盖范围内的就行】
+- 54、【困难】 LeetCode 239: [<font color=green>滑动窗口最大值</font>](https://leetcode-cn.com/problems/sliding-window-maximum/) 【借助 优先队列 或者 双端队列：关键在于怎么维护窗口中的最大值：不必保证队列必须k个元素，只要队列中最大值是窗口覆盖范围内的就行】
 - 55、【困难】 LeetCode 480: [滑动窗口中位数](https://leetcode-cn.com/problems/sliding-window-median/) 【借助 优先队列 或者 普通队列：<font color=red>未实现</font>】
 - 56、【困难】 剑指Offer 59-1: [滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 【借助 优先队列 或者 双端队列：同 LeetCode 239】
 - 57、【中等】 LeetCode 74: [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) 【数组遍历：需要点trick 或者 二分搜索】
@@ -65,10 +65,10 @@
 - 60、【简单】 LeetCode 219: [存在重复元素II](https://leetcode-cn.com/problems/contains-duplicate-ii/) 【借助 Set】
 - 61、【中等】 LeetCode 220: [存在重复元素III](https://leetcode-cn.com/problems/contains-duplicate-iii/) 【借助 Set 并需要trick】
 - 62、【中等】 LeetCode 19: [删除链表的倒数第N个元素](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/) 【链表+双指针】
-- 63、【简单】 LeetCode 70: [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
-- 64、【中等】 LeetCode 120: [三角形的最短路径](https://leetcode-cn.com/problems/triangle/) 【动态规划】
-- 65、【中等】 LeetCode 64: [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
-- 66、【中等】 LeetCode 343: [整数拆分](https://leetcode-cn.com/problems/integer-break/) 【动态规划】
+- 63、【简单】 LeetCode 70: [<font color=green>爬楼梯</font>](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
+- 64、【中等】 LeetCode 120: [<font color=green>三角形的最短路径</font>](https://leetcode-cn.com/problems/triangle/) 【动态规划】
+- 65、【中等】 LeetCode 64: [<font color=green>最小路径和</font>](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
+- 66、【中等】 LeetCode 343: [<font color=green>整数拆分</font>](https://leetcode-cn.com/problems/integer-break/) 【动态规划】
 - 67、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
 - 68、【中等】 LeetCode 91: [解码方法](https://leetcode-cn.com/problems/decode-ways/) 【动态规划：<font color=red>未实现</font>】
 - 69、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
@@ -80,11 +80,11 @@
 - 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
 - 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
 - 77、【简单】 LeetCode 257: [二叉树所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)  【二叉树：递归查找左右子树的路径，注意终止条件的判断，注意递归中变量的先后关系和层级关系】
-- 78、【中等】 LeetCode 113: [路径总和II](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归】
-- 79、【困难】 LeetCode 42: [接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)  【双指针：需要明确什么决定某个位置的水位】
-- 80、【中等】 LeetCode 5: [最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/) 【双指针：需要将每个字符作为中心，向两边遍历找最长回文，而且需要分奇偶情况】
-- 81、【中等】 LeetCode 300: [最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/) 【动态规划：状态为以每个元素结尾的数组的最长递增子序列，转移为当前元素之前的数组的最长子序列的最大值+1，返回状态中的最大值】
- 
+- 78、【中等】 LeetCode 113: [<font color=green>路径总和II</font>](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归寻找所有路径，然后寻找满足条件路径】
+- 79、【困难】 LeetCode 42: [<font color=green>接雨水</font>](https://leetcode-cn.com/problems/trapping-rain-water/)  【双指针：需要明确什么决定某个位置的水位】
+- 80、【中等】 LeetCode 5: [<font color=green>最长回文子串</font>](https://leetcode-cn.com/problems/longest-palindromic-substring/) 【双指针：需要将每个字符作为中心，向两边遍历找最长回文，而且需要分奇偶情况】
+- 81、【中等】 LeetCode 300: [<font color=green>最长递增子序列</font>](https://leetcode-cn.com/problems/longest-increasing-subsequence/) 【动态规划：状态为以每个元素结尾的数组的最长递增子序列，转移为当前元素之前的数组的最长子序列的最大值+1，返回状态中的最大值】
+- 82、【中等】 LeetCode 322: [<font color=green>零钱兑换</font>](https://leetcode-cn.com/problems/coin-change/) 【动态规划：状态为每种金额的最优解，当每个金额可分解，且有剩余金额的最优解时，当前金额最优解就是所有可能中的最小值，返回最后一个状态】
  
 ### 数据结构  
 - 动态数组：
