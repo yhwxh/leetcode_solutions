@@ -120,12 +120,14 @@ public class Solutions {
         dp[0] = triangle.get(0).get(0);
         // 遍历每一行
         for (int i = 1; i < len; i++) {
-            // 遍历每行的元素，更新 dp 中的值【这里每个元素需要用到前面元素，所以需要从后往前更新，不然就覆盖了】
+            // 每行的最后一个元素只能由上一行最后一个元素到达
             dp[i] = dp[i-1]+triangle.get(i).get(i);
+            // 遍历每行的元素，更新 dp 中的值【这里每个元素需要用到前面元素，所以需要从后往前更新，不然就覆盖了】
             for (int j = i-1; j >0 ; j--) {
                 // 每行有几个元素，就能更新几个(Math.min 中访问的是上一行的时候，元素的最小路径和）
                 dp[j] = Math.min(dp[j], dp[j-1]) + triangle.get(i).get(j);
             }
+            // 每行的第一个元素只能由上一行的第一个元素到达
             dp[0] = dp[0] + triangle.get(i).get(0);
         }
         // 遍历完后，取最小值
@@ -168,7 +170,7 @@ public class Solutions {
         int[] dpRecord = new int[cols];
         // 遍历矩阵每一行
         for (int i = 0; i < len; i++) {
-            // 第一个元素的转移方程
+            // 第一个元素的转移方程:每行的第一元素只能从上一行第一个元素到达
             dpRecord[0] = dpRecord[0] + grid[i][0];
             // 遍历当前行每个元素
             for (int j = 1; j < cols; j++) {
