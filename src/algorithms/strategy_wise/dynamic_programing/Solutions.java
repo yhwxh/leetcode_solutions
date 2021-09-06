@@ -320,6 +320,38 @@ public class Solutions {
         return dp[amount];
     }
 
+    /**
+     * LeetCode 53：最大子序和
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     *
+     * 示例 1：
+     * 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出：6
+     * 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+     *
+     * @param nums
+     */
+    public int maxSubArray(int[] nums){
+        if (nums==null || nums.length==0) return 0;
+        // 初始化为第一个元素，因为可能为负，所以不能初始化为0
+        int res = nums[0];
+        // 定义sum，记录当前连续序列的和
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            // 当前连续序列的和如果比0小，那么它加上当前元素后不会带来增加，所以，将sum更新为当前元素的值，重新开启一个序列
+            if (sum <=0 ){
+                // 这个条件会让和最大的序列不可能以负数开头
+                sum = nums[i];
+            } else {
+                // 当连续序列的和比0大时，这个序列还可以扩展，所以在当前基础上加上当前访问的节点
+                sum += nums[i];
+            }
+            // 更新 res ，让 res 保持最大
+            res = Math.max(res, sum);
+        }
+        return res;
+    }
+
     // 测试
     public static void main(String[] args) {
         Solutions slt = new Solutions();
