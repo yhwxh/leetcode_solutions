@@ -14,23 +14,32 @@ public class Solutions {
      * 输入：nums = [0,0,0,0,0], goal = 0
      * 输出：15
      */
-    public int numSubarraysWithSum(int[] nums, int goal) {
-        //TODO
+    public int numSubarraysWithSum(int[] nums, int goal){
+        // 记录返回结果
         int res = 0;
-        int left = 0, right = 0;
-        int sum = nums[0];
-        while (left <=right && right<nums.length) {
-            if (sum < goal) {
-                right++;
-                if (right<=nums.length-1)
-                    sum += nums[right];
-            } else if (sum > goal) {
+        // 记录窗口中元素的和
+        int sum = 0;
+        // 定义窗口的左指针,左指针和遍历数组的指针组成一个窗口
+        int left =0;
+        for(int i=0; i<nums.length; i++){
+            sum+=nums[i];
+            // 注意后面对sum判断大小对顺序不能颠倒
+            // 当窗口和大于目标值时，缩小窗口，缩小到不比目标值小时，还要继续判断sum和goal的关系，所以，goal==sum的判断必须在sum>goal的后面
+            while(left<i && sum > goal){  // 这里结束后必定在 sum==goal 处停止
                 sum -= nums[left];
                 left++;
-            } else if (sum==goal){
-                res++;
-                sum-=nums[left];
-                left++;
+            }
+            // 窗口和小于目标值，就扩大窗口（向右移动右侧指针）
+            if(sum<goal){ // 这步判断不分前后，只要sum>goal在sum==goal前就行
+                continue;
+            }
+            if(sum==goal) {
+                res+=1;
+                // 对窗口中从left开始统计0的个数，0不影响结果，但是算作不同的子串，所以要统计进来
+                for(int j=left; j < i && nums[j] == 0; j++){
+                    // 这里不需要对i右侧对0进行统计，i一步一步移动的时候已经统计进来了
+                    res+=1;
+                }
             }
         }
         return res;

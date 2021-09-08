@@ -85,6 +85,10 @@
 - 80、【中等】 LeetCode 5: [<font color=green>最长回文子串</font>](https://leetcode-cn.com/problems/longest-palindromic-substring/) 【双指针：需要将每个字符作为中心，向两边遍历找最长回文，而且需要分奇偶情况】
 - 81、【中等】 LeetCode 300: [<font color=green>最长递增子序列</font>](https://leetcode-cn.com/problems/longest-increasing-subsequence/) 【动态规划：状态为以每个元素结尾的数组的最长递增子序列，转移为当前元素之前的数组的最长子序列的最大值+1，返回状态中的最大值】
 - 82、【中等】 LeetCode 322: [<font color=green>零钱兑换</font>](https://leetcode-cn.com/problems/coin-change/) 【动态规划：状态为每种金额的最优解，当每个金额可分解，且有剩余金额的最优解时，当前金额最优解就是所有可能中的最小值，返回最后一个状态】
+- 83、【中等】 LeetCode 46: [全排列](https://leetcode-cn.com/problems/permutations/) 【回溯：每次判断每个元素是否加入子序列，并在每次添加后，递归下一个"个数（排了几个元素）"】
+- 84、【中等】 LeetCode 77: [组合](https://leetcode-cn.com/problems/combinations/) 【回溯：由于组合不考虑顺序，前面考虑过的元素不会在后面考虑，所以每次遍历从已经考虑的元素后一个开始，每次遍历递归下一个元素】
+- 85、【中等】 LeetCode 79: [<font color=green>子集</font>](https://leetcode-cn.com/problems/subsets/) 【回溯：】 
+- 86、【简单】 LeetCode 53: [<font color=green>最大子序和</font>](https://leetcode-cn.com/problems/maximum-subarray/) 【动态规划：此动态规划的状态不用O(n)的数组，而是记录当前最大子序列的和，如果当前最大字序和大于0，序列还能扩展，否则，序列重新开始】
  
 ### 数据结构  
 - 动态数组：
