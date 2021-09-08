@@ -497,6 +497,7 @@ public class Solutions {
         return res;
     }
 
+
     public static void main(String[] args) {
         Solutions s = new Solutions();
         TreeNode bst = s.getTestInstance(new int[]{1, 2, 3});

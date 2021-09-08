@@ -31,7 +31,9 @@ public class Solutions {
      * 解题思路：斐波那契数列的现实问题
      *  思路一：记忆化搜索（自上向下的解题顺序）：需要递归
      *  思路二【正解】：动态规划（自下向上的解题思路）：不需要递归
-     *      此题中，状态转移方程为：f(n) = f(n-1)+f(n-2)
+     *      此题中，状态转移方程为：
+     *          两步情况：f(n) = f(n-1)+f(n-2)
+     *          三步情况：f(n) = f(n-1) + f(n-2) + f(n-3)
      *      即，当前步骤的结果为前两步之和
      *      动态规划中，状态的定义是：上 k 阶台阶需要的步数
      * @param n
@@ -62,6 +64,18 @@ public class Solutions {
         for (int i = 2; i < n+1; i++) {
             // 状态转移方程：爬 n 阶台阶的可行数=(爬 n-1 阶台阶可行数) + (爬 n-2 阶台阶可行数)
             record[i] = record[i-1] + record[i-2];
+        }
+        return record[n+1];
+    }
+    private int countStepsDP3Ways(int n){
+        int[] record = new int[n+1];
+        // 这里和斐波那契数列不太一样，当 n=2 时，值为2，而斐波那契数列中为1
+        record[0] = 1;  // 这里初始的是1
+        record[1] = 1;
+        record[2] = 2;
+        for (int i = 3; i < n+1; i++) {
+            // 状态转移方程：爬 n 阶台阶的可行数=(爬 n-1 阶台阶可行数) + (爬 n-2 阶台阶可行数)
+            record[i] = record[i-1] + record[i-2] + record[i-3];
         }
         return record[n+1];
     }

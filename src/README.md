@@ -64,10 +64,10 @@
 - 59、【中等】 LeetCode 189: [反转数值](https://leetcode-cn.com/problems/rotate-array/) 【类似反转链表：先整体反转，再分段反转】
 - 60、【简单】 LeetCode 219: [存在重复元素II](https://leetcode-cn.com/problems/contains-duplicate-ii/) 【借助 Set】
 - 61、【中等】 LeetCode 220: [存在重复元素III](https://leetcode-cn.com/problems/contains-duplicate-iii/) 【借助 Set 并需要trick】
-- 62、【中等】 LeetCode 19: [删除链表的倒数第N个元素](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/) 【链表+双指针】
-- 63、【简单】 LeetCode 70: [<font color=green>爬楼梯</font>](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
-- 64、【中等】 LeetCode 120: [<font color=green>三角形的最短路径</font>](https://leetcode-cn.com/problems/triangle/) 【动态规划】
-- 65、【中等】 LeetCode 64: [<font color=green>最小路径和</font>](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划】
+- 62、【中等】 LeetCode 19: [删除链表的倒数第N个元素](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/) 【链表+双指针：移动固定大小的窗口来找到要删除的节点】
+- 63、【简单】 LeetCode 70: [<font color=green>爬楼梯：两步&三步</font>](https://leetcode-cn.com/problems/climbing-stairs/) 【动态规划 或者 记忆化搜索】
+- 64、【中等】 LeetCode 120: [<font color=green>三角形的最短路径</font>](https://leetcode-cn.com/problems/triangle/) 【动态规划：一行一行的更新每行中每个元素的状态】
+- 65、【中等】 LeetCode 64: [<font color=green>最小路径和</font>](https://leetcode-cn.com/problems/minimum-path-sum/) 【动态规划：一行一行的更新每行中每个元素的状态】
 - 66、【中等】 LeetCode 343: [<font color=green>整数拆分</font>](https://leetcode-cn.com/problems/integer-break/) 【动态规划】
 - 67、【中等】 LeetCode 279: [完全平方数](https://leetcode-cn.com/problems/perfect-squares/) 【动态规划：<font color=red>未实现</font>】
 - 68、【中等】 LeetCode 91: [解码方法](https://leetcode-cn.com/problems/decode-ways/) 【动态规划：<font color=red>未实现</font>】
@@ -75,7 +75,7 @@
 - 70、【中等】 LeetCode 62: [不同路径](https://leetcode-cn.com/problems/unique-paths/) 【动态规划：<font color=red>未实现</font>】
 - 71、【中等】 LeetCode 63: [不同路径II](https://leetcode-cn.com/problems/unique-paths-ii/) 【动态规划：<font color=red>未实现</font>】
 - 72、【简单】 LeetCode 111: [二叉树最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) 【二叉树：递归判断当前节点的左右子树的深度，并需要分情况讨论当前节点各种可能子树的情况】
-- 73、【简单】 LeetCode 236: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
+- 73、【简单】 LeetCode 226: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
 - 74、【简单】 LeetCode 100: [相同的树](https://leetcode-cn.com/problems/same-tree/) 【二叉树：递归判断左右子树是否相同，分情况讨论是否相同】
 - 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
 - 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
