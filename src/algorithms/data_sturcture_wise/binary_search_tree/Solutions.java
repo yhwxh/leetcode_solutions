@@ -1,7 +1,6 @@
 package algorithms.data_sturcture_wise.binary_search_tree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Solutions {
     private class TreeNode {
@@ -494,6 +493,37 @@ public class Solutions {
             rightPaht.get(i).add(0,root.val);
             res.add(rightPaht.get(i));
         }
+        return res;
+    }
+
+
+    /**
+     * LeetCode 102: 二叉树的层序遍历
+     * @param root
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList();
+
+        if(root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()){
+            List<Integer> subList = new ArrayList<>();
+            int currentSize = queue.size();
+            for (int i = 0; i < currentSize; i++) {
+                TreeNode cur = queue.poll();
+                subList.add(cur.val);
+                if (cur.left !=null){
+                    queue.add(cur.left);
+                }
+                if (cur.right != null){
+                    queue.add(cur.right);
+                }
+            }
+            res.add(subList);
+        }
+
         return res;
     }
 

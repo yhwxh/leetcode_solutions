@@ -272,6 +272,7 @@ public class Solutions {
         for (int i = 0; i < nums.length; i++) {
             count[nums[i]]++;
         }
+        // 将相应位置上的元素赋予相应的值
         for (int j = 0; j < nums.length; j++) {
             if (j < count[0]) {
                 nums[j] = 0;

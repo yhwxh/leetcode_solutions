@@ -89,6 +89,7 @@
 - 84、【中等】 LeetCode 77: [组合](https://leetcode-cn.com/problems/combinations/) 【回溯：由于组合不考虑顺序，前面考虑过的元素不会在后面考虑，所以每次遍历从已经考虑的元素后一个开始，每次遍历递归下一个元素】
 - 85、【中等】 LeetCode 79: [<font color=green>子集</font>](https://leetcode-cn.com/problems/subsets/) 【回溯：】 
 - 86、【简单】 LeetCode 53: [<font color=green>最大子序和</font>](https://leetcode-cn.com/problems/maximum-subarray/) 【动态规划：此动态规划的状态不用O(n)的数组，而是记录当前最大子序列的和，如果当前最大字序和大于0，序列还能扩展，否则，序列重新开始】
+- 87、【中等】 LeetCode 102: [<font color=green>二叉树层序遍历</font>](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/) 【二叉树：广度优先遍历，记录每层的元素个数（即队列的大小）】
  
 ### 数据结构  
 - 动态数组：
