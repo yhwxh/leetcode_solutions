@@ -1137,6 +1137,79 @@ public class Solutions {
         System.out.println(slt.isPalindrome(testStr));
     }
 
+    /**
+     * LeetCode 4：寻找两个正序数组的中位数
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        // 无论奇偶，中位数都可以表示为 l和r 的平均值
+        int l = (m + n + 1) / 2;    // 左侧数组中位数
+        int r = (m + n + 2) / 2;    // 右侧数组中位数
+        return (getKth(nums1, 0, nums2, 0, l) + getKth(nums1, 0, nums2, 0, r)) / 2.0;
+    }
+    // 在两个有序数组中二分查找第k大元素
+    private int getKth(int[] nums1, int start1, int[] nums2, int start2, int k){
+        /**
+         * nums1：要查找的左侧数组
+         * nums2：要查找的右侧数组
+         * start1：左侧数组查找的起始位置
+         * start2：右侧数组查找的起始位置
+         * k：要查找的元素索引
+         */
+        // 特殊情况 1：要查找的起始位置超出数组边界的情况
+        if(start1 > nums1.length-1) return nums2[start2 + k - 1];
+        if(start2 > nums2.length-1) return nums1[start1 + k - 1];
+        // 特殊情况 2：k为1的时候
+        if(k == 1) return Math.min(nums1[start1], nums2[start2]);
+
+        // 分别在两个数组中查找第k/2个元素，若存在（即数组没有越界），标记为找到的值；若不存在，标记为整数最大值
+        int nums1Mid = start1 + k/2 - 1 < nums1.length ? nums1[start1 + k/2 - 1] : Integer.MAX_VALUE;
+        int nums2Mid = start2 + k/2 - 1 < nums2.length ? nums2[start2 + k/2 - 1] : Integer.MAX_VALUE;
+
+        // 确定最终的第k/2个元素，然后递归查找
+        if(nums1Mid < nums2Mid)
+            return getKth(nums1, start1 + k/2, nums2, start2, k-k/2);
+        else
+            return getKth(nums1, start1, nums2, start2 + k/2, k-k/2);
+    }
+
+    /**
+     * LeetCode 33: 搜索旋转数组
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search(int[] nums, int target) {
+        if (nums==null || nums.length==0) return -1;
+
+        int left = 0, right = nums.length-1;
+        while (left<=right){
+            int mid = left + (right-left)/2;
+            if (nums[mid] == target){
+                return mid;
+            }
+            // 将旋转数组以 mid 为分界点，分成"有序"和"无序"两部分
+            if (nums[0] <= nums[mid]){  // 有序部分
+                // 如果目标值在有序部分，则右侧指针移动，在有序区间继续二分查找
+                if(target < nums[mid] && target >= nums[0]){
+                    right = mid - 1;
+                } else { // 不在有序部分，就移动左指针，在无序区间查找
+                    left = mid + 1;
+                }
+            } else { // 无序部分
+                // 目标值在无序区间，则移动左指针，在无序区间继续二分查找
+                if (target > nums[mid] && target<= nums[nums.length -1]){
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
 
     /**
      * 如何写出一个正确的程序：我们以二分查找为例

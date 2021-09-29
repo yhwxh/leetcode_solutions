@@ -136,6 +136,60 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * LeetCode 703: 数据流中的第K大元素
+     *
+     * 思路：维护一个大小为K的优先队列（最小堆）
+     *  k个元素的最小堆中，堆顶元素就是第K个最大值
+     *  所谓第K个最大值就是k个元素中最小的那个，
+     *  所以，不用关心其他元素的相对关系，只要是找到k个中最小的那个就行）
+     */
+    private class KthLargest {
+        // 最小堆
+        private PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> a - b);
+        private int pqSize;
+        public KthLargest(int k, int[] nums) {
+            pqSize = k;
+            for (int i = 0; i < nums.length; i++) {
+                add(nums[i]);
+            }
+        }
+
+        public int add(int val) {
+            /**
+             * 维护大小为K的最小堆，并返回堆顶的最小值
+             */
+            pq.add(val);
+            // 维护最小堆的大小，当大小超过k时，弹出堆定元素
+            if (pq.size()>pqSize){
+                pq.poll();
+            }
+            return pq.peek();
+        }
+    }
+
+    /**
+     * [面试题]LeetCode 17.14 ： 最小的K个数
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] smallestK(int[] arr, int k) {
+        // 最小堆的优先队列
+        PriorityQueue <Integer> queue = new PriorityQueue<>(
+                (a, b) -> a -b
+        );
+        for(int i=0; i< arr.length; i++){
+            queue.add(arr[i]);
+        }
+        int[] res = new int[k];
+        // 取队列的前K个元素
+        for(int j=0; j<k ; j++){
+            res[j] = queue.poll();
+        }
+        return res;
+    }
+
     public double[] medianSlidingWindow(int[] nums, int k) {
         if (nums==null) return null;
         double[] res = new double[nums.length -k +1];

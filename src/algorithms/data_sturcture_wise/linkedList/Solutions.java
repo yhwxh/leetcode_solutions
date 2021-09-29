@@ -446,6 +446,42 @@ public class Solutions {
         return slow;
     }
 
+    /**
+     * LeetCode 21: 合并两个有序链表
+     * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode();
+        // 前继节点指向虚拟头节点
+        ListNode prev = dummyHead;
+
+        while(l1!=null || l2!=null){
+            if(l1==null){
+                prev.next = new ListNode(l2.val);
+                l2 = l2.next;
+                prev = prev.next;
+            } else if(l2==null){
+                prev.next = new ListNode(l1.val);
+                l1 = l1.next;
+                prev = prev.next;
+            } else {
+                if(l1.val < l2.val){
+                    prev.next = new ListNode(l1.val);
+                    l1 = l1.next;
+                } else {
+                    prev.next = new ListNode(l2.val);
+                    l2 = l2.next;
+                }
+                prev = prev.next;
+            }
+        }
+        return dummyHead.next;
+    }
+
 
     public static void main(String[] args) {
         // test 203
@@ -461,5 +497,6 @@ public class Solutions {
 //        System.out.println(slt.rotateRight(testLinkedList, 0));
 //        System.out.println(slt.swapPairs(testLinkedList));
         System.out.println(slt.deleteDuplicates(data));
+        System.out.println(slt.mergeTwoLists(testLinkedList, testLinkedList));
     }
 }

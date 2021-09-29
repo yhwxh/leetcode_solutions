@@ -527,6 +527,32 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * LeetCode 654: 最大二叉树
+     *
+     * @param nums
+     */
+    public TreeNode maxBST(int[] nums){
+        if(nums == null || nums.length==0) return null;
+        Deque<TreeNode> aux = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int curVal = nums[i];
+            TreeNode cur = new TreeNode(curVal);
+            while (!aux.isEmpty() && aux.peek().val < curVal){
+                cur.left = aux.pop();
+            }
+            if(!aux.isEmpty()){
+                aux.peek().right = cur;
+            }
+            aux.push(cur);
+        }
+        if (aux.isEmpty()){
+            return null;
+        } else {
+            return aux.removeLast();
+        }
+    }
+
 
     public static void main(String[] args) {
         Solutions s = new Solutions();

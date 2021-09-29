@@ -290,6 +290,34 @@ public class SortAlgorithm {
         quickSortThreeWays(arr, gt, right);
     }
 
+    /**
+     * LeetCode 69: X的平方根
+     *
+     * 思路：
+     *  一：二分查找
+     *  二、牛顿法：
+     *      1、求解平方根，等价于对方程 x^2-input = 0 求解
+     *      2、牛顿法要求解的 x 的更新公式为 x=(x+input/x)/2
+     *          推导过程如下：随机选取一点，得道该点在曲线 x^2-input=0 上的导数（斜率）为 2x
+     *          那么，经过该点，且斜率为 2x 的直线方程为 y-y' = 2x(x-x')，当 y=0 时，即为新求解的 x，其形式为：x=(x+input/x)/2
+     * @param x
+     * @return
+     */
+    public int mySqrt(int x) {
+        int inter = x;
+        if(x < 0){
+            return -1;
+        }
+        // 初始化解为 x
+        double resX = x;
+        // 当精度不满足条件时就继续迭代
+        while (resX*resX-inter > 0.00001){
+            // 迭代公式：x=(x+input/x)/2
+            resX = (resX + inter/resX)/2.0;
+        }
+        return (int)resX;
+    }
+
 
     public static void main(String[] args) {
         SortAlgorithm sortAlgorithm = new SortAlgorithm();
@@ -312,6 +340,8 @@ public class SortAlgorithm {
         System.out.println();
 
     }
+
+
 
     private static int[] generateTestSamples(int n, boolean openLog) {
         int[] res = new int[n];

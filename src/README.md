@@ -38,10 +38,10 @@
 - 34、【简单】 LeetCode 1572: [矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum/) 【数组遍历：边界问题】
 - 35、【中等】 LeetCode 61: [旋转链表：向右挪动k个](https://leetcode-cn.com/problems/rotate-list/) 【先记录链表节点个数，尾指头，然后在 size-k 处断开】
 - 36、【中等】 LeetCode 209: [长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) 【滑动窗口】
-- 37、【中等】 LeetCode 3: [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) 【滑动窗口】
+- 37、【中等】 LeetCode 3: [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) 【滑动窗口:需要一个256长度的数组，记录每个字符是否出现过，】
 - 38、【简单】 LeetCode 232: [用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要用到两个栈在每次压栈和每次出栈的时候在两个栈之间倒换下数据】
 - 39、【简单】 LeetCode 225: [用对列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) 【需要两个队列，一个辅助队列保证后加入的元素在前面】
-- 40、【简单】 LeeCode 703: [返回数据流中第K大的元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/) 【借助 优先队列：维护一个大小为K的最小堆 OR 最大堆】
+- 40、【简单】 LeeCode 703: [返回数据流中第K大的元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/) 【借助 优先队列：维护一个大小为K的最小堆（第K个最大值，就是K个元素中第最小的那个，所以是最小堆）】
 - 41、【中等】 LeetCode 24: [两两交换链表中的节点：两两反转链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) 【链表遍历：需要找到 前继节点、当前节点、后继节点 才能完成两个节点的反转】
 - 42、【简单】 LeetCode 242: [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) 【借助 数组 OR Map】
 - 43、【简单】 LeetCode 202: [快乐数](https://leetcode-cn.com/problems/happy-number/) 【借助 Set OR Map】
@@ -75,9 +75,9 @@
 - 70、【中等】 LeetCode 62: [不同路径](https://leetcode-cn.com/problems/unique-paths/) 【动态规划：<font color=red>未实现</font>】
 - 71、【中等】 LeetCode 63: [不同路径II](https://leetcode-cn.com/problems/unique-paths-ii/) 【动态规划：<font color=red>未实现</font>】
 - 72、【简单】 LeetCode 111: [二叉树最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) 【二叉树：递归判断当前节点的左右子树的深度，并需要分情况讨论当前节点各种可能子树的情况】
-- 73、【简单】 LeetCode 226: [反转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
+- 73、【简单】 LeetCode 226: [<font color=green>反转二叉树</font>](https://leetcode-cn.com/problems/invert-binary-tree/) 【二叉树：递归反转左右子树，再交换左右子树的位置】
 - 74、【简单】 LeetCode 100: [相同的树](https://leetcode-cn.com/problems/same-tree/) 【二叉树：递归判断左右子树是否相同，分情况讨论是否相同】
-- 75、【简单】 LeetCode 101: [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
+- 75、【简单】 LeetCode 101: [<font color=green>对称二叉树</font>](https://leetcode-cn.com/problems/symmetric-tree/) 【二叉树：递归判断左右两颗子树是否对称，分情况讨论】
 - 76、【简单】 LeetCode 404: [左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/) 【二叉树：递归寻找左右子树的左叶子节点，注意终止条件的判断】
 - 77、【简单】 LeetCode 257: [二叉树所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)  【二叉树：递归查找左右子树的路径，注意终止条件的判断，注意递归中变量的先后关系和层级关系】
 - 78、【中等】 LeetCode 113: [<font color=green>路径总和II</font>](https://leetcode-cn.com/problems/path-sum-ii/)  【二叉树：递归寻找所有路径，然后寻找满足条件路径】
@@ -85,12 +85,22 @@
 - 80、【中等】 LeetCode 5: [<font color=green>最长回文子串</font>](https://leetcode-cn.com/problems/longest-palindromic-substring/) 【双指针：需要将每个字符作为中心，向两边遍历找最长回文，而且需要分奇偶情况】
 - 81、【中等】 LeetCode 300: [<font color=green>最长递增子序列</font>](https://leetcode-cn.com/problems/longest-increasing-subsequence/) 【动态规划：状态为以每个元素结尾的数组的最长递增子序列，转移为当前元素之前的数组的最长子序列的最大值+1，返回状态中的最大值】
 - 82、【中等】 LeetCode 322: [<font color=green>零钱兑换</font>](https://leetcode-cn.com/problems/coin-change/) 【动态规划：状态为每种金额的最优解，当每个金额可分解，且有剩余金额的最优解时，当前金额最优解就是所有可能中的最小值，返回最后一个状态】
-- 83、【中等】 LeetCode 46: [全排列](https://leetcode-cn.com/problems/permutations/) 【回溯：每次判断每个元素是否加入子序列，并在每次添加后，递归下一个"个数（排了几个元素）"】
+- 83、【中等】 LeetCode 46: [<font color=green>全排列</font>](https://leetcode-cn.com/problems/permutations/) 【回溯：每次判断每个元素是否加入子序列，并在每次添加后，递归下一个"个数（排了几个元素）"】
 - 84、【中等】 LeetCode 77: [组合](https://leetcode-cn.com/problems/combinations/) 【回溯：由于组合不考虑顺序，前面考虑过的元素不会在后面考虑，所以每次遍历从已经考虑的元素后一个开始，每次遍历递归下一个元素】
 - 85、【中等】 LeetCode 79: [<font color=green>子集</font>](https://leetcode-cn.com/problems/subsets/) 【回溯：】 
 - 86、【简单】 LeetCode 53: [<font color=green>最大子序和</font>](https://leetcode-cn.com/problems/maximum-subarray/) 【动态规划：此动态规划的状态不用O(n)的数组，而是记录当前最大子序列的和，如果当前最大字序和大于0，序列还能扩展，否则，序列重新开始】
 - 87、【中等】 LeetCode 102: [<font color=green>二叉树层序遍历</font>](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/) 【二叉树：广度优先遍历，记录每层的元素个数（即队列的大小）】
+- 88、【简单】 LeetCode 21：[<font color=green>合并两个有序链表</font>](https://leetcode-cn.com/problems/merge-two-sorted-lists/) 【链表遍历：注意指针的定义】
+- 89、【简单】 LeetCode 69: [<font color=green>x的平方根</font>](https://leetcode-cn.com/problems/sqrtx/) 【二分查找&牛顿法：迭代公式：x = (x+input/x)/2】
+- 90、【中等】 LeetCode 17.14: [最小的K个数](https://leetcode-cn.com/problems/smallest-k-lcci/) 【优先队列：最小堆的前k个元素】
+- 91、【中等】 LeetCode 98: [<font color=green>验证二叉（分）搜索树</font>](https://leetcode-cn.com/problems/validate-binary-search-tree/) 【二分搜索树，中序遍历】
+- 92、【中等】 LeetCode 33: [<font color=green>搜索旋转排序数组</font>](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/) 【最优解：二分搜索，需要根据数组特点，判断该在左边找还是右边找，这里判断不是判断中间元素与要查找元素大小，而是判断要查找元素跟数组末尾元素的大小】
+- 93、【中等】 LeetCode 654:[<font color=green>最大二叉树</font>](https://leetcode-cn.com/problems/maximum-binary-tree/)  【最优解：需要用到一个队列来存储所有节点】
+- 94、【中等】 LeetCode 1143:[<font color=green>最长公共子序列</font>](https://leetcode-cn.com/problems/longest-common-subsequence/) 【动态规划】
+- 95、【中等】 LeetCode 1345:[<font color=green>跳跃游戏III</font>](https://leetcode-cn.com/problems/jump-game-iv/) 【最优解：BFS】
+- 96、【困难】 LeetCode 4:[<font color=green>寻找两个正序数组的中位数</font>](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/) 【变换思路：查找第k个元素】
  
+
 ### 数据结构  
 - 动态数组：
   * DynamicArray
