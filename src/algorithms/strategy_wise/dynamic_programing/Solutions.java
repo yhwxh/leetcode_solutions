@@ -366,6 +366,64 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * LeetCode 1143: 最大公共子序列
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public int longestCommonSubsequence(String text1, String text2) {
+        if(text1.length()==0 || text2.length()==0) return 0;
+        int m = text1.length();
+        int n = text2.length();
+
+        int[][] dp = new int[m+1][n+1];
+        // 此处 i j 不是索引，是表示字符串中第几个元素
+        for(int i = 1; i<=m; i++){
+            char c1 = text1.charAt(i-1);
+            for(int j=1; j<=n; j++){
+                char c2 = text2.charAt(j-1);
+                if(c1 == c2){
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
+    // 编辑距离：给定两个字符串，求解将两个字符串修改成一样的字符串需要的最小操作次数
+    public int minDistance(String word1, String word2) {
+        if(word1==null || word2 == null) {
+            throw new IllegalArgumentException();
+        }
+        int m = word1.length();
+        int n = word2.length();
+
+        if(m == 0 || n==0){
+            return m+n;
+        }
+        int[][] dp = new int[m+1][n+1];
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+        // i和j表示第几个字符，不是下表
+        for (int i = 1; i <=m; i++) {
+            for (int j = 1; j <=n; j++) {
+                if (word1.charAt(i-1) == word2.charAt(j-1)){
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(dp[i-1][j]+1, Math.min(dp[i][j-1]+1, dp[i-1][j-1]+1));
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
     // 测试
     public static void main(String[] args) {
         Solutions slt = new Solutions();

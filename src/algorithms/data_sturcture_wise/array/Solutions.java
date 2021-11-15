@@ -823,7 +823,7 @@ public class Solutions {
      * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
      * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
      * <p>
-     * 解题思路：
+     * 解题思路：(允许买卖多次)
      * 如何实现利润最大化的求解本质是：怎么抓住每个上升波段
      * 1、假定我们知道了买进的最低价格，只要遍历数组，在高于它的价格卖出就可以
      * 2、可以初始化买入价格为数组的第一个元素（数组必须大于1才能有一次完整交易）
@@ -844,6 +844,29 @@ public class Solutions {
             buyPrice = prices[k];
         }
         return sum;
+    }
+
+    /**
+     * LeetCode 121: 买卖股票最佳时机（只能买卖一次）
+     *
+     * 其实就是找到最大值和最小值
+     * @param prices
+     * @return
+     */
+    public int maxProfit2(int[] prices) {
+        int res = 0;
+        int minPrice = prices[0];
+        // 扫描一遍数组
+        for(int i=1; i< prices.length; i++){
+            int curPrice = prices[i];
+            // 寻找最低价格，并更细
+            if(curPrice < minPrice){
+                minPrice = curPrice;
+            } else if(curPrice - minPrice > res){ // 否则就更新利润
+                res = curPrice - minPrice;
+            }
+        }
+        return res;
     }
 
     /**

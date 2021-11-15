@@ -534,13 +534,16 @@ public class Solutions {
      */
     public TreeNode maxBST(int[] nums){
         if(nums == null || nums.length==0) return null;
+        // 队列的作用是用来记录每棵子树最大值左侧的节点
         Deque<TreeNode> aux = new LinkedList<>();
         for (int i = 0; i < nums.length; i++) {
             int curVal = nums[i];
             TreeNode cur = new TreeNode(curVal);
+            // 把左侧所有小的节点生成在左子树上
             while (!aux.isEmpty() && aux.peek().val < curVal){
                 cur.left = aux.pop();
             }
+            // 因为从左到右遍历，所以后面节点都是右子树上的节点
             if(!aux.isEmpty()){
                 aux.peek().right = cur;
             }

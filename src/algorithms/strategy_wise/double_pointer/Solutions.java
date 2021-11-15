@@ -76,6 +76,7 @@ public class Solutions {
      *
      * 解题思路：碰撞指针
      *  1、注意，每个位置上能装水的高度取决于该位置左边的最大高度和右边的最大高度的最小值
+     *  2、当前指针 left 或者 right 区域能盛水的范围取决于 [leftMax, rightMax]
      *
      * @param height
      * @return
