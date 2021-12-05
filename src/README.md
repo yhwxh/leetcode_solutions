@@ -99,6 +99,7 @@
 - 94、【中等】 LeetCode 1143:[<font color=green>最长公共子序列</font>](https://leetcode-cn.com/problems/longest-common-subsequence/) 【动态规划：状态为两个字符串当前索引处的最长公共子串，转移方程分两种情况：字符相等（上个状态+1）和不相等（上两个状态的最大值），返回最后一个】
 - 95、【中等】 LeetCode 1345:[<font color=green>跳跃游戏III</font>](https://leetcode-cn.com/problems/jump-game-iv/) 【最优解：BFS】
 - 96、【困难】 LeetCode 4:[<font color=green>寻找两个正序数组的中位数</font>](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/) 【变换思路：查找第k个元素】
+- 97、【困难】 LeetCode 41:[<font color=gren>缺失的第一个正数</font>](https://leetcode-cn.com/problems/first-missing-positive/) 【】
  
 
 ### 数据结构  

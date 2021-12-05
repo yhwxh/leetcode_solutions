@@ -1065,7 +1065,6 @@ public class Solutions {
             }
             // 从左向右打印完一行，我们将上边界 top 指针下移一位
             top++;
-
             // step2：从上到下打印当前列的所有元素，即 [top,bottom] 这个区间
             if (top > bottom) break;
             for (int j = top; j <= bottom; j++) {
@@ -1074,7 +1073,6 @@ public class Solutions {
             }
             // 从上到下打印完，右侧边界 right 向左移动一位
             right--;
-
             // step3：从右到左打印当前行的所有元素，即 [right,left] 这个区间
             if (right < left) break;
             for (int k = right; k >= left; k--) {
@@ -1083,7 +1081,6 @@ public class Solutions {
             }
             // 从右到左打印完，底部边界 bottom 向上移动一位
             bottom--;
-
             // step4：从下到上打印当前列的所有元素，即 [bottom,top] 这个区间
             if (bottom < top) break;
             for (int m = bottom; m >= top; m--) {
@@ -1131,34 +1128,6 @@ public class Solutions {
         }
     }
 
-
-    public static void main(String[] args) {
-        Solutions slt = new Solutions();
-        int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
-        slt.sortColors(testArr);
-
-        int[] nums1 = new int[]{2, 4, 3, 5, 1};
-        int[] nums2 = new int[]{1};
-        System.out.println(slt.reversePairs(nums1));
-        for (int i = 0; i < nums1.length; i++) {
-            System.out.print(nums1[i] + " ");
-        }
-        System.out.println();
-        slt.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3});
-
-        // test matrix
-        int[][] matrix = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
-        int[][] matrix2 = {{1, 2, 3}, {4, 5, 6},{7,8,9}};
-        slt.searchMatrixII(matrix, 20);
-        int[] printMatrix = slt.spiralOrder(matrix2);
-        for (int i = 0; i < printMatrix.length; i++) {
-            System.out.print(printMatrix[i] + " ");
-        }
-        System.out.println("\n end");
-
-        String testStr = "A man, a plan, a canal: Panama";
-        System.out.println(slt.isPalindrome(testStr));
-    }
 
     /**
      * LeetCode 4：寻找两个正序数组的中位数
@@ -1235,6 +1204,67 @@ public class Solutions {
     }
 
     /**
+     * LeetCode 41: 缺失的第一个正数
+     */
+    public int firstMissingPositive(int[] nums) {
+        if (nums == null) return -1;
+        int n = nums.length;
+        // 将所有 [1, n] 之外的数替换成 n+1， 因为所有 [1,n] 之外的数都不是要找的数
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0)
+                nums[i] = n+1;
+        }
+        // 将索引 i 上的值 nums[i] 对应位置上的值取做负数，表示该位置表示的正整数出现过
+        for (int i = 0; i < n; i++) {
+            // 由于某个位置的值可能别改过符号，所以每次取 nums[i] 的绝对值
+            int num = Math.abs(nums[i]);
+            if (num <= n){
+                nums[num - 1] = -Math.abs(nums[num - 1]);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] >=0){
+                return i+1;
+            }
+        }
+        return n+1;
+    }
+
+
+    public static void main(String[] args) {
+        Solutions slt = new Solutions();
+        int[] testArr = new int[]{2, 0, 2, 1, 1, 0};
+        slt.sortColors(testArr);
+
+        int[] nums1 = new int[]{2, 4, 3, 5, 1};
+        int[] nums2 = new int[]{1};
+        System.out.println(slt.reversePairs(nums1));
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i] + " ");
+        }
+        System.out.println();
+        slt.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3});
+
+        // test matrix
+        int[][] matrix = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
+        int[][] matrix2 = {{1, 2, 3}, {4, 5, 6},{7,8,9}};
+        slt.searchMatrixII(matrix, 20);
+        int[] printMatrix = slt.spiralOrder(matrix2);
+        for (int i = 0; i < printMatrix.length; i++) {
+            System.out.print(printMatrix[i] + " ");
+        }
+        System.out.println("\n end");
+
+        String testStr = "A man, a plan, a canal: Panama";
+        System.out.println(slt.isPalindrome(testStr));
+        int[] nums3 = new int[]{10,4,16,54,17,-7,21,15,25,31,61,1,6,12,21,46,16,56,54,12,23,20,38,63,2,27,35,11,13,47,13,11,61,39,0,14,42,8,16,54,50,12,-10,43,11,-1,24,38,-10,13,60,0,44,11,50,33,48,20,31,-4,2,54,-6,51,6};
+        System.out.println(slt.firstMissingPositive(nums3));
+    }
+
+
+
+    /**
      * 如何写出一个正确的程序：我们以二分查找为例
      * 1、想出正确的算法思路、逻辑
      * 2、正确考虑到所有边界问题
@@ -1260,4 +1290,5 @@ public class Solutions {
         }
         return -1;
     }
+
 }
